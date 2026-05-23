@@ -3,634 +3,421 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PROTEZIONE CIVILE N.O.V.</title>
+<title>Protezione Civile N.O.V.</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 }
 
-html{
-scroll-behavior:smooth;
-}
-
 body{
 font-family:'Inter',sans-serif;
-background:#030712;
+background:#020617;
 color:white;
 overflow-x:hidden;
 }
 
-body.red-alert{
-animation:redFlash 1s infinite;
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+linear-gradient(rgba(2,6,23,.82),rgba(2,6,23,.96)),
+url("https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=1600&auto=format&fit=crop");
+background-size:cover;
+background-position:center;
+z-index:-2;
 }
 
-@keyframes redFlash{
-0%{background:#220000;}
-50%{background:#4b0000;}
-100%{background:#220000;}
+.container{
+width:92%;
+max-width:1200px;
+margin:auto;
 }
 
 header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-padding:18px 35px;
-background:rgba(3,7,18,.88);
-backdrop-filter:blur(16px);
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:999;
+padding:28px 0;
 border-bottom:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+background:rgba(0,0,0,.25);
+position:sticky;
+top:0;
+z-index:999;
 }
 
-.logo-box{
+.header-content{
 display:flex;
 align-items:center;
-gap:18px;
+gap:20px;
 }
 
-.logo-box img{
-width:100px;
-height:100px;
+.logo{
+width:120px;
+height:120px;
 border-radius:50%;
 object-fit:cover;
 background:white;
 padding:6px;
-box-shadow:0 10px 30px rgba(0,0,0,.45);
+box-shadow:0 0 30px rgba(255,255,255,.15);
 }
 
-.logo-text h1{
-font-size:28px;
+.header-text h1{
+font-size:clamp(32px,6vw,58px);
 font-weight:900;
 line-height:1;
 }
 
-.logo-text span{
-font-size:14px;
-opacity:.8;
-}
-
-nav{
-display:flex;
-gap:28px;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-font-weight:700;
-transition:.3s;
-}
-
-nav a:hover{
-color:#22c55e;
+.header-text p{
+font-size:clamp(18px,3vw,28px);
+opacity:.85;
+margin-top:10px;
 }
 
 .hero{
-position:relative;
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
+padding:90px 0 70px;
 text-align:center;
-padding:170px 20px 90px;
-background:
-linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.85)),
-url('FB_IMG_1779032553450.jpg') center/cover no-repeat;
-}
-
-.hero-content{
-max-width:1050px;
 }
 
 .hero h2{
-font-size:90px;
+font-size:clamp(42px,8vw,90px);
 font-weight:900;
-line-height:.95;
-margin-bottom:24px;
-text-shadow:0 10px 35px rgba(0,0,0,.55);
-}
-
-.hero h3{
-font-size:42px;
-color:#22c55e;
-margin-bottom:28px;
+line-height:1;
+margin-bottom:25px;
+text-shadow:0 0 30px rgba(255,255,255,.15);
 }
 
 .hero p{
-font-size:23px;
-line-height:1.8;
+font-size:clamp(20px,3vw,32px);
 opacity:.92;
-margin-bottom:45px;
-}
-
-.hero-buttons{
-display:flex;
-justify-content:center;
-gap:18px;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:17px 34px;
-border:none;
-border-radius:50px;
-font-size:16px;
-font-weight:800;
-cursor:pointer;
-text-decoration:none;
-transition:.3s;
-display:inline-block;
-}
-
-.btn-red{
-background:#dc2626;
-color:white;
-box-shadow:0 10px 25px rgba(220,38,38,.35);
-}
-
-.btn-red:hover{
-transform:translateY(-4px);
-background:#ef4444;
-}
-
-.btn-green{
-background:#16a34a;
-color:white;
-box-shadow:0 10px 25px rgba(22,163,74,.35);
-}
-
-.btn-green:hover{
-transform:translateY(-4px);
-background:#22c55e;
-}
-
-section{
-padding:100px 8%;
-}
-
-.section-title{
-font-size:52px;
-font-weight:900;
-text-align:center;
-margin-bottom:20px;
-}
-
-.section-sub{
-max-width:950px;
+max-width:900px;
 margin:auto;
-text-align:center;
-font-size:18px;
-line-height:1.8;
-opacity:.82;
+line-height:1.5;
 }
 
-.alert-layout{
+.section{
+padding:35px 0;
+}
+
+.grid-alerts{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:28px;
-margin-top:55px;
-}
-
-.current-alert,
-.alert-scale{
-background:rgba(255,255,255,.06);
-border:1px solid rgba(255,255,255,.08);
-border-radius:28px;
-padding:35px;
-backdrop-filter:blur(12px);
-box-shadow:0 15px 40px rgba(0,0,0,.35);
-}
-
-.current-alert h3,
-.alert-scale h3{
-font-size:30px;
-margin-bottom:20px;
-}
-
-.alert-live{
-width:18px;
-height:18px;
-background:#22c55e;
-border-radius:50%;
-animation:pulseGreen 1s infinite;
-margin-bottom:18px;
-}
-
-@keyframes pulseGreen{
-0%{opacity:1;transform:scale(1)}
-50%{opacity:.45;transform:scale(1.25)}
-100%{opacity:1;transform:scale(1)}
-}
-
-.alert-status{
-padding:22px;
-border-radius:22px;
-font-size:34px;
-font-weight:900;
-text-align:center;
-margin-bottom:22px;
-}
-
-.alert-status.green{
-background:linear-gradient(135deg,#15803d,#22c55e);
-}
-
-.alert-status.red{
-background:linear-gradient(135deg,#7f1d1d,#dc2626);
-animation:redBlink 1s infinite;
-}
-
-@keyframes redBlink{
-0%{opacity:1}
-50%{opacity:.45}
-100%{opacity:1}
-}
-
-.current-alert p{
-font-size:18px;
-line-height:1.8;
-opacity:.9;
-}
-
-.scale-item{
-padding:18px;
-border-radius:18px;
-margin-bottom:15px;
-font-weight:700;
-}
-
-.scale-item span{
-display:block;
-font-size:22px;
-margin-bottom:6px;
-}
-
-.scale-item p{
-line-height:1.5;
-opacity:.92;
-}
-
-.scale-item.green{
-background:#166534;
-}
-
-.scale-item.yellow{
-background:#ca8a04;
-color:#111;
-}
-
-.scale-item.orange{
-background:#ea580c;
-}
-
-.scale-item.red{
-background:#b91c1c;
-}
-
-.cards{
-margin-top:60px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:28px;
+gap:25px;
 }
 
 .card{
-background:rgba(255,255,255,.06);
+background:rgba(15,23,42,.82);
 border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(12px);
-border-radius:26px;
-padding:38px;
-transition:.35s;
-}
-
-.card:hover{
-transform:translateY(-8px);
-background:rgba(255,255,255,.09);
+border-radius:34px;
+padding:35px;
+backdrop-filter:blur(14px);
+box-shadow:0 0 30px rgba(0,0,0,.35);
 }
 
 .card h3{
-font-size:26px;
-margin-bottom:14px;
+font-size:38px;
+margin-bottom:25px;
+font-weight:800;
 }
 
-.card p{
-line-height:1.8;
-opacity:.85;
-}
-
-.map-box{
-margin-top:60px;
-border-radius:28px;
-overflow:hidden;
-box-shadow:0 15px 40px rgba(0,0,0,.4);
-border:1px solid rgba(255,255,255,.08);
-padding:45px;
+.alert-live{
 text-align:center;
-background:rgba(255,255,255,.06);
-backdrop-filter:blur(12px);
 }
 
-.map-box h3{
+.alert-badge{
+display:inline-block;
+padding:18px 40px;
+border-radius:999px;
 font-size:34px;
+font-weight:900;
+margin-bottom:25px;
+animation:pulse 1.5s infinite;
+}
+
+.green{
+background:#16a34a;
+box-shadow:0 0 30px rgba(34,197,94,.6);
+}
+
+.yellow{
+background:#facc15;
+color:#000;
+box-shadow:0 0 30px rgba(250,204,21,.6);
+}
+
+.red{
+background:#dc2626;
+box-shadow:0 0 40px rgba(239,68,68,.9);
+}
+
+.alert-live p{
+font-size:24px;
+line-height:1.6;
+opacity:.92;
+}
+
+.scale{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.scale-item{
+display:flex;
+align-items:center;
+gap:15px;
+padding:14px;
+border-radius:18px;
+background:rgba(255,255,255,.04);
+}
+
+.dot{
+width:26px;
+height:26px;
+border-radius:50%;
+flex-shrink:0;
+}
+
+.fire-card{
+text-align:center;
+}
+
+.fire-card h3{
+font-size:58px;
+line-height:1.1;
+margin-bottom:30px;
+}
+
+.fire-desc{
+font-size:28px;
+line-height:1.8;
+opacity:.92;
+margin-bottom:35px;
+}
+
+.fire-btn{
+display:inline-block;
+padding:24px 50px;
+background:#ef2222;
+border-radius:999px;
+font-size:32px;
+font-weight:900;
+text-decoration:none;
+color:white;
+box-shadow:0 0 40px rgba(239,34,34,.65);
+transition:.3s;
+}
+
+.fire-btn:hover{
+transform:scale(1.05);
+}
+
+.emergency{
+margin-top:35px;
+background:linear-gradient(135deg,#7f1d1d,#dc2626);
+border:none;
+}
+
+.emergency h3{
+font-size:54px;
 margin-bottom:20px;
 }
 
-.map-box p{
-font-size:18px;
-line-height:1.8;
-opacity:.85;
-margin-bottom:30px;
+.emergency p{
+font-size:28px;
+line-height:1.7;
 }
 
-.donation-box{
-max-width:1000px;
-margin:60px auto 0;
-padding:45px;
-border-radius:30px;
-background:linear-gradient(135deg,#b91c1c,#ef4444);
-box-shadow:0 20px 50px rgba(0,0,0,.35);
-text-align:center;
+.contact{
+margin-top:35px;
 }
 
-.donation-box h3{
-font-size:42px;
-margin-bottom:25px;
-font-weight:900;
-}
-
-.tax-code{
-font-size:52px;
-font-weight:900;
-background:white;
-color:#b91c1c;
-padding:20px;
-border-radius:24px;
-display:inline-block;
-margin-bottom:30px;
-letter-spacing:3px;
-}
-
-.donation-box p{
-font-size:22px;
+.contact p{
+font-size:24px;
 line-height:2;
+}
+
+.donate{
+margin-top:35px;
+text-align:center;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+}
+
+.donate h3{
+font-size:54px;
+margin-bottom:25px;
+}
+
+.donate .cf{
+font-size:44px;
+font-weight:900;
+color:#22c55e;
+margin:25px 0;
+word-break:break-word;
+}
+
+.donate p{
+font-size:26px;
+line-height:1.8;
 }
 
 footer{
 padding:50px 20px;
-background:#020617;
 text-align:center;
-border-top:1px solid rgba(255,255,255,.08);
+opacity:.7;
+font-size:18px;
 }
 
-footer h3{
-font-size:30px;
-margin-bottom:10px;
-}
-
-footer p{
-opacity:.75;
-line-height:1.8;
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.05);}
+100%{transform:scale(1);}
 }
 
 @media(max-width:900px){
 
-nav{
-display:none;
-}
-
-header{
-padding:14px 18px;
-}
-
-.logo-box img{
-width:78px;
-height:78px;
-}
-
-.logo-text h1{
-font-size:18px;
-}
-
-.logo-text span{
-font-size:12px;
+.grid-alerts{
+grid-template-columns:1fr;
 }
 
 .hero h2{
 font-size:52px;
 }
 
-.hero h3{
-font-size:26px;
-}
-
-.hero p{
-font-size:18px;
-}
-
-.section-title{
-font-size:36px;
-}
-
-.alert-layout{
-grid-template-columns:1fr;
-}
-
-.tax-code{
+.card h3{
 font-size:32px;
-letter-spacing:1px;
 }
 
-.donation-box{
-padding:30px 20px;
+.fire-card h3{
+font-size:46px;
 }
 
+.fire-desc{
+font-size:22px;
 }
 
+.fire-btn{
+font-size:24px;
+padding:20px 35px;
+}
+
+.emergency h3{
+font-size:42px;
+}
+
+.donate h3{
+font-size:42px;
+}
+
+.donate .cf{
+font-size:34px;
+}
+
+.logo{
+width:95px;
+height:95px;
+}
+
+.header-text h1{
+font-size:40px;
+}
+
+.header-text p{
+font-size:22px;
+}
+}
 </style>
 </head>
 
 <body>
 
 <header>
+<div class="container header-content">
 
-<div class="logo-box">
+<img class="logo" src="https://lopagabri-gif.github.io/protezione-civile-nov/Screenshot_20260517_174752_Facebook.jpg">
 
-<img src="FB_IMG_1779516909018.jpg">
-
-<div class="logo-text">
+<div class="header-text">
 <h1>PROTEZIONE CIVILE N.O.V.</h1>
-<span>Nucleo Operativo Volontario del Metapontino</span>
+<p>Nucleo Operativo Volontario del Metapontino</p>
 </div>
 
 </div>
-
-<nav>
-<a href="#allerta">Allerte</a>
-<a href="#emergenza">Emergenze</a>
-<a href="#mappa">Mappa incendi</a>
-<a href="#contatti">Contatti</a>
-</nav>
-
 </header>
 
 <section class="hero">
-
-<div class="hero-content">
-
-<h2>PROTEZIONE CIVILE N.O.V.</h2>
-
-<h3>Sempre al servizio del territorio 🚨</h3>
-
+<div class="container">
+<h2>Sempre al servizio del territorio</h2>
 <p>
-Interventi, emergenze, prevenzione e tutela del territorio
-al servizio della comunità di Pisticci e della Basilicata.
+Monitoraggio, emergenze, incendi, sicurezza e supporto alla popolazione 24 ore su 24.
 </p>
-
-<div class="hero-buttons">
-<a href="#allerta" class="btn btn-red">Allerte</a>
-<a href="#mappa" class="btn btn-green">Mappa incendi</a>
 </div>
-
-</div>
-
 </section>
 
-<section id="allerta">
+<section class="section">
+<div class="container">
 
-<h2 class="section-title">
-🚨 Allerta Protezione Civile
-</h2>
+<div class="grid-alerts">
 
-<p class="section-sub">
-Situazione aggiornata della Basilicata e livelli di criticità.
-</p>
+<div class="card alert-live">
+<h3>⚠️ Allerta attuale</h3>
 
-<div class="alert-layout">
-
-<div class="current-alert">
-
-<div class="alert-live"></div>
-
-<h3>ALLERTA ATTUALE</h3>
-
-<div class="alert-status green">
-🟢 VERDE
+<div class="alert-badge green">
+VERDE
 </div>
 
 <p>
-Attualmente non risultano criticità rilevanti sul territorio.
-Situazione sotto controllo.
-</p>
-
-</div>
-
-<div class="alert-scale">
-
-<h3>SCALA ALLERTE</h3>
-
-<div class="scale-item green">
-<span>🟢 VERDE</span>
-<p>Nessuna criticità prevista.</p>
-</div>
-
-<div class="scale-item yellow">
-<span>🟡 GIALLA</span>
-<p>Possibili criticità localizzate.</p>
-</div>
-
-<div class="scale-item orange">
-<span>🟠 ARANCIONE</span>
-<p>Rischio moderato e monitoraggio attivo.</p>
-</div>
-
-<div class="scale-item red">
-<span>🔴 ROSSA</span>
-<p>Massima emergenza e rischio elevato.</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="emergenza">
-
-<h2 class="section-title">
-🚒 Sistema Emergenze
-</h2>
-
-<p class="section-sub">
-Ricevi notifiche immediate in caso di incendi o emergenze sul territorio.
-</p>
-
-<div class="cards">
-
-<div class="card">
-<h3>🔥 Incendi</h3>
-<p>
-Aggiornamenti rapidi sugli incendi boschivi e situazioni di emergenza.
+Situazione regolare sul territorio.<br>
+Nessuna criticità rilevante al momento.
 </p>
 </div>
 
 <div class="card">
-<h3>📲 Notifiche</h3>
+<h3>📊 Scala allerte</h3>
 
-<p>
-Attiva le notifiche per ricevere avvisi direttamente sul telefono.
-</p>
+<div class="scale">
 
-<button onclick="attivaNotifiche()" class="btn btn-red" style="margin-top:20px;">
-Attiva notifiche
-</button>
+<div class="scale-item">
+<div class="dot" style="background:#22c55e;"></div>
+<div>
+<b>VERDE</b><br>
+Situazione normale
+</div>
+</div>
 
-<button onclick="notificaTest()" class="btn btn-green" style="margin-top:20px;">
-Prova notifica
-</button>
+<div class="scale-item">
+<div class="dot" style="background:#facc15;"></div>
+<div>
+<b>GIALLA</b><br>
+Attenzione e monitoraggio
+</div>
+</div>
+
+<div class="scale-item">
+<div class="dot" style="background:#ef4444;"></div>
+<div>
+<b>ROSSA</b><br>
+Emergenza elevata
+</div>
+</div>
+
+</div>
+</div>
 
 </div>
 
-<div class="card">
-<h3>🚨 Emergenze</h3>
-<p>
-Informazioni in tempo reale per la sicurezza della popolazione.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="mappa">
-
-<h2 class="section-title">
-🔥 Mappa incendi Basilicata
-</h2>
-
-<p class="section-sub">
-Monitoraggio satellitare quasi in tempo reale degli hotspot incendi tramite NASA FIRMS.
-</p>
-
-<div class="map-box">
+<div class="card fire-card">
 
 <h3>🔥 Mappa incendi in tempo reale</h3>
 
-<p>
-La mappa NASA FIRMS non può essere visualizzata direttamente dentro il sito,
-ma puoi aprirla in tempo reale cliccando il pulsante qui sotto.
+<p class="fire-desc">
+Mappa NASA FIRMS degli incendi attuali sempre aggiornata.
 </p>
 
-<a class="btn btn-red"
-href="https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@16.5,40.5,7.0z"
+<a class="fire-btn"
+href="https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@16.6,40.3,8.0z"
 target="_blank">
 
 Apri mappa incendi Basilicata
@@ -639,206 +426,70 @@ Apri mappa incendi Basilicata
 
 </div>
 
-</section>
+<div class="card emergency">
 
-<section id="contatti">
-
-<h2 class="section-title">
-📞 Contatti
-</h2>
-
-<div class="cards">
-
-<div class="card">
-
-<h3>🏢 Associazione</h3>
+<h3>🚨 Emergenze incendi</h3>
 
 <p>
-<strong>N.O.V.</strong><br>
-NUCLEO OPERATIVO VOLONTARI DEL METAPONTINO
+In caso di emergenze o incendi sul territorio è possibile ricevere aggiornamenti e notifiche rapide direttamente dal gruppo operativo.
 </p>
 
 </div>
 
-<div class="card">
+<div class="card contact">
 
-<h3>📍 Indirizzo</h3>
+<h3>📞 Contatti</h3>
 
 <p>
-Via Nilde Iotti<br>
-75015 Tinchi - PISTICCI (MT)
+<b>N.O.V.</b> = NUCLEO OPERATIVO VOLONTARI DEL METAPONTINO
 </p>
-
-</div>
-
-<div class="card">
-
-<h3>📞 Telefono</h3>
 
 <p>
-<a href="tel:+393934139344"
-style="color:white;text-decoration:none;">
-393 413 9344
-</a>
+📍 Via Nilde Iotti, 75015 Tinchi - Pisticci (MT)
 </p>
-
-</div>
-
-<div class="card">
-
-<h3>📧 Email</h3>
 
 <p>
-<a href="mailto:nov_protciv@live.it"
-style="color:white;text-decoration:none;">
-nov_protciv@live.it
-</a>
+📱 +39 3518634206
 </p>
-
-</div>
-
-<div class="card">
-
-<h3>📨 Email PEC</h3>
 
 <p>
-<a href="mailto:protezionecivilenov@pec.it"
-style="color:white;text-decoration:none;">
-protezionecivilenov@pec.it
-</a>
+✉️ nov_protciv@live.it
+</p>
+
+<p>
+📧 PEC: protezionecivilenov@pec.it
 </p>
 
 </div>
 
-</div>
+<div class="card donate">
 
-</section>
+<h3>❤️ DONA IL TUO 5×1000</h3>
 
-<section id="donazioni">
-
-<h2 class="section-title">
-❤️ DONA IL TUO 5 × MILLE
-</h2>
-
-<p class="section-sub">
-Sostieni chi interviene ogni giorno per il territorio,
-la sicurezza e le emergenze reali.
+<p>
+INSERISCILO NEL 730 / CU
 </p>
 
-<div class="donation-box">
-
-<h3>INSERISCILO NEL 730 / CU</h3>
-
-<div class="tax-code">
+<div class="cf">
 90017920779
 </div>
 
 <p>
-<strong>SOSTIENI CHI INTERVIENE QUANDO SERVE 🚨</strong>
-<br><br>
-✅ Grazie per il tuo supporto<br>
-✅ Non ti costa nulla<br>
-✅ Aiuti il territorio<br>
-✅ Supporti emergenze reali
+Sostieni chi interviene quando serve.<br><br>
+
+✔️ Non ti costa nulla<br>
+✔️ Aiuti il territorio<br>
+✔️ Supporti emergenze reali
 </p>
 
 </div>
 
+</div>
 </section>
 
 <footer>
-
-<h3>PROTEZIONE CIVILE N.O.V.</h3>
-
-<p>
-Nucleo Operativo Volontario del Metapontino<br>
-Sempre al servizio del territorio 🚨
-</p>
-
+© 2026 Protezione Civile N.O.V. - Tutti i diritti riservati
 </footer>
-
-<script>
-
-async function registraSW(){
-
-if("serviceWorker" in navigator){
-
-try{
-
-const reg = await navigator.serviceWorker.register("sw.js");
-return reg;
-
-}catch(error){
-
-alert("Errore service worker");
-
-}
-
-}
-
-}
-
-async function attivaNotifiche(){
-
-await registraSW();
-
-if(!("Notification" in window)){
-
-alert("Notifiche non supportate");
-return;
-
-}
-
-const permission = await Notification.requestPermission();
-
-if(permission === "granted"){
-
-alert("Notifiche attivate correttamente 🚨");
-
-}else{
-
-alert("Permesso notifiche negato");
-
-}
-
-}
-
-async function notificaTest(){
-
-const reg = await registraSW();
-
-if(Notification.permission !== "granted"){
-
-alert("Prima attiva le notifiche");
-return;
-
-}
-
-if(reg){
-
-reg.showNotification("PROTEZIONE CIVILE N.O.V.",{
-
-body:"🚨 Notifica di prova inviata correttamente",
-icon:"FB_IMG_1779516909018.jpg",
-badge:"FB_IMG_1779516909018.jpg"
-
-});
-
-}
-
-}
-
-/* cambia qui: verde / rossa */
-
-const livelloAllerta = "verde";
-
-if(livelloAllerta === "rossa"){
-
-document.body.classList.add("red-alert");
-
-}
-
-</script>
 
 </body>
 </html>
