@@ -505,11 +505,17 @@ o emergenze sul territorio.
 </div>
 
 <div class="card">
-<h3>📲 Notifiche Push</h3>
+<h3>📲 Notifiche emergenza</h3>
+
 <p>
-Il sito potrà inviare notifiche automatiche
-direttamente sugli smartphone.
+Attiva le notifiche per ricevere avvisi
+in caso di incendi o emergenze.
 </p>
+
+<button onclick="attivaNotifiche()" class="btn btn-red" style="margin-top:20px;border:none;cursor:pointer;">
+Attiva notifiche
+</button>
+
 </div>
 
 <div class="card">
@@ -609,6 +615,34 @@ if(e.target===this){
 closeImg();
 }
 });
+
+/* NOTIFICHE */
+
+function attivaNotifiche(){
+
+if(!("Notification" in window)){
+alert("Il tuo dispositivo non supporta le notifiche.");
+return;
+}
+
+Notification.requestPermission().then(function(permission){
+
+if(permission === "granted"){
+
+new Notification("Protezione Civile N.O.V.",{
+body:"Notifiche attivate correttamente 🚨",
+icon:"FB_IMG_1779516909018.jpg"
+});
+
+}else{
+
+alert("Permesso notifiche negato.");
+
+}
+
+});
+
+}
 
 </script>
 
