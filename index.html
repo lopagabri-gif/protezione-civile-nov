@@ -8,10 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
@@ -26,8 +31,8 @@ content:"";
 position:fixed;
 inset:0;
 background:
-linear-gradient(rgba(2,6,23,.82),rgba(2,6,23,.96)),
-url("https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=1600&auto=format&fit=crop");
+linear-gradient(rgba(2,6,23,.84),rgba(2,6,23,.96)),
+url("https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=1800&auto=format&fit=crop");
 background-size:cover;
 background-position:center;
 z-index:-2;
@@ -39,14 +44,16 @@ max-width:1200px;
 margin:auto;
 }
 
+/* HEADER */
+
 header{
-padding:28px 0;
-border-bottom:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(10px);
-background:rgba(0,0,0,.25);
+padding:20px 0;
 position:sticky;
 top:0;
 z-index:999;
+background:rgba(2,6,23,.82);
+backdrop-filter:blur(14px);
+border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .header-content{
@@ -59,14 +66,14 @@ gap:20px;
 width:120px;
 height:120px;
 border-radius:50%;
-object-fit:cover;
 background:white;
 padding:6px;
-box-shadow:0 0 30px rgba(255,255,255,.15);
+object-fit:cover;
+box-shadow:0 0 35px rgba(255,255,255,.2);
 }
 
 .header-text h1{
-font-size:clamp(32px,6vw,58px);
+font-size:clamp(28px,6vw,60px);
 font-weight:900;
 line-height:1;
 }
@@ -74,35 +81,45 @@ line-height:1;
 .header-text p{
 font-size:clamp(18px,3vw,28px);
 opacity:.85;
-margin-top:10px;
+margin-top:8px;
 }
+
+/* HERO */
 
 .hero{
 padding:90px 0 70px;
 text-align:center;
 }
 
+.hero-box{
+background:rgba(15,23,42,.78);
+border:1px solid rgba(255,255,255,.08);
+padding:50px 30px;
+border-radius:40px;
+backdrop-filter:blur(14px);
+box-shadow:0 0 40px rgba(0,0,0,.35);
+}
+
 .hero h2{
-font-size:clamp(42px,8vw,90px);
+font-size:clamp(46px,8vw,90px);
 font-weight:900;
 line-height:1;
 margin-bottom:25px;
-text-shadow:0 0 30px rgba(255,255,255,.15);
 }
 
 .hero p{
-font-size:clamp(20px,3vw,32px);
+font-size:clamp(22px,3vw,34px);
+line-height:1.6;
 opacity:.92;
-max-width:900px;
-margin:auto;
-line-height:1.5;
 }
+
+/* SECTIONS */
 
 .section{
-padding:35px 0;
+padding:30px 0;
 }
 
-.grid-alerts{
+.grid{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:25px;
@@ -111,10 +128,10 @@ gap:25px;
 .card{
 background:rgba(15,23,42,.82);
 border:1px solid rgba(255,255,255,.08);
-border-radius:34px;
+border-radius:35px;
 padding:35px;
 backdrop-filter:blur(14px);
-box-shadow:0 0 30px rgba(0,0,0,.35);
+box-shadow:0 0 35px rgba(0,0,0,.35);
 }
 
 .card h3{
@@ -123,7 +140,9 @@ margin-bottom:25px;
 font-weight:800;
 }
 
-.alert-live{
+/* ALERTA */
+
+.alert-current{
 text-align:center;
 }
 
@@ -139,13 +158,13 @@ animation:pulse 1.5s infinite;
 
 .green{
 background:#16a34a;
-box-shadow:0 0 30px rgba(34,197,94,.6);
+box-shadow:0 0 35px rgba(34,197,94,.6);
 }
 
 .yellow{
 background:#facc15;
 color:#000;
-box-shadow:0 0 30px rgba(250,204,21,.6);
+box-shadow:0 0 35px rgba(250,204,21,.6);
 }
 
 .red{
@@ -153,11 +172,13 @@ background:#dc2626;
 box-shadow:0 0 40px rgba(239,68,68,.9);
 }
 
-.alert-live p{
+.alert-current p{
 font-size:24px;
-line-height:1.6;
+line-height:1.7;
 opacity:.92;
 }
+
+/* SCALE */
 
 .scale{
 display:flex;
@@ -169,17 +190,21 @@ gap:18px;
 display:flex;
 align-items:center;
 gap:15px;
-padding:14px;
-border-radius:18px;
 background:rgba(255,255,255,.04);
+padding:16px;
+border-radius:18px;
+font-size:22px;
+line-height:1.4;
 }
 
 .dot{
-width:26px;
-height:26px;
+width:24px;
+height:24px;
 border-radius:50%;
 flex-shrink:0;
 }
+
+/* FIRE */
 
 .fire-card{
 text-align:center;
@@ -188,10 +213,10 @@ text-align:center;
 .fire-card h3{
 font-size:58px;
 line-height:1.1;
-margin-bottom:30px;
+margin-bottom:25px;
 }
 
-.fire-desc{
+.fire-card p{
 font-size:28px;
 line-height:1.8;
 opacity:.92;
@@ -215,14 +240,14 @@ transition:.3s;
 transform:scale(1.05);
 }
 
+/* EMERGENCY */
+
 .emergency{
-margin-top:35px;
 background:linear-gradient(135deg,#7f1d1d,#dc2626);
-border:none;
 }
 
 .emergency h3{
-font-size:54px;
+font-size:52px;
 margin-bottom:20px;
 }
 
@@ -231,27 +256,26 @@ font-size:28px;
 line-height:1.7;
 }
 
-.contact{
-margin-top:35px;
-}
+/* CONTACT */
 
 .contact p{
 font-size:24px;
 line-height:2;
 }
 
+/* DONATE */
+
 .donate{
-margin-top:35px;
 text-align:center;
 background:linear-gradient(135deg,#0f172a,#1e293b);
 }
 
 .donate h3{
 font-size:54px;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
-.donate .cf{
+.cf{
 font-size:44px;
 font-weight:900;
 color:#22c55e;
@@ -264,6 +288,8 @@ font-size:26px;
 line-height:1.8;
 }
 
+/* FOOTER */
+
 footer{
 padding:50px 20px;
 text-align:center;
@@ -271,49 +297,20 @@ opacity:.7;
 font-size:18px;
 }
 
+/* ANIMATIONS */
+
 @keyframes pulse{
 0%{transform:scale(1);}
 50%{transform:scale(1.05);}
 100%{transform:scale(1);}
 }
 
+/* MOBILE */
+
 @media(max-width:900px){
 
-.grid-alerts{
+.grid{
 grid-template-columns:1fr;
-}
-
-.hero h2{
-font-size:52px;
-}
-
-.card h3{
-font-size:32px;
-}
-
-.fire-card h3{
-font-size:46px;
-}
-
-.fire-desc{
-font-size:22px;
-}
-
-.fire-btn{
-font-size:24px;
-padding:20px 35px;
-}
-
-.emergency h3{
-font-size:42px;
-}
-
-.donate h3{
-font-size:42px;
-}
-
-.donate .cf{
-font-size:34px;
 }
 
 .logo{
@@ -322,13 +319,84 @@ height:95px;
 }
 
 .header-text h1{
-font-size:40px;
+font-size:38px;
 }
 
 .header-text p{
+font-size:20px;
+}
+
+.hero{
+padding:60px 0 40px;
+}
+
+.hero h2{
+font-size:54px;
+}
+
+.hero p{
 font-size:22px;
 }
+
+.card{
+padding:28px;
 }
+
+.card h3{
+font-size:30px;
+}
+
+.alert-badge{
+font-size:28px;
+}
+
+.alert-current p{
+font-size:21px;
+}
+
+.scale-item{
+font-size:18px;
+}
+
+.fire-card h3{
+font-size:42px;
+}
+
+.fire-card p{
+font-size:22px;
+}
+
+.fire-btn{
+font-size:24px;
+padding:20px 30px;
+}
+
+.emergency h3{
+font-size:40px;
+}
+
+.emergency p{
+font-size:22px;
+}
+
+.contact p{
+font-size:20px;
+}
+
+.donate h3{
+font-size:42px;
+}
+
+.cf{
+font-size:34px;
+}
+
+.donate p{
+font-size:22px;
+}
+
+}
+
 </style>
 </head>
 
@@ -337,7 +405,8 @@ font-size:22px;
 <header>
 <div class="container header-content">
 
-<img class="logo" src="https://lopagabri-gif.github.io/protezione-civile-nov/Screenshot_20260517_174752_Facebook.jpg">
+<img class="logo"
+src="https://lopagabri-gif.github.io/protezione-civile-nov/Screenshot_20260517_174752_Facebook.jpg">
 
 <div class="header-text">
 <h1>PROTEZIONE CIVILE N.O.V.</h1>
@@ -349,19 +418,27 @@ font-size:22px;
 
 <section class="hero">
 <div class="container">
+
+<div class="hero-box">
+
 <h2>Sempre al servizio del territorio</h2>
+
 <p>
 Monitoraggio, emergenze, incendi, sicurezza e supporto alla popolazione 24 ore su 24.
 </p>
+
+</div>
+
 </div>
 </section>
 
 <section class="section">
 <div class="container">
 
-<div class="grid-alerts">
+<div class="grid">
 
-<div class="card alert-live">
+<div class="card alert-current">
+
 <h3>⚠️ Allerta attuale</h3>
 
 <div class="alert-badge green">
@@ -372,9 +449,11 @@ VERDE
 Situazione regolare sul territorio.<br>
 Nessuna criticità rilevante al momento.
 </p>
+
 </div>
 
 <div class="card">
+
 <h3>📊 Scala allerte</h3>
 
 <div class="scale">
@@ -404,15 +483,22 @@ Emergenza elevata
 </div>
 
 </div>
+
 </div>
 
 </div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
 
 <div class="card fire-card">
 
 <h3>🔥 Mappa incendi in tempo reale</h3>
 
-<p class="fire-desc">
+<p>
 Mappa NASA FIRMS degli incendi attuali sempre aggiornata.
 </p>
 
@@ -426,15 +512,27 @@ Apri mappa incendi Basilicata
 
 </div>
 
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
 <div class="card emergency">
 
 <h3>🚨 Emergenze incendi</h3>
 
 <p>
-In caso di emergenze o incendi sul territorio è possibile ricevere aggiornamenti e notifiche rapide direttamente dal gruppo operativo.
+In caso di incendi o emergenze sul territorio è possibile ricevere aggiornamenti e notifiche rapide direttamente dal gruppo operativo.
 </p>
 
 </div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
 
 <div class="card contact">
 
@@ -461,6 +559,12 @@ In caso di emergenze o incendi sul territorio è possibile ricevere aggiornament
 </p>
 
 </div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
 
 <div class="card donate">
 
