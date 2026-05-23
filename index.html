@@ -26,19 +26,15 @@ color:white;
 overflow-x:hidden;
 }
 
-/* ALLERTA ROSSA */
-
 body.red-alert{
 animation:redFlash 1s infinite;
 }
 
 @keyframes redFlash{
 0%{background:#220000;}
-50%{background:#520000;}
+50%{background:#4b0000;}
 100%{background:#220000;}
 }
-
-/* HEADER */
 
 header{
 position:fixed;
@@ -46,7 +42,7 @@ top:0;
 left:0;
 width:100%;
 padding:18px 35px;
-background:rgba(3,7,18,.84);
+background:rgba(3,7,18,.88);
 backdrop-filter:blur(16px);
 display:flex;
 justify-content:space-between;
@@ -62,8 +58,8 @@ gap:18px;
 }
 
 .logo-box img{
-width:95px;
-height:95px;
+width:100px;
+height:100px;
 border-radius:50%;
 object-fit:cover;
 background:white;
@@ -72,7 +68,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.45);
 }
 
 .logo-text h1{
-font-size:26px;
+font-size:28px;
 font-weight:900;
 line-height:1;
 }
@@ -98,8 +94,6 @@ nav a:hover{
 color:#22c55e;
 }
 
-/* HERO */
-
 .hero{
 position:relative;
 min-height:100vh;
@@ -107,9 +101,9 @@ display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:150px 20px 80px;
+padding:170px 20px 90px;
 background:
-linear-gradient(rgba(0,0,0,.58),rgba(0,0,0,.84)),
+linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.85)),
 url('FB_IMG_1779032553450.jpg') center/cover no-repeat;
 }
 
@@ -118,15 +112,15 @@ max-width:1050px;
 }
 
 .hero h2{
-font-size:92px;
+font-size:90px;
 font-weight:900;
 line-height:.95;
 margin-bottom:24px;
-text-shadow:0 10px 35px rgba(0,0,0,.5);
+text-shadow:0 10px 35px rgba(0,0,0,.55);
 }
 
 .hero h3{
-font-size:40px;
+font-size:42px;
 color:#22c55e;
 margin-bottom:28px;
 }
@@ -179,14 +173,12 @@ transform:translateY(-4px);
 background:#22c55e;
 }
 
-/* SEZIONI */
-
 section{
 padding:100px 8%;
 }
 
 .section-title{
-font-size:50px;
+font-size:52px;
 font-weight:900;
 text-align:center;
 margin-bottom:20px;
@@ -201,67 +193,108 @@ line-height:1.8;
 opacity:.82;
 }
 
-/* ALLERTA ATTUALE */
+.alert-layout{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:28px;
+margin-top:55px;
+}
 
-.current-alert{
-max-width:850px;
-margin:55px auto 0;
-padding:35px;
+.current-alert,
+.alert-scale{
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
 border-radius:28px;
-background:linear-gradient(135deg,#15803d,#22c55e);
-text-align:center;
+padding:35px;
+backdrop-filter:blur(12px);
 box-shadow:0 15px 40px rgba(0,0,0,.35);
 }
 
-.current-alert h3{
-font-size:38px;
-margin-bottom:15px;
+.current-alert h3,
+.alert-scale h3{
+font-size:30px;
+margin-bottom:20px;
+}
+
+.alert-live{
+width:18px;
+height:18px;
+background:#22c55e;
+border-radius:50%;
+animation:pulseGreen 1s infinite;
+margin-bottom:18px;
+}
+
+@keyframes pulseGreen{
+0%{opacity:1;transform:scale(1)}
+50%{opacity:.45;transform:scale(1.25)}
+100%{opacity:1;transform:scale(1)}
+}
+
+.alert-status{
+padding:22px;
+border-radius:22px;
+font-size:34px;
+font-weight:900;
+text-align:center;
+margin-bottom:22px;
+}
+
+.alert-status.green{
+background:linear-gradient(135deg,#15803d,#22c55e);
+}
+
+.alert-status.red{
+background:linear-gradient(135deg,#7f1d1d,#dc2626);
+animation:redBlink 1s infinite;
+}
+
+@keyframes redBlink{
+0%{opacity:1}
+50%{opacity:.45}
+100%{opacity:1}
 }
 
 .current-alert p{
 font-size:18px;
 line-height:1.8;
+opacity:.9;
 }
 
-/* SCALE ALLERTA */
-
-.alert-grid{
-margin-top:60px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-.alert-card{
-padding:35px;
-border-radius:26px;
-box-shadow:0 12px 30px rgba(0,0,0,.3);
-}
-
-.alert-card h3{
-font-size:28px;
+.scale-item{
+padding:18px;
+border-radius:18px;
 margin-bottom:15px;
+font-weight:700;
 }
 
-.alert-card p{
-line-height:1.8;
+.scale-item span{
+display:block;
+font-size:22px;
+margin-bottom:6px;
+}
+
+.scale-item p{
+line-height:1.5;
 opacity:.92;
 }
 
-.green{
-background:linear-gradient(135deg,#15803d,#22c55e);
+.scale-item.green{
+background:#166534;
 }
 
-.yellow{
-background:linear-gradient(135deg,#ca8a04,#facc15);
+.scale-item.yellow{
+background:#ca8a04;
 color:#111;
 }
 
-.red{
-background:linear-gradient(135deg,#b91c1c,#ef4444);
+.scale-item.orange{
+background:#ea580c;
 }
 
-/* CARDS */
+.scale-item.red{
+background:#b91c1c;
+}
 
 .cards{
 margin-top:60px;
@@ -294,23 +327,29 @@ line-height:1.8;
 opacity:.85;
 }
 
-/* MAPPA */
-
 .map-box{
 margin-top:60px;
 border-radius:28px;
 overflow:hidden;
 box-shadow:0 15px 40px rgba(0,0,0,.4);
 border:1px solid rgba(255,255,255,.08);
+padding:45px;
+text-align:center;
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(12px);
 }
 
-.map-box iframe{
-width:100%;
-height:650px;
-border:none;
+.map-box h3{
+font-size:34px;
+margin-bottom:20px;
 }
 
-/* 5X1000 */
+.map-box p{
+font-size:18px;
+line-height:1.8;
+opacity:.85;
+margin-bottom:30px;
+}
 
 .donation-box{
 max-width:1000px;
@@ -345,8 +384,6 @@ font-size:22px;
 line-height:2;
 }
 
-/* FOOTER */
-
 footer{
 padding:50px 20px;
 background:#020617;
@@ -364,17 +401,27 @@ opacity:.75;
 line-height:1.8;
 }
 
-/* MOBILE */
-
 @media(max-width:900px){
 
 nav{
 display:none;
 }
 
+header{
+padding:14px 18px;
+}
+
 .logo-box img{
 width:78px;
 height:78px;
+}
+
+.logo-text h1{
+font-size:18px;
+}
+
+.logo-text span{
+font-size:12px;
 }
 
 .hero h2{
@@ -393,12 +440,17 @@ font-size:18px;
 font-size:36px;
 }
 
-.map-box iframe{
-height:500px;
+.alert-layout{
+grid-template-columns:1fr;
 }
 
 .tax-code{
 font-size:32px;
+letter-spacing:1px;
+}
+
+.donation-box{
+padding:30px 20px;
 }
 
 }
@@ -416,7 +468,7 @@ font-size:32px;
 
 <div class="logo-text">
 <h1>PROTEZIONE CIVILE N.O.V.</h1>
-<span>Nucleo Operativo Volontario di Pisticci</span>
+<span>Nucleo Operativo Volontario del Metapontino</span>
 </div>
 
 </div>
@@ -430,19 +482,13 @@ font-size:32px;
 
 </header>
 
-<!-- HERO -->
-
 <section class="hero">
 
 <div class="hero-content">
 
-<h2>
-PROTEZIONE CIVILE N.O.V.
-</h2>
+<h2>PROTEZIONE CIVILE N.O.V.</h2>
 
-<h3>
-Sempre al servizio del territorio 🚨
-</h3>
+<h3>Sempre al servizio del territorio 🚨</h3>
 
 <p>
 Interventi, emergenze, prevenzione e tutela del territorio
@@ -458,69 +504,73 @@ al servizio della comunità di Pisticci e della Basilicata.
 
 </section>
 
-<!-- ALLERTA -->
-
 <section id="allerta">
 
-<h2 class="section-title">Allerta Protezione Civile</h2>
+<h2 class="section-title">
+🚨 Allerta Protezione Civile
+</h2>
 
 <p class="section-sub">
-Sistema di monitoraggio e informazioni aggiornate
-per la sicurezza del territorio.
+Situazione aggiornata della Basilicata e livelli di criticità.
 </p>
+
+<div class="alert-layout">
 
 <div class="current-alert">
 
-<h3>
-🟢 ALLERTA ATTUALE: VERDE
-</h3>
+<div class="alert-live"></div>
+
+<h3>ALLERTA ATTUALE</h3>
+
+<div class="alert-status green">
+🟢 VERDE
+</div>
 
 <p>
-Attualmente non risultano criticità rilevanti
-sul territorio della Basilicata.
+Attualmente non risultano criticità rilevanti sul territorio.
+Situazione sotto controllo.
 </p>
 
 </div>
 
-<div class="alert-grid">
+<div class="alert-scale">
 
-<div class="alert-card green">
-<h3>🟢 Allerta Verde</h3>
-<p>
-Situazione regolare.
-Nessuna criticità prevista.
-</p>
+<h3>SCALA ALLERTE</h3>
+
+<div class="scale-item green">
+<span>🟢 VERDE</span>
+<p>Nessuna criticità prevista.</p>
 </div>
 
-<div class="alert-card yellow">
-<h3>🟡 Allerta Gialla</h3>
-<p>
-Possibili criticità localizzate.
-Prestare attenzione agli aggiornamenti.
-</p>
+<div class="scale-item yellow">
+<span>🟡 GIALLA</span>
+<p>Possibili criticità localizzate.</p>
 </div>
 
-<div class="alert-card red">
-<h3>🔴 Allerta Rossa</h3>
-<p>
-Situazione di grave pericolo.
-Massima attenzione ed evitare spostamenti non necessari.
-</p>
+<div class="scale-item orange">
+<span>🟠 ARANCIONE</span>
+<p>Rischio moderato e monitoraggio attivo.</p>
+</div>
+
+<div class="scale-item red">
+<span>🔴 ROSSA</span>
+<p>Massima emergenza e rischio elevato.</p>
+</div>
+
 </div>
 
 </div>
 
 </section>
 
-<!-- EMERGENZE -->
-
 <section id="emergenza">
 
-<h2 class="section-title">Sistema Emergenze</h2>
+<h2 class="section-title">
+🚒 Sistema Emergenze
+</h2>
 
 <p class="section-sub">
-Il sito permette di ricevere notifiche immediate
-in caso di incendi o emergenze sul territorio.
+Ricevi notifiche immediate in caso di incendi o emergenze sul territorio.
 </p>
 
 <div class="cards">
@@ -528,8 +578,7 @@ in caso di incendi o emergenze sul territorio.
 <div class="card">
 <h3>🔥 Incendi</h3>
 <p>
-Aggiornamenti rapidi su incendi boschivi
-e situazioni di emergenza.
+Aggiornamenti rapidi sugli incendi boschivi e situazioni di emergenza.
 </p>
 </div>
 
@@ -537,8 +586,7 @@ e situazioni di emergenza.
 <h3>📲 Notifiche</h3>
 
 <p>
-Attiva le notifiche per ricevere avvisi
-direttamente sul telefono.
+Attiva le notifiche per ricevere avvisi direttamente sul telefono.
 </p>
 
 <button onclick="attivaNotifiche()" class="btn btn-red" style="margin-top:20px;">
@@ -554,79 +602,122 @@ Prova notifica
 <div class="card">
 <h3>🚨 Emergenze</h3>
 <p>
-Informazioni in tempo reale per la sicurezza
-della popolazione.
+Informazioni in tempo reale per la sicurezza della popolazione.
 </p>
 </div>
 
 </div>
 
 </section>
-
-<!-- MAPPA -->
 
 <section id="mappa">
 
 <h2 class="section-title">
-Mappa incendi Basilicata 🔥
+🔥 Mappa incendi Basilicata
 </h2>
 
 <p class="section-sub">
-Monitoraggio satellitare quasi in tempo reale
-degli hotspot incendi tramite NASA FIRMS.
+Monitoraggio satellitare quasi in tempo reale degli hotspot incendi tramite NASA FIRMS.
 </p>
 
 <div class="map-box">
 
-<iframe
-src="https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@16.5,40.5,7.0z">
-</iframe>
+<h3>🔥 Mappa incendi in tempo reale</h3>
+
+<p>
+La mappa NASA FIRMS non può essere visualizzata direttamente dentro il sito,
+ma puoi aprirla in tempo reale cliccando il pulsante qui sotto.
+</p>
+
+<a class="btn btn-red"
+href="https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@16.5,40.5,7.0z"
+target="_blank">
+
+Apri mappa incendi Basilicata
+
+</a>
 
 </div>
 
 </section>
 
-<!-- CONTATTI -->
-
 <section id="contatti">
 
-<h2 class="section-title">Contatti</h2>
+<h2 class="section-title">
+📞 Contatti
+</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>📍 Sede</h3>
-<p>Pisticci (MT)</p>
+
+<h3>🏢 Associazione</h3>
+
+<p>
+<strong>N.O.V.</strong><br>
+NUCLEO OPERATIVO VOLONTARI DEL METAPONTINO
+</p>
+
 </div>
 
 <div class="card">
-<h3>📞 Telefono</h3>
+
+<h3>📍 Indirizzo</h3>
+
 <p>
-<a href="tel:+393293559404" style="color:white;text-decoration:none;">
-329 355 9404
+Via Nilde Iotti<br>
+75015 Tinchi - PISTICCI (MT)
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>📞 Telefono</h3>
+
+<p>
+<a href="tel:+393934139344"
+style="color:white;text-decoration:none;">
+393 413 9344
 </a>
 </p>
+
 </div>
 
 <div class="card">
+
 <h3>📧 Email</h3>
+
 <p>
-<a href="mailto:nov_protciv@live.it" style="color:white;text-decoration:none;">
+<a href="mailto:nov_protciv@live.it"
+style="color:white;text-decoration:none;">
 nov_protciv@live.it
 </a>
 </p>
+
+</div>
+
+<div class="card">
+
+<h3>📨 Email PEC</h3>
+
+<p>
+<a href="mailto:protezionecivilenov@pec.it"
+style="color:white;text-decoration:none;">
+protezionecivilenov@pec.it
+</a>
+</p>
+
 </div>
 
 </div>
 
 </section>
 
-<!-- DONAZIONI -->
-
 <section id="donazioni">
 
 <h2 class="section-title">
-DONA IL TUO 5 × MILLE ❤️
+❤️ DONA IL TUO 5 × MILLE
 </h2>
 
 <p class="section-sub">
@@ -636,27 +727,19 @@ la sicurezza e le emergenze reali.
 
 <div class="donation-box">
 
-<h3>
-INSERISCILO NEL 730 / CU
-</h3>
+<h3>INSERISCILO NEL 730 / CU</h3>
 
 <div class="tax-code">
 90017920779
 </div>
 
 <p>
-
-<strong>
-SOSTIENI CHI INTERVIENE QUANDO SERVE 🚨
-</strong>
-
+<strong>SOSTIENI CHI INTERVIENE QUANDO SERVE 🚨</strong>
 <br><br>
-
 ✅ Grazie per il tuo supporto<br>
 ✅ Non ti costa nulla<br>
 ✅ Aiuti il territorio<br>
 ✅ Supporti emergenze reali
-
 </p>
 
 </div>
@@ -668,7 +751,7 @@ SOSTIENI CHI INTERVIENE QUANDO SERVE 🚨
 <h3>PROTEZIONE CIVILE N.O.V.</h3>
 
 <p>
-Nucleo Operativo Volontario di Pisticci<br>
+Nucleo Operativo Volontario del Metapontino<br>
 Sempre al servizio del territorio 🚨
 </p>
 
@@ -695,15 +778,15 @@ alert("Errore service worker");
 
 }
 
-/* NOTIFICHE */
-
 async function attivaNotifiche(){
 
 await registraSW();
 
 if(!("Notification" in window)){
+
 alert("Notifiche non supportate");
 return;
+
 }
 
 const permission = await Notification.requestPermission();
@@ -736,7 +819,6 @@ if(reg){
 reg.showNotification("PROTEZIONE CIVILE N.O.V.",{
 
 body:"🚨 Notifica di prova inviata correttamente",
-
 icon:"FB_IMG_1779516909018.jpg",
 badge:"FB_IMG_1779516909018.jpg"
 
@@ -746,15 +828,9 @@ badge:"FB_IMG_1779516909018.jpg"
 
 }
 
-/* CAMBIA ALLERTA QUI */
+/* cambia qui: verde / rossa */
 
 const livelloAllerta = "verde";
-
-/*
-verde
-gialla
-rossa
-*/
 
 if(livelloAllerta === "rossa"){
 
