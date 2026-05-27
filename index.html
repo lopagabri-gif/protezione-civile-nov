@@ -1926,32 +1926,43 @@ const db  = getDatabase(app);
 const segnRef = ref(db, 'segnalazioni');
 
 /* ══════════════════════════════
-   CALLMEBOT — WHATSAPP DIRETTIVO
-   Aggiungi qui numero+apikey di ogni membro
+   TELEGRAM — NOTIFICHE DIRETTIVO
 ══════════════════════════════ */
-const DIRETTIVO = [
-  // { phone: '39XXXXXXXXXX', apikey: 'XXXXXXX' },
-  // { phone: '39XXXXXXXXXX', apikey: 'XXXXXXX' },
-  // Decommenta e compila quando hai le API key CallMeBot
+const TELEGRAM_TOKEN = '8100056228:AAHLIjPxAbNhDM1kK2CXEgiWNncwH0sLhzU';
+
+// Aggiungi qui il chat_id di ogni membro del direttivo
+const DIRETTIVO_IDS = [
+  715449500,  // Gabriele
+  // Aggiungi altri membri domani:
+  // 123456789,  // Nome membro 2
+  // 987654321,  // Nome membro 3
 ];
 
-async function inviaWhatsApp(segn){
-  if(DIRETTIVO.length === 0) return;
+async function inviaNotificaTelegram(segn){
+  if(DIRETTIVO_IDS.length === 0) return;
   const mapsLink = segn.lat
     ? `https://maps.google.com/?q=${segn.lat},${segn.lng}`
     : 'Posizione non disponibile';
-  const msg = encodeURIComponent(
-    `🚨 NUOVA SEGNALAZIONE N.O.V.\n` +
-    `${segn.icon} Tipo: ${segn.label}\n` +
-    `📝 ${segn.desc}\n` +
-    `👤 Segnalato da: ${segn.nome}\n` +
-    `📍 Posizione: ${mapsLink}\n` +
-    `🕐 ${segn.time}`
-  );
-  for(const m of DIRETTIVO){
+  const testo =
+    `🚨 *NUOVA SEGNALAZIONE N.O.V.*\n` +
+    `${segn.icon} *Tipo:* ${segn.label}\n` +
+    `📝 *Descrizione:* ${segn.desc}\n` +
+    `👤 *Segnalato da:* ${segn.nome}\n` +
+    `📍 *Posizione:* ${mapsLink}\n` +
+    `🕐 *Orario:* ${segn.time}`;
+
+  for(const chatId of DIRETTIVO_IDS){
     try{
-      await fetch(`https://api.callmebot.com/whatsapp.php?phone=${m.phone}&text=${msg}&apikey=${m.apikey}`);
-    }catch(e){ console.warn('WhatsApp non inviato a', m.phone); }
+      await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: testo,
+          parse_mode: 'Markdown'
+        })
+      });
+    }catch(e){ console.warn('Telegram non inviato a', chatId); }
   }
 }
 
@@ -2080,7 +2091,7 @@ window.inviaSegnalazione = async function(){
     document.getElementById('segnDesc').value = '';
     document.getElementById('segnNome').value = '';
     mostraToast(`${nuova.icon} Segnalazione inviata al direttivo!`, 'success');
-    await inviaWhatsApp(nuova);
+    await inviaNotificaTelegram(nuova);
   }catch(e){
     mostraToast('Errore invio — controlla la connessione.', 'error');
   }
