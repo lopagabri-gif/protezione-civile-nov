@@ -3,928 +3,1227 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PROTEZIONE CIVILE N.O.V.</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<title>Protezione Civile N.O.V. — Nucleo Operativo Volontari del Metapontino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+/* ─── ROOT ─── */
+:root {
+  --red:      #dc2626;
+  --red-dark: #991b1b;
+  --red-glow: rgba(220,38,38,.35);
+  --green:    #16a34a;
+  --green-lt: #22c55e;
+  --yellow:   #ca8a04;
+  --orange:   #ea580c;
+  --bg:       #06080f;
+  --bg2:      #0c0f1a;
+  --glass:    rgba(255,255,255,.04);
+  --border:   rgba(255,255,255,.07);
+  --text:     #e8eaf0;
+  --muted:    rgba(232,234,240,.60);
+  --font-h:   'Barlow Condensed', sans-serif;
+  --font-b:   'Barlow', sans-serif;
 }
 
-html{
-scroll-behavior:smooth;
-}
-
+/* ─── RESET ─── */
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
 body{
-font-family:'Inter',sans-serif;
-background:#030712;
-color:white;
-overflow-x:hidden;
+  font-family: var(--font-b);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
 }
 
-body.red-alert{
-animation:redFlash 1s infinite;
+/* ─── NOISE TEXTURE OVERLAY ─── */
+body::before{
+  content:'';
+  position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
 }
 
+/* ─── RED ALERT ─── */
+body.red-alert{ animation: redFlash 1.2s infinite; }
 @keyframes redFlash{
-0%{background:#220000;}
-50%{background:#4b0000;}
-100%{background:#220000;}
+  0%,100%{ background:#1a0000; }
+  50%{ background:#2d0000; }
 }
 
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
 header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-padding:18px 35px;
-background:rgba(3,7,18,.88);
-backdrop-filter:blur(16px);
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:999;
-border-bottom:1px solid rgba(255,255,255,.08);
+  position:fixed; top:0; left:0; width:100%;
+  padding:0 40px;
+  height:76px;
+  background: rgba(6,8,15,.90);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display:flex; align-items:center; justify-content:space-between;
+  z-index:999;
+  border-bottom:1px solid var(--border);
+}
+
+/* left accent line */
+header::before{
+  content:'';
+  position:absolute; left:0; top:0; bottom:0;
+  width:4px;
+  background: linear-gradient(180deg, var(--red), transparent);
 }
 
 .logo-box{
-display:flex;
-align-items:center;
-gap:18px;
+  display:flex; align-items:center; gap:16px;
 }
 
 .logo-box img{
-width:100px;
-height:100px;
-border-radius:50%;
-object-fit:cover;
-background:white;
-padding:6px;
-box-shadow:0 10px 30px rgba(0,0,0,.45);
+  width:48px; height:48px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--red);
+  background:white;
+  padding:3px;
 }
 
 .logo-text h1{
-font-size:28px;
-font-weight:900;
-line-height:1;
+  font-family: var(--font-h);
+  font-size:22px; font-weight:900;
+  letter-spacing:.5px;
+  line-height:1;
 }
 
 .logo-text span{
-font-size:14px;
-opacity:.8;
+  font-size:11px; font-weight:400;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  color: var(--muted);
 }
 
-nav{
-display:flex;
-gap:28px;
-}
-
+/* pill nav */
+nav{ display:flex; gap:4px; }
 nav a{
-color:white;
-text-decoration:none;
-font-weight:700;
-transition:.3s;
+  color: var(--muted);
+  text-decoration:none;
+  font-size:13px; font-weight:600;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  padding:8px 16px;
+  border-radius:6px;
+  transition:.25s;
 }
-
 nav a:hover{
-color:#22c55e;
+  color: white;
+  background: rgba(255,255,255,.07);
 }
 
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
 .hero{
-position:relative;
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:170px 20px 90px;
-background:
-linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.85)),
-url('FB_IMG_1779032553450.jpg') center/cover no-repeat;
+  position:relative;
+  min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+  padding:120px 24px 80px;
+  overflow:hidden;
+}
+
+.hero-bg{
+  position:absolute; inset:0;
+  background:
+    url('FB_IMG_1779032553450.jpg') center/cover no-repeat;
+  transform:scale(1.05);
+  animation: heroZoom 18s ease-in-out infinite alternate;
+}
+@keyframes heroZoom{
+  from{ transform:scale(1.05); }
+  to{   transform:scale(1.12); }
+}
+.hero-bg::after{
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,8,15,.55) 0%,
+    rgba(6,8,15,.40) 40%,
+    rgba(6,8,15,.85) 80%,
+    var(--bg) 100%
+  );
+}
+
+/* diagonal stripe accent */
+.hero-bg::before{
+  content:'';
+  position:absolute; inset:0;
+  background: repeating-linear-gradient(
+    -55deg,
+    transparent,
+    transparent 80px,
+    rgba(220,38,38,.03) 80px,
+    rgba(220,38,38,.03) 81px
+  );
+  z-index:1;
 }
 
 .hero-content{
-max-width:1050px;
+  position:relative; z-index:2;
+  max-width:900px;
+}
+
+/* badge */
+.hero-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:7px 18px;
+  border:1px solid rgba(220,38,38,.4);
+  border-radius:4px;
+  background:rgba(220,38,38,.08);
+  font-size:11px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  color: var(--red);
+  margin-bottom:32px;
+  animation: fadeUp .7s ease both;
+}
+.hero-badge .dot{
+  width:6px; height:6px;
+  background:var(--red);
+  border-radius:50%;
+  animation: pulseRed 1s infinite;
+}
+@keyframes pulseRed{
+  0%,100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:.4; transform:scale(1.4); }
 }
 
 .hero h2{
-font-size:90px;
-font-weight:900;
-line-height:.95;
-margin-bottom:24px;
-text-shadow:0 10px 35px rgba(0,0,0,.55);
+  font-family: var(--font-h);
+  font-size: clamp(54px, 10vw, 110px);
+  font-weight:900;
+  line-height:.9;
+  letter-spacing:-1px;
+  margin-bottom:20px;
+  animation: fadeUp .8s .1s ease both;
 }
 
+.hero h2 .accent{ color: var(--red); }
+
 .hero h3{
-font-size:42px;
-color:#22c55e;
-margin-bottom:28px;
+  font-family: var(--font-h);
+  font-size: clamp(20px, 3.5vw, 32px);
+  font-weight:600;
+  color: var(--muted);
+  margin-bottom:24px;
+  animation: fadeUp .8s .2s ease both;
+  letter-spacing:.5px;
 }
 
 .hero p{
-font-size:23px;
-line-height:1.8;
-opacity:.92;
-margin-bottom:45px;
+  font-size:17px; line-height:1.75;
+  color: var(--muted);
+  max-width:580px; margin:0 auto 44px;
+  animation: fadeUp .8s .3s ease both;
 }
 
 .hero-buttons{
-display:flex;
-justify-content:center;
-gap:18px;
-flex-wrap:wrap;
+  display:flex; justify-content:center;
+  gap:14px; flex-wrap:wrap;
+  animation: fadeUp .8s .4s ease both;
 }
 
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(22px); }
+  to{   opacity:1; transform:translateY(0); }
+}
+
+/* scroll hint */
+.hero-scroll{
+  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+  z-index:2;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  font-size:10px; letter-spacing:2px; text-transform:uppercase;
+  color: var(--muted);
+  animation: fadeUp 1s .8s ease both;
+}
+.hero-scroll span{
+  width:1px; height:40px;
+  background:linear-gradient(var(--muted), transparent);
+  animation: scrollLine 1.5s ease-in-out infinite;
+}
+@keyframes scrollLine{
+  0%,100%{ opacity:1; transform:scaleY(1); transform-origin:top; }
+  50%{ opacity:.3; }
+}
+
+/* ─── BUTTONS ─── */
 .btn{
-padding:17px 34px;
-border:none;
-border-radius:50px;
-font-size:16px;
-font-weight:800;
-cursor:pointer;
-text-decoration:none;
-transition:.3s;
-display:inline-block;
+  display:inline-flex; align-items:center; gap:8px;
+  padding:14px 30px;
+  border:none; border-radius:6px;
+  font-size:13px; font-weight:700;
+  letter-spacing:.8px; text-transform:uppercase;
+  cursor:pointer; text-decoration:none;
+  transition:.25s;
 }
-
 .btn-red{
-background:#dc2626;
-color:white;
-box-shadow:0 10px 25px rgba(220,38,38,.35);
+  background: var(--red);
+  color:white;
+  box-shadow:0 8px 24px var(--red-glow);
 }
-
 .btn-red:hover{
-transform:translateY(-4px);
-background:#ef4444;
+  background:#ef4444;
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px var(--red-glow);
 }
-
 .btn-green{
-background:#16a34a;
-color:white;
-box-shadow:0 10px 25px rgba(22,163,74,.35);
+  background: var(--green);
+  color:white;
+  box-shadow:0 8px 24px rgba(22,163,74,.3);
 }
-
 .btn-green:hover{
-transform:translateY(-4px);
-background:#22c55e;
+  background: var(--green-lt);
+  transform:translateY(-2px);
+}
+.btn-outline{
+  background:transparent;
+  color:white;
+  border:1px solid var(--border);
+}
+.btn-outline:hover{
+  background: var(--glass);
+  border-color:rgba(255,255,255,.18);
 }
 
-section{
-padding:100px 8%;
+/* ══════════════════════════════
+   SECTIONS
+══════════════════════════════ */
+section{ padding:100px 6%; position:relative; z-index:1; }
+
+.section-eyebrow{
+  display:flex; align-items:center; justify-content:center;
+  gap:10px;
+  font-size:11px; font-weight:700;
+  letter-spacing:3px; text-transform:uppercase;
+  color: var(--red);
+  margin-bottom:14px;
 }
+.section-eyebrow::before,
+.section-eyebrow::after{
+  content:'';
+  height:1px; width:40px;
+  background: linear-gradient(90deg, transparent, var(--red));
+}
+.section-eyebrow::after{ transform:rotate(180deg); }
 
 .section-title{
-font-size:52px;
-font-weight:900;
-text-align:center;
-margin-bottom:20px;
+  font-family: var(--font-h);
+  font-size: clamp(36px, 6vw, 62px);
+  font-weight:900;
+  text-align:center;
+  line-height:1;
+  letter-spacing:-.5px;
+  margin-bottom:16px;
 }
 
 .section-sub{
-max-width:950px;
-margin:auto;
-text-align:center;
-font-size:18px;
-line-height:1.8;
-opacity:.82;
+  max-width:700px;
+  margin:0 auto;
+  text-align:center;
+  font-size:16px; line-height:1.75;
+  color: var(--muted);
 }
+
+/* divider */
+.divider{
+  width:100%;
+  height:1px;
+  background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent);
+}
+
+/* ══════════════════════════════
+   ALLERTA
+══════════════════════════════ */
+#allerta{ background: var(--bg2); }
 
 .alert-layout{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:28px;
-margin-top:55px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  margin-top:56px;
 }
 
-.current-alert,
-.alert-scale{
-background:rgba(255,255,255,.06);
-border:1px solid rgba(255,255,255,.08);
-border-radius:28px;
-padding:35px;
-backdrop-filter:blur(12px);
-box-shadow:0 15px 40px rgba(0,0,0,.35);
+.glass-card{
+  background: var(--glass);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:32px;
+  backdrop-filter:blur(16px);
+  transition:.3s;
+}
+.glass-card:hover{ border-color:rgba(255,255,255,.13); }
+
+.card-label{
+  font-size:10px; font-weight:700;
+  letter-spacing:2.5px; text-transform:uppercase;
+  color: var(--muted);
+  margin-bottom:20px;
 }
 
-.current-alert h3,
-.alert-scale h3{
-font-size:30px;
-margin-bottom:20px;
+.live-row{
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:16px;
 }
-
-.alert-live{
-width:18px;
-height:18px;
-background:#22c55e;
-border-radius:50%;
-animation:pulseGreen 1s infinite;
-margin-bottom:18px;
+.live-dot{
+  width:10px; height:10px;
+  background: var(--green-lt);
+  border-radius:50%;
+  animation: pulseGreen 1.2s ease-in-out infinite;
 }
-
 @keyframes pulseGreen{
-0%{opacity:1;transform:scale(1)}
-50%{opacity:.45;transform:scale(1.25)}
-100%{opacity:1;transform:scale(1)}
+  0%,100%{ opacity:1; box-shadow:0 0 0 0 rgba(34,197,94,.5); }
+  50%{ opacity:.6; box-shadow:0 0 0 6px rgba(34,197,94,0); }
+}
+.live-text{
+  font-size:11px; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase;
+  color: var(--green-lt);
 }
 
 .alert-status{
-padding:22px;
-border-radius:22px;
-font-size:34px;
-font-weight:900;
-text-align:center;
-margin-bottom:22px;
+  border-radius:12px;
+  padding:28px 20px;
+  text-align:center;
+  margin-bottom:20px;
 }
-
+.alert-status .status-icon{ font-size:36px; margin-bottom:8px; }
+.alert-status .status-label{
+  font-family: var(--font-h);
+  font-size:42px; font-weight:900;
+  line-height:1;
+  letter-spacing:1px;
+}
 .alert-status.green{
-background:linear-gradient(135deg,#15803d,#22c55e);
+  background: linear-gradient(135deg,rgba(21,128,61,.3),rgba(34,197,94,.12));
+  border:1px solid rgba(34,197,94,.25);
+  color: var(--green-lt);
 }
-
 .alert-status.red{
-background:linear-gradient(135deg,#7f1d1d,#dc2626);
-animation:redBlink 1s infinite;
+  background: linear-gradient(135deg,rgba(127,29,29,.4),rgba(220,38,38,.15));
+  border:1px solid rgba(220,38,38,.35);
+  color:#fca5a5;
+  animation:redBlink 1.2s infinite;
 }
-
 @keyframes redBlink{
-0%{opacity:1}
-50%{opacity:.45}
-100%{opacity:1}
+  0%,100%{ opacity:1; }
+  50%{ opacity:.6; }
 }
 
-.current-alert p{
-font-size:18px;
-line-height:1.8;
-opacity:.9;
-}
+.alert-desc{ font-size:15px; line-height:1.7; color: var(--muted); }
 
+/* scale */
+.scale-list{ display:flex; flex-direction:column; gap:10px; }
 .scale-item{
-padding:18px;
-border-radius:18px;
-margin-bottom:15px;
-font-weight:700;
+  display:flex; align-items:flex-start; gap:14px;
+  padding:16px 18px;
+  border-radius:10px;
+  border:1px solid transparent;
+}
+.scale-icon{ font-size:20px; flex-shrink:0; margin-top:2px; }
+.scale-body .scale-name{
+  font-family: var(--font-h);
+  font-size:18px; font-weight:800;
+  letter-spacing:.5px;
+  line-height:1;
+  margin-bottom:4px;
+}
+.scale-body p{ font-size:13px; line-height:1.5; opacity:.85; }
+
+.scale-item.green{ background:rgba(21,128,61,.18); border-color:rgba(34,197,94,.15); }
+.scale-item.yellow{ background:rgba(202,138,4,.18); border-color:rgba(202,138,4,.2); color:#fde68a; }
+.scale-item.orange{ background:rgba(234,88,12,.18); border-color:rgba(234,88,12,.2); }
+.scale-item.red{ background:rgba(185,28,28,.22); border-color:rgba(220,38,38,.2); }
+
+/* ══════════════════════════════
+   EMERGENZE
+══════════════════════════════ */
+.emerg-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:22px;
+  margin-top:56px;
 }
 
-.scale-item span{
-display:block;
-font-size:22px;
-margin-bottom:6px;
+.emerg-card{
+  background: var(--glass);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:36px 32px;
+  transition:.3s;
+  position:relative;
+  overflow:hidden;
+}
+.emerg-card::before{
+  content:'';
+  position:absolute; top:0; left:0; right:0;
+  height:2px;
+  background: var(--red);
+  transform:scaleX(0); transform-origin:left;
+  transition:.35s;
+}
+.emerg-card:hover::before{ transform:scaleX(1); }
+.emerg-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(255,255,255,.12);
 }
 
-.scale-item p{
-line-height:1.5;
-opacity:.92;
+.emerg-icon{
+  font-size:40px; margin-bottom:20px;
+  display:block;
 }
 
-.scale-item.green{
-background:#166534;
+.emerg-card h3{
+  font-family: var(--font-h);
+  font-size:28px; font-weight:800;
+  letter-spacing:.3px;
+  margin-bottom:12px;
 }
 
-.scale-item.yellow{
-background:#ca8a04;
-color:#111;
+.emerg-card p{
+  font-size:15px; line-height:1.7;
+  color: var(--muted);
+  margin-bottom:24px;
 }
 
-.scale-item.orange{
-background:#ea580c;
+.btn-row{
+  display:flex; gap:10px; flex-wrap:wrap;
 }
 
-.scale-item.red{
-background:#b91c1c;
+/* ══════════════════════════════
+   MAPPA
+══════════════════════════════ */
+#mappa{ background: var(--bg2); }
+
+.map-cta{
+  margin-top:56px;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background: var(--glass);
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:0;
 }
 
-.cards{
-margin-top:60px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:28px;
+.map-cta-body{
+  padding:48px 52px;
 }
 
-.card{
-background:rgba(255,255,255,.06);
-border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(12px);
-border-radius:26px;
-padding:38px;
-transition:.35s;
+.map-cta-body h3{
+  font-family: var(--font-h);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight:900;
+  margin-bottom:14px;
+  line-height:1;
 }
 
-.card:hover{
-transform:translateY(-8px);
-background:rgba(255,255,255,.09);
+.map-cta-body p{
+  font-size:16px; line-height:1.7;
+  color: var(--muted);
+  max-width:520px;
+  margin-bottom:28px;
 }
 
-.card h3{
-font-size:26px;
-margin-bottom:14px;
+.map-cta-visual{
+  padding:48px 52px;
+  border-left:1px solid var(--border);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:8px;
+  background:rgba(220,38,38,.04);
+}
+.map-cta-visual .big-icon{
+  font-size:72px;
+  line-height:1;
+  animation: flicker 3s ease-in-out infinite;
+}
+@keyframes flicker{
+  0%,100%{ opacity:1; }
+  45%{ opacity:1; }
+  50%{ opacity:.55; }
+  55%{ opacity:1; }
+  90%{ opacity:1; }
+  92%{ opacity:.7; }
+  94%{ opacity:1; }
+}
+.map-cta-visual span{
+  font-size:11px; letter-spacing:2px;
+  text-transform:uppercase;
+  color: var(--muted);
 }
 
-.card p{
-line-height:1.8;
-opacity:.85;
-}
-
-.map-box{
-margin-top:60px;
-border-radius:28px;
-overflow:hidden;
-box-shadow:0 15px 40px rgba(0,0,0,.4);
-border:1px solid rgba(255,255,255,.08);
-padding:45px;
-text-align:center;
-background:rgba(255,255,255,.06);
-backdrop-filter:blur(12px);
-}
-
-.map-box h3{
-font-size:34px;
-margin-bottom:20px;
-}
-
-.map-box p{
-font-size:18px;
-line-height:1.8;
-opacity:.85;
-margin-bottom:30px;
-}
-
+/* ══════════════════════════════
+   GALLERIA
+══════════════════════════════ */
 .gallery{
-margin-top:60px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:20px;
+  margin-top:56px;
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 220px;
+  gap:12px;
 }
 
-.gallery img{
-width:100%;
-height:260px;
-object-fit:cover;
-border-radius:24px;
-border:2px solid rgba(255,255,255,.08);
-transition:.35s;
-cursor:pointer;
-box-shadow:0 0 25px rgba(0,0,0,.35);
+.gallery-item{
+  position:relative;
+  overflow:hidden;
+  border-radius:12px;
+  cursor:pointer;
+  border:1px solid var(--border);
 }
+.gallery-item:nth-child(1){ grid-column:span 2; grid-row:span 2; }
+.gallery-item:nth-child(5){ grid-column:span 2; }
 
-.gallery img:hover{
-transform:scale(1.03);
-box-shadow:0 0 35px rgba(255,255,255,.18);
+.gallery-item img{
+  width:100%; height:100%;
+  object-fit:cover;
+  transition:.5s ease;
+  display:block;
 }
+.gallery-item:hover img{
+  transform:scale(1.06);
+}
+.gallery-item::after{
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.5), transparent 50%);
+  opacity:0;
+  transition:.3s;
+}
+.gallery-item:hover::after{ opacity:1; }
 
+/* lightbox */
 .lightbox{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.92);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:9999;
-padding:20px;
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.94);
+  display:none; justify-content:center; align-items:center;
+  z-index:9999;
+  padding:24px;
+  backdrop-filter:blur(8px);
 }
-
+.lightbox.active{ display:flex; }
 .lightbox img{
-max-width:95%;
-max-height:90%;
-border-radius:20px;
+  max-width:90%; max-height:88vh;
+  border-radius:12px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+.lb-close{
+  position:absolute; top:24px; right:30px;
+  font-size:36px; font-weight:300;
+  cursor:pointer; color:white; line-height:1;
+  opacity:.7; transition:.2s;
+}
+.lb-close:hover{ opacity:1; }
+
+/* ══════════════════════════════
+   CONTATTI
+══════════════════════════════ */
+#contatti{ background: var(--bg2); }
+
+.contacts-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  margin-top:56px;
 }
 
-.close{
-position:absolute;
-top:25px;
-right:30px;
-font-size:42px;
-font-weight:900;
-cursor:pointer;
+.contact-card{
+  background: var(--glass);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:28px 24px;
+  transition:.3s;
+}
+.contact-card:hover{
+  border-color:rgba(220,38,38,.3);
+  transform:translateY(-4px);
+}
+.contact-card .cc-icon{
+  font-size:28px; margin-bottom:14px; display:block;
+}
+.contact-card .cc-label{
+  font-size:10px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  color: var(--muted);
+  margin-bottom:8px;
+}
+.contact-card .cc-value{
+  font-size:16px; font-weight:500;
+  line-height:1.5;
+}
+.contact-card a{
+  color: white;
+  text-decoration:none;
+  transition:.2s;
+}
+.contact-card a:hover{ color: var(--red); }
+
+/* ══════════════════════════════
+   5x1000
+══════════════════════════════ */
+#donazioni{
+  position:relative;
+  overflow:hidden;
+}
+#donazioni::before{
+  content:'5×1000';
+  position:absolute;
+  font-family: var(--font-h);
+  font-size:280px; font-weight:900;
+  right:-20px; top:50%;
+  transform:translateY(-50%);
+  opacity:.03;
+  pointer-events:none;
+  line-height:1;
+  white-space:nowrap;
 }
 
-.donation-box{
-max-width:1000px;
-margin:60px auto 0;
-padding:45px;
-border-radius:30px;
-background:linear-gradient(135deg,#b91c1c,#ef4444);
-box-shadow:0 20px 50px rgba(0,0,0,.35);
-text-align:center;
+.donation-inner{
+  max-width:900px;
+  margin:56px auto 0;
+  background:linear-gradient(135deg, var(--red-dark) 0%, var(--red) 100%);
+  border-radius:24px;
+  padding:56px 60px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 30px 60px rgba(185,28,28,.35);
+}
+.donation-inner::before{
+  content:'';
+  position:absolute; inset:0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent, transparent 40px,
+    rgba(255,255,255,.02) 40px, rgba(255,255,255,.02) 41px
+  );
 }
 
-.donation-box h3{
-font-size:42px;
-margin-bottom:25px;
-font-weight:900;
+.donation-inner h3{
+  font-family: var(--font-h);
+  font-size: clamp(22px, 3.5vw, 34px);
+  font-weight:700;
+  letter-spacing:.5px;
+  margin-bottom:28px;
+  position:relative;
 }
 
 .tax-code{
-font-size:52px;
-font-weight:900;
-background:white;
-color:#b91c1c;
-padding:20px;
-border-radius:24px;
-display:inline-block;
-margin-bottom:30px;
-letter-spacing:3px;
+  display:inline-block;
+  font-family: var(--font-h);
+  font-size: clamp(32px, 7vw, 64px);
+  font-weight:900;
+  background:white;
+  color: var(--red-dark);
+  padding:16px 40px;
+  border-radius:14px;
+  letter-spacing:4px;
+  margin-bottom:32px;
+  position:relative;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
 }
 
-.donation-box p{
-font-size:22px;
-line-height:2;
+.donation-list{
+  list-style:none;
+  display:flex; flex-direction:column;
+  gap:10px;
+  font-size:17px;
+  position:relative;
+}
+.donation-list li{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+}
+.donation-list li::before{
+  content:'';
+  width:6px; height:6px;
+  background:rgba(255,255,255,.5);
+  border-radius:50%;
 }
 
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
 footer{
-padding:50px 20px;
-background:#020617;
-text-align:center;
-border-top:1px solid rgba(255,255,255,.08);
+  padding:48px 8%;
+  background: #020309;
+  border-top:1px solid var(--border);
+  display:flex;
+  align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:20px;
 }
 
-footer h3{
-font-size:30px;
-margin-bottom:10px;
+.footer-brand{
+  display:flex; align-items:center; gap:14px;
+}
+.footer-brand img{
+  width:44px; height:44px;
+  border-radius:50%; border:2px solid var(--red);
+  padding:2px; background:white; object-fit:cover;
+}
+.footer-brand h3{
+  font-family: var(--font-h);
+  font-size:20px; font-weight:800;
+  line-height:1;
+  margin-bottom:4px;
+}
+.footer-brand p{
+  font-size:12px; color: var(--muted); letter-spacing:.5px;
 }
 
-footer p{
-opacity:.75;
-line-height:1.8;
+.footer-copy{
+  font-size:12px; color: var(--muted);
+  text-align:right;
 }
 
-@media(max-width:900px){
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media(max-width:960px){
+  nav{ display:none; }
+  header{ padding:0 20px; }
 
-nav{
-display:none;
+  .alert-layout{ grid-template-columns:1fr; }
+
+  .map-cta{
+    grid-template-columns:1fr;
+  }
+  .map-cta-visual{ border-left:none; border-top:1px solid var(--border); }
+
+  .gallery{
+    grid-template-columns:1fr 1fr;
+    grid-auto-rows:180px;
+  }
+  .gallery-item:nth-child(1){ grid-column:span 1; grid-row:span 1; }
+  .gallery-item:nth-child(5){ grid-column:span 1; }
+
+  .donation-inner{ padding:40px 28px; }
+  .tax-code{ font-size:28px; letter-spacing:2px; padding:14px 24px; }
+
+  footer{ flex-direction:column; text-align:center; }
+  .footer-copy{ text-align:center; }
 }
 
-header{
-padding:14px 18px;
+@media(max-width:520px){
+  section{ padding:72px 5%; }
+  .gallery{
+    grid-template-columns:1fr;
+    grid-auto-rows:200px;
+  }
 }
-
-.logo-box img{
-width:78px;
-height:78px;
-}
-
-.logo-text h1{
-font-size:18px;
-}
-
-.logo-text span{
-font-size:12px;
-}
-
-.hero h2{
-font-size:52px;
-}
-
-.hero h3{
-font-size:26px;
-}
-
-.hero p{
-font-size:18px;
-}
-
-.section-title{
-font-size:36px;
-}
-
-.alert-layout{
-grid-template-columns:1fr;
-}
-
-.tax-code{
-font-size:32px;
-letter-spacing:1px;
-}
-
-.donation-box{
-padding:30px 20px;
-}
-
-.gallery img{
-height:230px;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
+<!-- ── HEADER ── -->
 <header>
-
-<div class="logo-box">
-
-<img src="FB_IMG_1779516909018.jpg">
-
-<div class="logo-text">
-<h1>PROTEZIONE CIVILE N.O.V.</h1>
-<span>Nucleo Operativo Volontari del Metapontino</span>
-</div>
-
-</div>
-
-<nav>
-<a href="#allerta">Allerte</a>
-<a href="#emergenza">Emergenze</a>
-<a href="#mappa">Mappa incendi</a>
-<a href="#foto">Foto</a>
-<a href="#contatti">Contatti</a>
-</nav>
-
+  <div class="logo-box">
+    <img src="FB_IMG_1779516909018.jpg" alt="Logo N.O.V.">
+    <div class="logo-text">
+      <h1>PROTEZIONE CIVILE N.O.V.</h1>
+      <span>Nucleo Operativo Volontari del Metapontino</span>
+    </div>
+  </div>
+  <nav>
+    <a href="#allerta">Allerte</a>
+    <a href="#emergenza">Emergenze</a>
+    <a href="#mappa">Incendi</a>
+    <a href="#foto">Foto</a>
+    <a href="#contatti">Contatti</a>
+  </nav>
 </header>
 
+<!-- ── HERO ── -->
 <section class="hero">
+  <div class="hero-bg"></div>
 
-<div class="hero-content">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Attivi sul territorio
+    </div>
 
-<h2>PROTEZIONE CIVILE N.O.V.</h2>
+    <h2>PROTEZIONE<br>CIVILE <span class="accent">N.O.V.</span></h2>
 
-<h3>Sempre al servizio del territorio 🚨</h3>
+    <h3>Sempre al servizio del territorio</h3>
 
-<p>
-Interventi, emergenze, prevenzione e tutela del territorio
-al servizio della comunità di Pisticci e della Basilicata.
-</p>
+    <p>
+      Interventi, emergenze, prevenzione e tutela del territorio
+      al servizio della comunità di Pisticci e della Basilicata.
+    </p>
 
-<div class="hero-buttons">
-<a href="#allerta" class="btn btn-red">Allerte</a>
-<a href="#mappa" class="btn btn-green">Mappa incendi</a>
-</div>
+    <div class="hero-buttons">
+      <a href="#allerta" class="btn btn-red">🚨 Allerte</a>
+      <a href="#mappa"   class="btn btn-green">🔥 Mappa incendi</a>
+      <a href="#contatti" class="btn btn-outline">Contattaci</a>
+    </div>
+  </div>
 
-</div>
-
+  <div class="hero-scroll">
+    Scorri
+    <span></span>
+  </div>
 </section>
 
+<!-- ── ALLERTA ── -->
 <section id="allerta">
+  <div class="section-eyebrow">Stato attuale</div>
+  <h2 class="section-title">Allerta Protezione Civile</h2>
+  <p class="section-sub">
+    Situazione aggiornata della Basilicata e livelli di criticità.
+  </p>
 
-<h2 class="section-title">🚨 Allerta Protezione Civile</h2>
+  <div class="alert-layout">
 
-<p class="section-sub">
-Situazione aggiornata della Basilicata e livelli di criticità.
-</p>
+    <div class="glass-card">
+      <div class="card-label">Allerta in corso</div>
 
-<div class="alert-layout">
+      <div class="live-row">
+        <span class="live-dot"></span>
+        <span class="live-text">Live aggiornato</span>
+      </div>
 
-<div class="current-alert">
+      <div class="alert-status green">
+        <div class="status-icon">🟢</div>
+        <div class="status-label">VERDE</div>
+      </div>
 
-<div class="alert-live"></div>
+      <p class="alert-desc">
+        Attualmente non risultano criticità rilevanti sul territorio.
+        Situazione monitorata e sotto controllo.
+      </p>
+    </div>
 
-<h3>ALLERTA ATTUALE</h3>
+    <div class="glass-card">
+      <div class="card-label">Scala allerte nazionale</div>
+      <div class="scale-list">
+        <div class="scale-item green">
+          <span class="scale-icon">🟢</span>
+          <div class="scale-body">
+            <div class="scale-name">VERDE</div>
+            <p>Nessuna criticità prevista.</p>
+          </div>
+        </div>
+        <div class="scale-item yellow">
+          <span class="scale-icon">🟡</span>
+          <div class="scale-body">
+            <div class="scale-name">GIALLA</div>
+            <p>Possibili criticità localizzate.</p>
+          </div>
+        </div>
+        <div class="scale-item orange">
+          <span class="scale-icon">🟠</span>
+          <div class="scale-body">
+            <div class="scale-name">ARANCIONE</div>
+            <p>Rischio moderato e monitoraggio attivo.</p>
+          </div>
+        </div>
+        <div class="scale-item red">
+          <span class="scale-icon">🔴</span>
+          <div class="scale-body">
+            <div class="scale-name">ROSSA</div>
+            <p>Massima emergenza e rischio elevato.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="alert-status green">
-🟢 VERDE
-</div>
-
-<p>
-Attualmente non risultano criticità rilevanti sul territorio.
-Situazione sotto controllo.
-</p>
-
-</div>
-
-<div class="alert-scale">
-
-<h3>SCALA ALLERTE</h3>
-
-<div class="scale-item green">
-<span>🟢 VERDE</span>
-<p>Nessuna criticità prevista.</p>
-</div>
-
-<div class="scale-item yellow">
-<span>🟡 GIALLA</span>
-<p>Possibili criticità localizzate.</p>
-</div>
-
-<div class="scale-item orange">
-<span>🟠 ARANCIONE</span>
-<p>Rischio moderato e monitoraggio attivo.</p>
-</div>
-
-<div class="scale-item red">
-<span>🔴 ROSSA</span>
-<p>Massima emergenza e rischio elevato.</p>
-</div>
-
-</div>
-
-</div>
-
+  </div>
 </section>
 
+<div class="divider"></div>
+
+<!-- ── EMERGENZE ── -->
 <section id="emergenza">
+  <div class="section-eyebrow">Sistema di allerta</div>
+  <h2 class="section-title">Sistema Emergenze</h2>
+  <p class="section-sub">
+    Ricevi notifiche immediate in caso di incendi o emergenze sul territorio.
+  </p>
 
-<h2 class="section-title">🚒 Sistema Emergenze</h2>
+  <div class="emerg-grid">
 
-<p class="section-sub">
-Ricevi notifiche immediate in caso di incendi o emergenze sul territorio.
-</p>
+    <div class="emerg-card">
+      <span class="emerg-icon">🔥</span>
+      <h3>Incendi boschivi</h3>
+      <p>
+        Aggiornamenti rapidi sugli incendi boschivi
+        e situazioni di emergenza in Basilicata.
+      </p>
+    </div>
 
-<div class="cards">
+    <div class="emerg-card">
+      <span class="emerg-icon">📲</span>
+      <h3>Notifiche push</h3>
+      <p>
+        Attiva le notifiche per ricevere avvisi
+        immediati direttamente sul tuo telefono.
+      </p>
+      <div class="btn-row">
+        <button onclick="attivaNotifiche()" class="btn btn-red">Attiva</button>
+        <button onclick="notificaTest()"    class="btn btn-outline">Prova</button>
+      </div>
+    </div>
 
-<div class="card">
-<h3>🔥 Incendi</h3>
-<p>
-Aggiornamenti rapidi sugli incendi boschivi e situazioni di emergenza.
-</p>
-</div>
+    <div class="emerg-card">
+      <span class="emerg-icon">🚨</span>
+      <h3>Emergenze live</h3>
+      <p>
+        Informazioni in tempo reale per la sicurezza
+        della popolazione durante eventi critici.
+      </p>
+    </div>
 
-<div class="card">
-<h3>📲 Notifiche</h3>
-
-<p>
-Attiva le notifiche per ricevere avvisi direttamente sul telefono.
-</p>
-
-<button onclick="attivaNotifiche()" class="btn btn-red" style="margin-top:20px;">
-Attiva notifiche
-</button>
-
-<button onclick="notificaTest()" class="btn btn-green" style="margin-top:20px;">
-Prova notifica
-</button>
-
-</div>
-
-<div class="card">
-<h3>🚨 Emergenze</h3>
-<p>
-Informazioni in tempo reale per la sicurezza della popolazione.
-</p>
-</div>
-
-</div>
-
+  </div>
 </section>
 
+<div class="divider"></div>
+
+<!-- ── MAPPA ── -->
 <section id="mappa">
+  <div class="section-eyebrow">Monitoraggio satellitare</div>
+  <h2 class="section-title">Mappa Incendi Basilicata</h2>
+  <p class="section-sub">
+    Hotspot in tempo reale tramite NASA FIRMS.
+    Dati aggiornati ogni passaggio satellitare.
+  </p>
 
-<h2 class="section-title">🔥 Mappa incendi Basilicata</h2>
-
-<p class="section-sub">
-Monitoraggio satellitare quasi in tempo reale degli hotspot incendi tramite NASA FIRMS.
-</p>
-
-<div class="map-box">
-
-<h3>🔥 Mappa incendi in tempo reale</h3>
-
-<p>
-Mappa NASA FIRMS degli incendi attuali sempre aggiornata.
-</p>
-
-<a class="btn btn-red"
-href="https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@16.6,40.3,8.0z"
-target="_blank">
-Apri mappa incendi Basilicata
-</a>
-
-</div>
-
+  <div class="map-cta">
+    <div class="map-cta-body">
+      <h3>Mappa incendi<br>in tempo reale</h3>
+      <p>
+        Visualizza gli hotspot di calore rilevati dai satelliti NASA MODIS e VIIRS
+        sulla Basilicata. Aggiornamenti ogni 12 ore circa.
+      </p>
+      <a class="btn btn-red"
+         href="https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@16.6,40.3,8.0z"
+         target="_blank">
+        🔥 Apri mappa NASA FIRMS
+      </a>
+    </div>
+    <div class="map-cta-visual">
+      <div class="big-icon">🛰️</div>
+      <span>NASA FIRMS</span>
+      <span>Basilicata</span>
+    </div>
+  </div>
 </section>
 
+<div class="divider"></div>
+
+<!-- ── GALLERIA ── -->
 <section id="foto">
+  <div class="section-eyebrow">Operatività sul campo</div>
+  <h2 class="section-title">Galleria Operativa</h2>
+  <p class="section-sub">
+    Immagini delle attività, degli interventi e dei volontari N.O.V.
+  </p>
 
-<h2 class="section-title">📸 Galleria operativa</h2>
-
-<p class="section-sub">
-Immagini delle attività operative, degli interventi e dei volontari N.O.V.
-</p>
-
-<div class="gallery">
-
-<img src="FB_IMG_1779032282471.jpg" onclick="openImg(this.src)">
-<img src="FB_IMG_1779032351750.jpg" onclick="openImg(this.src)">
-<img src="FB_IMG_1779032400374.jpg" onclick="openImg(this.src)">
-<img src="FB_IMG_1779032516968.jpg" onclick="openImg(this.src)">
-<img src="FB_IMG_1779032526869.jpg" onclick="openImg(this.src)">
-<img src="FB_IMG_1779032545746.jpg" onclick="openImg(this.src)">
-<img src="FB_IMG_1779032553450.jpg" onclick="openImg(this.src)">
-<img src="FB_IMG_1779032589055.jpg" onclick="openImg(this.src)">
-<img src="FB_IMG_1779032631507.jpg" onclick="openImg(this.src)">
-<img src="FB_IMG_1779516909018.jpg" onclick="openImg(this.src)">
-<img src="FB_IMG_1779516946597.jpg" onclick="openImg(this.src)">
-
-</div>
-
+  <div class="gallery">
+    <div class="gallery-item"><img src="FB_IMG_1779032282471.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032351750.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032400374.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032516968.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032526869.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032545746.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032553450.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032589055.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032631507.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779516909018.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779516946597.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+  </div>
 </section>
 
+<!-- ── CONTATTI ── -->
 <section id="contatti">
+  <div class="section-eyebrow">Come raggiungerci</div>
+  <h2 class="section-title">Contatti</h2>
+  <p class="section-sub">
+    Siamo presenti sul territorio del Metapontino, pronti a intervenire
+    in caso di necessità.
+  </p>
 
-<h2 class="section-title">📞 Contatti</h2>
+  <div class="contacts-grid">
 
-<div class="cards">
+    <div class="contact-card">
+      <span class="cc-icon">🏢</span>
+      <div class="cc-label">Associazione</div>
+      <div class="cc-value">
+        <strong>N.O.V.</strong><br>
+        Nucleo Operativo Volontari del Metapontino
+      </div>
+    </div>
 
-<div class="card">
+    <div class="contact-card">
+      <span class="cc-icon">📍</span>
+      <div class="cc-label">Sede</div>
+      <div class="cc-value">
+        Via Nilde Iotti<br>
+        75015 Tinchi — Pisticci (MT)
+      </div>
+    </div>
 
-<h3>🏢 Associazione</h3>
+    <div class="contact-card">
+      <span class="cc-icon">📞</span>
+      <div class="cc-label">Telefono</div>
+      <div class="cc-value">
+        <a href="tel:+393518634206">+39 351 863 4206</a>
+      </div>
+    </div>
 
-<p>
-<strong>N.O.V.</strong><br>
-NUCLEO OPERATIVO VOLONTARI DEL METAPONTINO
-</p>
+    <div class="contact-card">
+      <span class="cc-icon">📧</span>
+      <div class="cc-label">Email</div>
+      <div class="cc-value">
+        <a href="mailto:nov_protciv@live.it">nov_protciv@live.it</a>
+      </div>
+    </div>
 
-</div>
+    <div class="contact-card">
+      <span class="cc-icon">📨</span>
+      <div class="cc-label">Email PEC</div>
+      <div class="cc-value">
+        <a href="mailto:protezionecivilenov@pec.it">protezionecivilenov@pec.it</a>
+      </div>
+    </div>
 
-<div class="card">
-
-<h3>📍 Indirizzo</h3>
-
-<p>
-Via Nilde Iotti<br>
-75015 Tinchi - PISTICCI (MT)
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>📞 Telefono</h3>
-
-<p>
-<a href="tel:+393518634206"
-style="color:white;text-decoration:none;">
-+39 3518634206
-</a>
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>📧 Email</h3>
-
-<p>
-<a href="mailto:nov_protciv@live.it"
-style="color:white;text-decoration:none;">
-nov_protciv@live.it
-</a>
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>📨 Email PEC</h3>
-
-<p>
-<a href="mailto:protezionecivilenov@pec.it"
-style="color:white;text-decoration:none;">
-protezionecivilenov@pec.it
-</a>
-</p>
-
-</div>
-
-</div>
-
+  </div>
 </section>
 
+<!-- ── 5×1000 ── -->
 <section id="donazioni">
+  <div class="section-eyebrow">Sostienici</div>
+  <h2 class="section-title">Dona il tuo 5 × 1000</h2>
+  <p class="section-sub">
+    Sostieni chi interviene ogni giorno per il territorio,
+    la sicurezza e le emergenze reali.
+  </p>
 
-<h2 class="section-title">❤️ DONA IL TUO 5 × MILLE</h2>
-
-<p class="section-sub">
-Sostieni chi interviene ogni giorno per il territorio,
-la sicurezza e le emergenze reali.
-</p>
-
-<div class="donation-box">
-
-<h3>INSERISCILO NEL 730 / CU</h3>
-
-<div class="tax-code">
-90017920779
-</div>
-
-<p>
-<strong>SOSTIENI CHI INTERVIENE QUANDO SERVE 🚨</strong>
-<br><br>
-✅ Grazie per il tuo supporto<br>
-✅ Non ti costa nulla<br>
-✅ Aiuti il territorio<br>
-✅ Supporti emergenze reali
-</p>
-
-</div>
-
+  <div class="donation-inner">
+    <h3>Inserisci il codice fiscale nel tuo 730 / CU</h3>
+    <div class="tax-code">90017920779</div>
+    <ul class="donation-list">
+      <li>Non ti costa assolutamente nulla</li>
+      <li>Aiuti concretamente il territorio</li>
+      <li>Supporti emergenze reali e volontari attivi</li>
+      <li>Grazie di cuore per il tuo supporto 🙏</li>
+    </ul>
+  </div>
 </section>
 
+<!-- ── FOOTER ── -->
 <footer>
-
-<h3>PROTEZIONE CIVILE N.O.V.</h3>
-
-<p>
-Nucleo Operativo Volontari del Metapontino<br>
-Sempre al servizio del territorio 🚨
-</p>
-
+  <div class="footer-brand">
+    <img src="FB_IMG_1779516909018.jpg" alt="Logo">
+    <div>
+      <h3>PROTEZIONE CIVILE N.O.V.</h3>
+      <p>Nucleo Operativo Volontari del Metapontino</p>
+    </div>
+  </div>
+  <div class="footer-copy">
+    Via Nilde Iotti · 75015 Tinchi, Pisticci (MT)<br>
+    nov_protciv@live.it · +39 351 863 4206
+  </div>
 </footer>
 
+<!-- ── LIGHTBOX ── -->
 <div class="lightbox" id="lightbox">
-<span class="close" onclick="closeImg()">×</span>
-<img id="lightbox-img">
+  <span class="lb-close" onclick="closeImg()">×</span>
+  <img id="lightbox-img" alt="">
 </div>
 
+<!-- ── SCRIPT ── -->
 <script>
-
+/* ── Lightbox ── */
 function openImg(src){
-document.getElementById("lightbox").style.display="flex";
-document.getElementById("lightbox-img").src=src;
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
-
 function closeImg(){
-document.getElementById("lightbox").style.display="none";
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
 }
-
-document.getElementById("lightbox").addEventListener("click",function(e){
-if(e.target===this){
-closeImg();
-}
+document.getElementById('lightbox').addEventListener('click', function(e){
+  if(e.target === this) closeImg();
+});
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeImg();
 });
 
+/* ── Notifiche ── */
 async function registraSW(){
-
-if("serviceWorker" in navigator){
-
-try{
-
-const reg = await navigator.serviceWorker.register("sw.js");
-return reg;
-
-}catch(error){
-
-alert("Errore service worker");
-
-}
-
-}
-
+  if('serviceWorker' in navigator){
+    try{
+      return await navigator.serviceWorker.register('sw.js');
+    }catch(e){
+      console.warn('SW error:', e);
+    }
+  }
 }
 
 async function attivaNotifiche(){
-
-await registraSW();
-
-if(!("Notification" in window)){
-
-alert("Notifiche non supportate");
-return;
-
-}
-
-const permission = await Notification.requestPermission();
-
-if(permission === "granted"){
-
-alert("Notifiche attivate correttamente 🚨");
-
-}else{
-
-alert("Permesso notifiche negato");
-
-}
-
+  await registraSW();
+  if(!('Notification' in window)){ alert('Notifiche non supportate da questo browser.'); return; }
+  const p = await Notification.requestPermission();
+  if(p === 'granted'){
+    alert('✅ Notifiche attivate correttamente!');
+  }else{
+    alert('❌ Permesso negato. Controlla le impostazioni del browser.');
+  }
 }
 
 async function notificaTest(){
-
-const reg = await registraSW();
-
-if(Notification.permission !== "granted"){
-
-alert("Prima attiva le notifiche");
-return;
-
+  const reg = await registraSW();
+  if(Notification.permission !== 'granted'){ alert('Prima attiva le notifiche.'); return; }
+  if(reg){
+    reg.showNotification('PROTEZIONE CIVILE N.O.V.', {
+      body:  '🚨 Notifica di prova inviata correttamente',
+      icon:  'FB_IMG_1779516909018.jpg',
+      badge: 'FB_IMG_1779516909018.jpg'
+    });
+  }
 }
 
-if(reg){
+/* ── Allerta (modifica qui: "verde" | "gialla" | "arancione" | "rossa") ── */
+const LIVELLO = 'verde';
 
-reg.showNotification("PROTEZIONE CIVILE N.O.V.",{
+if(LIVELLO === 'rossa'){
+  document.body.classList.add('red-alert');
+  const box = document.querySelector('.alert-status');
+  if(box){
+    box.className = 'alert-status red';
+    box.querySelector('.status-icon').textContent  = '🔴';
+    box.querySelector('.status-label').textContent = 'ROSSA';
+  }
+  const desc = document.querySelector('.alert-desc');
+  if(desc) desc.textContent = '⚠️ Massima emergenza attiva. Seguire le indicazioni delle autorità.';
+}
 
-body:"🚨 Notifica di prova inviata correttamente",
-icon:"FB_IMG_1779516909018.jpg",
-badge:"FB_IMG_1779516909018.jpg"
+/* ── Intersection observer per fade-in ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, { threshold:0.12 });
 
+document.querySelectorAll('.glass-card, .emerg-card, .contact-card').forEach(el => {
+  el.style.opacity    = '0';
+  el.style.transform  = 'translateY(20px)';
+  el.style.transition = 'opacity .55s ease, transform .55s ease';
+  observer.observe(el);
 });
-
-}
-
-}
-
-/* cambia qui: verde / rossa */
-
-const livelloAllerta = "verde";
-
-if(livelloAllerta === "rossa"){
-
-document.body.classList.add("red-alert");
-
-}
-
 </script>
-
 </body>
 </html>
