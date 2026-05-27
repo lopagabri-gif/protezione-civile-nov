@@ -1131,6 +1131,167 @@ footer{
   .volontario-layout{ grid-template-columns:1fr; }
   .volontario-form{ position:static; }
 }
+
+/* ══════════════════════════════
+   SEGNALAZIONI
+══════════════════════════════ */
+#segnalazioni{ background: var(--bg2); }
+
+.segn-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+  margin-top:56px;
+}
+
+/* bottoni tipo segnalazione */
+.segn-types{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-bottom:20px;
+}
+.segn-type-btn{
+  background: var(--glass);
+  border:2px solid var(--border);
+  border-radius:14px;
+  padding:20px 16px;
+  text-align:center;
+  cursor:pointer;
+  transition:.25s;
+  color:white;
+  font-family: var(--font-b);
+}
+.segn-type-btn:hover{ border-color:rgba(220,38,38,.4); background:rgba(220,38,38,.07); }
+.segn-type-btn.selected{ border-color:var(--red); background:rgba(220,38,38,.12); }
+.segn-type-btn .st-icon{ font-size:32px; display:block; margin-bottom:8px; }
+.segn-type-btn .st-label{
+  font-size:13px; font-weight:700;
+  letter-spacing:.5px;
+}
+
+.segn-form{
+  background: var(--glass);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:32px 28px;
+}
+.segn-form h3{
+  font-family: var(--font-h);
+  font-size:26px; font-weight:800;
+  margin-bottom:6px;
+}
+.segn-form .segn-sub{
+  font-size:14px; color:var(--muted);
+  margin-bottom:24px; line-height:1.5;
+}
+
+.gps-row{
+  display:flex; align-items:center; gap:10px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 16px;
+  margin-bottom:16px;
+  font-size:13px;
+  color:var(--muted);
+}
+.gps-row .gps-dot{
+  width:8px; height:8px;
+  border-radius:50%;
+  background:#6b7280;
+  flex-shrink:0;
+  transition:.3s;
+}
+.gps-row.gps-ok .gps-dot{ background:var(--green-lt); box-shadow:0 0 6px var(--green-lt); }
+.gps-row.gps-ok{ color:var(--green-lt); }
+
+/* mappa segnalazioni */
+.segn-map-wrap{
+  background: var(--glass);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.segn-map-header{
+  padding:20px 24px 16px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.segn-map-header h3{
+  font-family: var(--font-h);
+  font-size:22px; font-weight:800;
+}
+.segn-count{
+  background:var(--red);
+  color:white;
+  font-size:12px; font-weight:700;
+  padding:4px 12px;
+  border-radius:20px;
+}
+#segn-map{
+  flex:1;
+  min-height:380px;
+  position:relative;
+  background:#0d1117;
+}
+.segn-map-list{
+  max-height:160px;
+  overflow-y:auto;
+  padding:12px 16px;
+  border-top:1px solid var(--border);
+}
+.segn-map-list::-webkit-scrollbar{ width:4px; }
+.segn-map-list::-webkit-scrollbar-track{ background:transparent; }
+.segn-map-list::-webkit-scrollbar-thumb{ background:var(--border); border-radius:2px; }
+
+.segn-item{
+  display:flex; align-items:flex-start; gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+}
+.segn-item:last-child{ border-bottom:none; }
+.segn-item .si-icon{ font-size:18px; flex-shrink:0; }
+.segn-item .si-body .si-tipo{
+  font-weight:700; font-size:13px;
+  margin-bottom:2px;
+}
+.segn-item .si-body .si-desc{ color:var(--muted); line-height:1.4; }
+.segn-item .si-body .si-time{
+  font-size:11px; color:var(--muted);
+  margin-top:3px; letter-spacing:.5px;
+}
+.segn-empty{
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+  padding:20px 0;
+}
+
+/* toast notifica */
+.toast{
+  position:fixed;
+  bottom:28px; left:50%; transform:translateX(-50%) translateY(80px);
+  background:#1e293b;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px 24px;
+  font-size:14px; font-weight:600;
+  z-index:9998;
+  transition:.4s cubic-bezier(.34,1.56,.64,1);
+  white-space:nowrap;
+  pointer-events:none;
+}
+.toast.show{ transform:translateX(-50%) translateY(0); }
+.toast.success{ border-color:rgba(34,197,94,.4); color:var(--green-lt); }
+.toast.error{ border-color:rgba(220,38,38,.4); color:#fca5a5; }
+
+@media(max-width:960px){
+  .segn-layout{ grid-template-columns:1fr; }
+}
 </style>
 </head>
 
@@ -1150,6 +1311,7 @@ footer{
     <a href="#allerta">Allerte</a>
     <a href="#emergenza">Emergenze</a>
     <a href="#mappa">Incendi</a>
+    <a href="#segnalazioni">Segnala</a>
     <a href="#foto">Foto</a>
     <a href="#volontario">Volontario</a>
     <a href="#contatti">Contatti</a>
@@ -1161,15 +1323,16 @@ footer{
 
 <!-- menu mobile -->
 <div class="mobile-nav" id="mobileNav">
-  <a href="#chisiamo"  onclick="chiudiMenu()">Chi siamo</a>
-  <a href="#allerta"   onclick="chiudiMenu()">Allerte</a>
-  <a href="#emergenza" onclick="chiudiMenu()">Emergenze</a>
-  <a href="#mappa"     onclick="chiudiMenu()">Mappa incendi</a>
-  <a href="#foto"      onclick="chiudiMenu()">Foto</a>
+  <a href="#chisiamo"   onclick="chiudiMenu()">Chi siamo</a>
+  <a href="#allerta"    onclick="chiudiMenu()">Allerte</a>
+  <a href="#emergenza"  onclick="chiudiMenu()">Emergenze</a>
+  <a href="#mappa"      onclick="chiudiMenu()">Mappa incendi</a>
+  <a href="#segnalazioni" onclick="chiudiMenu()">🚨 Segnala evento</a>
+  <a href="#foto"       onclick="chiudiMenu()">Foto</a>
   <a href="#volontario" onclick="chiudiMenu()">Diventa volontario</a>
-  <a href="#numeri"    onclick="chiudiMenu()">Numeri utili</a>
-  <a href="#contatti"  onclick="chiudiMenu()">Contatti</a>
-  <a href="#donazioni" onclick="chiudiMenu()">5×1000</a>
+  <a href="#numeri"     onclick="chiudiMenu()">Numeri utili</a>
+  <a href="#contatti"   onclick="chiudiMenu()">Contatti</a>
+  <a href="#donazioni"  onclick="chiudiMenu()">5×1000</a>
 </div>
 
 <!-- ── HERO ── -->
@@ -1565,6 +1728,78 @@ footer{
 
 <div class="divider"></div>
 
+<!-- ── SEGNALAZIONI ── -->
+<section id="segnalazioni">
+  <div class="section-eyebrow">Aiutaci a monitorare il territorio</div>
+  <h2 class="section-title">Segnala un Evento</h2>
+  <p class="section-sub">
+    Hai visto un incendio, una frana o una situazione pericolosa?
+    Segnalacelo subito — la tua posizione GPS viene acquisita automaticamente.
+  </p>
+
+  <div class="segn-layout">
+
+    <!-- FORM -->
+    <div class="segn-form">
+      <h3>Nuova segnalazione</h3>
+      <p class="segn-sub">Seleziona il tipo, descrivi brevemente e invia. Riceveremo tutto.</p>
+
+      <div class="segn-types">
+        <div class="segn-type-btn selected" onclick="selezionaTipo(this,'🔥','Incendio')">
+          <span class="st-icon">🔥</span>
+          <span class="st-label">Incendio</span>
+        </div>
+        <div class="segn-type-btn" onclick="selezionaTipo(this,'⛰️','Frana')">
+          <span class="st-icon">⛰️</span>
+          <span class="st-label">Frana</span>
+        </div>
+        <div class="segn-type-btn" onclick="selezionaTipo(this,'🌊','Alluvione')">
+          <span class="st-icon">🌊</span>
+          <span class="st-label">Alluvione</span>
+        </div>
+        <div class="segn-type-btn" onclick="selezionaTipo(this,'⚠️','Altro pericolo')">
+          <span class="st-icon">⚠️</span>
+          <span class="st-label">Altro</span>
+        </div>
+      </div>
+
+      <div class="gps-row" id="gpsRow">
+        <span class="gps-dot"></span>
+        <span id="gpsLabel">Acquisizione posizione GPS in corso...</span>
+      </div>
+
+      <div class="form-group">
+        <label>Descrizione</label>
+        <textarea id="segnDesc" placeholder="Descrivi brevemente cosa vedi: dimensioni, direzione del fumo, pericoli immediati..." style="min-height:100px;"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Il tuo nome (opzionale)</label>
+        <input type="text" id="segnNome" placeholder="Anonimo">
+      </div>
+
+      <button class="btn btn-red" style="width:100%;justify-content:center;font-size:15px;" onclick="inviaSegnalazione()">
+        🚨 Invia segnalazione
+      </button>
+    </div>
+
+    <!-- MAPPA -->
+    <div class="segn-map-wrap">
+      <div class="segn-map-header">
+        <h3>📍 Segnalazioni attive</h3>
+        <span class="segn-count" id="segnCount">0</span>
+      </div>
+      <div id="segn-map"></div>
+      <div class="segn-map-list" id="segnList">
+        <p class="segn-empty">Nessuna segnalazione ancora. Sii il primo a segnalare.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ── CONTATTI ── -->
 <section id="contatti">
   <div class="section-eyebrow">Come raggiungerci</div>
@@ -1663,8 +1898,217 @@ footer{
   <img id="lightbox-img" alt="">
 </div>
 
+<!-- toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Leaflet mappa -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+/* ── CONFIG FIREBASE ── */
+const firebaseConfig = {
+  apiKey: "AIzaSyALw5AVxxggN1QnGYdVo-wn_He_tmRHUzI",
+  authDomain: "protezione-civile-nov.firebaseapp.com",
+  databaseURL: "https://protezione-civile-nov-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "protezione-civile-nov",
+  storageBucket: "protezione-civile-nov.firebasestorage.app",
+  messagingSenderId: "926183751232",
+  appId: "1:926183751232:web:aa24d5f8a032be3c8a69a5"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);
+const segnRef = ref(db, 'segnalazioni');
+
+/* ══════════════════════════════
+   CALLMEBOT — WHATSAPP DIRETTIVO
+   Aggiungi qui numero+apikey di ogni membro
+══════════════════════════════ */
+const DIRETTIVO = [
+  // { phone: '39XXXXXXXXXX', apikey: 'XXXXXXX' },
+  // { phone: '39XXXXXXXXXX', apikey: 'XXXXXXX' },
+  // Decommenta e compila quando hai le API key CallMeBot
+];
+
+async function inviaWhatsApp(segn){
+  if(DIRETTIVO.length === 0) return;
+  const mapsLink = segn.lat
+    ? `https://maps.google.com/?q=${segn.lat},${segn.lng}`
+    : 'Posizione non disponibile';
+  const msg = encodeURIComponent(
+    `🚨 NUOVA SEGNALAZIONE N.O.V.\n` +
+    `${segn.icon} Tipo: ${segn.label}\n` +
+    `📝 ${segn.desc}\n` +
+    `👤 Segnalato da: ${segn.nome}\n` +
+    `📍 Posizione: ${mapsLink}\n` +
+    `🕐 ${segn.time}`
+  );
+  for(const m of DIRETTIVO){
+    try{
+      await fetch(`https://api.callmebot.com/whatsapp.php?phone=${m.phone}&text=${msg}&apikey=${m.apikey}`);
+    }catch(e){ console.warn('WhatsApp non inviato a', m.phone); }
+  }
+}
+
+/* ══════════════════════════════
+   MAPPA & UI
+══════════════════════════════ */
+let tipoSelezionato = { icon:'🔥', label:'Incendio' };
+let coordsUtente    = null;
+let mappaLeaflet    = null;
+let markers         = [];
+
+const tipoColori = {
+  'Incendio':      '#dc2626',
+  'Frana':         '#92400e',
+  'Alluvione':     '#1d4ed8',
+  'Altro pericolo':'#d97706'
+};
+
+window.selezionaTipo = function(el, icon, label){
+  document.querySelectorAll('.segn-type-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  tipoSelezionato = { icon, label };
+};
+
+function avviaGPS(){
+  if(!navigator.geolocation){
+    document.getElementById('gpsLabel').textContent = 'GPS non disponibile.';
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      coordsUtente = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      const row = document.getElementById('gpsRow');
+      row.classList.add('gps-ok');
+      document.getElementById('gpsLabel').textContent =
+        `📍 Posizione acquisita (${coordsUtente.lat.toFixed(4)}, ${coordsUtente.lng.toFixed(4)})`;
+    },
+    () => {
+      document.getElementById('gpsLabel').textContent = '⚠️ GPS non disponibile — segnalazione senza posizione.';
+    },
+    { enableHighAccuracy:true, timeout:10000 }
+  );
+}
+
+function initMappa(){
+  if(mappaLeaflet) return;
+  mappaLeaflet = L.map('segn-map', { zoomControl:true }).setView([40.38, 16.55], 10);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution:'© OpenStreetMap © CARTO', maxZoom:18
+  }).addTo(mappaLeaflet);
+}
+
+function creaIcona(colore){
+  return L.divIcon({
+    html:`<div style="width:18px;height:18px;background:${colore};border:3px solid white;border-radius:50%;box-shadow:0 0 8px ${colore};"></div>`,
+    iconSize:[18,18], className:''
+  });
+}
+
+function aggiornaUI(lista){
+  const count  = document.getElementById('segnCount');
+  const listEl = document.getElementById('segnList');
+  count.textContent = lista.length;
+
+  markers.forEach(m => m.remove());
+  markers = [];
+
+  if(lista.length === 0){
+    listEl.innerHTML = '<p class="segn-empty">Nessuna segnalazione ancora. Sii il primo a segnalare.</p>';
+    return;
+  }
+
+  listEl.innerHTML = lista.slice().reverse().map(s => `
+    <div class="segn-item">
+      <span class="si-icon">${s.icon}</span>
+      <div class="si-body">
+        <div class="si-tipo">${s.label}</div>
+        <div class="si-desc">${s.desc || '—'}</div>
+        <div class="si-time">${s.nome ? s.nome+' · ' : ''}${s.time}${s.lat ? ` · <a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" style="color:var(--red);text-decoration:none;">📍 Mappa</a>` : ''}</div>
+      </div>
+    </div>
+  `).join('');
+
+  lista.forEach(s => {
+    if(!s.lat || !s.lng) return;
+    const colore = tipoColori[s.label] || '#dc2626';
+    const m = L.marker([s.lat, s.lng], { icon: creaIcona(colore) })
+      .addTo(mappaLeaflet)
+      .bindPopup(`<b>${s.icon} ${s.label}</b><br>${s.desc||''}<br><small>${s.time}</small>`);
+    markers.push(m);
+  });
+
+  const conCoords = lista.filter(s => s.lat);
+  if(conCoords.length > 0){
+    const u = conCoords[conCoords.length-1];
+    mappaLeaflet.setView([u.lat, u.lng], 12);
+  }
+}
+
+/* ── Ascolta Firebase in tempo reale ── */
+onValue(segnRef, snapshot => {
+  const data  = snapshot.val() || {};
+  const lista = Object.values(data);
+  if(mappaLeaflet) aggiornaUI(lista);
+  else window._segnBuffer = lista;
+});
+
+/* ── Invia segnalazione su Firebase ── */
+window.inviaSegnalazione = async function(){
+  const desc = document.getElementById('segnDesc').value.trim();
+  const nome = document.getElementById('segnNome').value.trim();
+  if(!desc){ mostraToast('Scrivi una descrizione prima di inviare.','error'); return; }
+
+  const nuova = {
+    icon:  tipoSelezionato.icon,
+    label: tipoSelezionato.label,
+    desc,
+    nome:  nome || 'Anonimo',
+    lat:   coordsUtente?.lat || null,
+    lng:   coordsUtente?.lng || null,
+    time:  new Date().toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})
+  };
+
+  try{
+    await push(segnRef, nuova);
+    document.getElementById('segnDesc').value = '';
+    document.getElementById('segnNome').value = '';
+    mostraToast(`${nuova.icon} Segnalazione inviata al direttivo!`, 'success');
+    await inviaWhatsApp(nuova);
+  }catch(e){
+    mostraToast('Errore invio — controlla la connessione.', 'error');
+  }
+};
+
+/* ── Init quando sezione visibile ── */
+const mapObserver = new IntersectionObserver(entries => {
+  if(entries[0].isIntersecting){
+    initMappa();
+    if(window._segnBuffer) aggiornaUI(window._segnBuffer);
+    mapObserver.disconnect();
+  }
+}, { threshold:0.1 });
+mapObserver.observe(document.getElementById('segnalazioni'));
+
+avviaGPS();
+</script>
+
 <!-- ── SCRIPT ── -->
 <script>
+/* ── Toast ── */
+function mostraToast(msg, tipo){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className   = `toast ${tipo} show`;
+  setTimeout(() => { t.className = 'toast'; }, 3200);
+}
+
 /* ── Form volontario ── */
 function inviaModulo(btn){
   const nome  = document.querySelector('input[placeholder="Mario Rossi"]').value.trim();
