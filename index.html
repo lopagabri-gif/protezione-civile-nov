@@ -97,16 +97,17 @@ header::before{
 
 .logo-text h1{
   font-family: var(--font-h);
-  font-size:22px; font-weight:900;
+  font-size:20px; font-weight:900;
   letter-spacing:.5px;
   line-height:1;
 }
 
 .logo-text span{
-  font-size:11px; font-weight:400;
-  letter-spacing:.8px;
+  font-size:10px; font-weight:400;
+  letter-spacing:.5px;
   text-transform:uppercase;
   color: var(--muted);
+  white-space:nowrap;
 }
 
 /* pill nav */
@@ -932,7 +933,10 @@ footer{
 @media(max-width:960px){
   nav{ display:none; }
   .hamburger{ display:flex; }
-  header{ padding:0 20px; }
+  header{ padding:0 16px; }
+  .logo-text span{ display:none; }
+  .logo-text h1{ font-size:17px; }
+  .logo-box img{ width:42px; height:42px; }
 
   .chisiamo-layout{ grid-template-columns:1fr; gap:40px; }
   .chisiamo-stats{ grid-template-columns:1fr 1fr; }
@@ -1604,52 +1608,6 @@ footer{
 
 <div class="divider"></div>
 
-<!-- ── EMERGENZE ── -->
-<section id="emergenza">
-  <div class="section-eyebrow">Sistema di allerta</div>
-  <h2 class="section-title">Sistema Emergenze</h2>
-  <p class="section-sub">
-    Ricevi notifiche immediate in caso di incendi o emergenze sul territorio.
-  </p>
-
-  <div class="emerg-grid">
-
-    <div class="emerg-card">
-      <span class="emerg-icon">🔥</span>
-      <h3>Incendi boschivi</h3>
-      <p>
-        Aggiornamenti rapidi sugli incendi boschivi
-        e situazioni di emergenza in Basilicata.
-      </p>
-    </div>
-
-    <div class="emerg-card">
-      <span class="emerg-icon">📲</span>
-      <h3>Notifiche push</h3>
-      <p>
-        Attiva le notifiche per ricevere avvisi
-        immediati direttamente sul tuo telefono.
-      </p>
-      <div class="btn-row">
-        <button onclick="attivaNotifiche()" class="btn btn-red">Attiva</button>
-        <button onclick="notificaTest()"    class="btn btn-outline">Prova</button>
-      </div>
-    </div>
-
-    <div class="emerg-card">
-      <span class="emerg-icon">🚨</span>
-      <h3>Emergenze live</h3>
-      <p>
-        Informazioni in tempo reale per la sicurezza
-        della popolazione durante eventi critici.
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
 <!-- ── MAPPA ── -->
 <section id="mappa">
   <div class="section-eyebrow">Monitoraggio satellitare</div>
@@ -2139,19 +2097,7 @@ function aggiornaUI(lista){
   }
 }
 
-/* ── Ascolta Firebase in tempo reale ── */
-onValue(segnRef, snapshot => {
-  const data  = snapshot.val() || {};
-  const lista = Object.values(data);
-  pulisciSegnalazioniScadute(snapshot);
-  if(mappaLeaflet) aggiornaUI(lista.filter(s => !s.timestamp || (Date.now() - s.timestamp) < 3600000));
-  else window._segnBuffer = lista.filter(s => !s.timestamp || (Date.now() - s.timestamp) < 3600000);
-});
-
-/* pulizia ogni 5 minuti */
-setInterval(() => {
-  onValue(segnRef, snapshot => pulisciSegnalazioniScadute(snapshot), { onlyOnce: true });
-}, 5 * 60 * 1000);
+/* ── Init quando sezione visibile ── */
 
 /* ── Invia segnalazione su Firebase ── */
 window.inviaSegnalazione = async function(){
@@ -2187,13 +2133,26 @@ function pulisciSegnalazioniScadute(snapshot){
   const ora  = Date.now();
   const UN_ORA = 60 * 60 * 1000;
   Object.entries(data).forEach(([key, val]) => {
-    if(val.timestamp && (ora - val.timestamp) > UN_ORA){
+    if(!val.timestamp || (ora - val.timestamp) > UN_ORA){
       remove(ref(db, `segnalazioni/${key}`));
     }
   });
 }
 
-/* ── Init quando sezione visibile ── */
+/* ── Ascolta Firebase in tempo reale ── */
+onValue(segnRef, snapshot => {
+  pulisciSegnalazioniScadute(snapshot);
+  const data  = snapshot.val() || {};
+  const ora   = Date.now();
+  const lista = Object.values(data).filter(s => s.timestamp && (ora - s.timestamp) < 3600000);
+  if(mappaLeaflet) aggiornaUI(lista);
+  else window._segnBuffer = lista;
+});
+
+/* pulizia ogni 5 minuti */
+setInterval(() => {
+  onValue(segnRef, snapshot => pulisciSegnalazioniScadute(snapshot), { onlyOnce: true });
+}, 5 * 60 * 1000);
 const mapObserver = new IntersectionObserver(entries => {
   if(entries[0].isIntersecting){
     initMappa();
