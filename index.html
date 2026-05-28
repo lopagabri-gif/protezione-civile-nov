@@ -275,10 +275,12 @@ nav a:hover{
 
 .hero-bg{
   position:absolute; inset:0;
-  background:
-    url('FB_IMG_1779032553450.jpg') center/cover no-repeat;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
   transform:scale(1.05);
   animation: heroZoom 18s ease-in-out infinite alternate;
+  transition: background-image 1.5s ease-in-out;
 }
 @keyframes heroZoom{
   from{ transform:scale(1.05); }
@@ -2192,6 +2194,29 @@ function inviaModulo(btn){
   );
   window.location.href = `mailto:nov_protciv@live.it?subject=${subject}&body=${body}`;
 }
+
+/* ── Slideshow hero ── */
+const heroImgs = [
+  'FB_IMG_1779032553450.jpg',
+  'FB_IMG_1779032282471.jpg',
+  'FB_IMG_1779032351750.jpg',
+  'FB_IMG_1779032400374.jpg',
+  'FB_IMG_1779032516968.jpg',
+  'FB_IMG_1779032526869.jpg',
+  'FB_IMG_1779032545746.jpg',
+  'FB_IMG_1779032589055.jpg',
+  'FB_IMG_1779032631507.jpg',
+  'FB_IMG_1779516909018.jpg',
+  'FB_IMG_1779516946597.jpg',
+];
+let heroIdx = 0;
+const heroBg = document.querySelector('.hero-bg');
+heroBg.style.backgroundImage = `url('${heroImgs[0]}')`;
+
+setInterval(() => {
+  heroIdx = (heroIdx + 1) % heroImgs.length;
+  heroBg.style.backgroundImage = `url('${heroImgs[heroIdx]}')`;
+}, 5000);
 
 /* ── Hamburger menu ── */
 const hamburger  = document.getElementById('hamburger');
