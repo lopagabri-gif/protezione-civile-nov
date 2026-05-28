@@ -1367,6 +1367,78 @@ footer{
   </div>
 </section>
 
+<!-- ── SEGNALAZIONI ── -->
+<section id="segnalazioni" style="background:var(--bg2);">
+  <div class="section-eyebrow">Aiutaci a monitorare il territorio</div>
+  <h2 class="section-title">🚨 Segnala un Evento</h2>
+  <p class="section-sub">
+    Hai visto un incendio, una frana o una situazione pericolosa?
+    Segnalacelo subito — la tua posizione GPS viene acquisita automaticamente.
+  </p>
+
+  <div class="segn-layout">
+
+    <!-- FORM -->
+    <div class="segn-form">
+      <h3>Nuova segnalazione</h3>
+      <p class="segn-sub">Seleziona il tipo, descrivi brevemente e invia. Riceveremo tutto.</p>
+
+      <div class="segn-types">
+        <div class="segn-type-btn selected" onclick="selezionaTipo(this,'🔥','Incendio')">
+          <span class="st-icon">🔥</span>
+          <span class="st-label">Incendio</span>
+        </div>
+        <div class="segn-type-btn" onclick="selezionaTipo(this,'⛰️','Frana')">
+          <span class="st-icon">⛰️</span>
+          <span class="st-label">Frana</span>
+        </div>
+        <div class="segn-type-btn" onclick="selezionaTipo(this,'🌊','Alluvione')">
+          <span class="st-icon">🌊</span>
+          <span class="st-label">Alluvione</span>
+        </div>
+        <div class="segn-type-btn" onclick="selezionaTipo(this,'⚠️','Altro pericolo')">
+          <span class="st-icon">⚠️</span>
+          <span class="st-label">Altro</span>
+        </div>
+      </div>
+
+      <div class="gps-row" id="gpsRow">
+        <span class="gps-dot"></span>
+        <span id="gpsLabel">Acquisizione posizione GPS in corso...</span>
+      </div>
+
+      <div class="form-group">
+        <label>Descrizione</label>
+        <textarea id="segnDesc" placeholder="Descrivi brevemente cosa vedi: dimensioni, direzione del fumo, pericoli immediati..." style="min-height:100px;"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Il tuo nome (opzionale)</label>
+        <input type="text" id="segnNome" placeholder="Anonimo">
+      </div>
+
+      <button class="btn btn-red" style="width:100%;justify-content:center;font-size:15px;" onclick="inviaSegnalazione()">
+        🚨 Invia segnalazione
+      </button>
+    </div>
+
+    <!-- MAPPA -->
+    <div class="segn-map-wrap">
+      <div class="segn-map-header">
+        <h3>📍 Segnalazioni attive</h3>
+        <span class="segn-count" id="segnCount">0</span>
+      </div>
+      <div id="segn-map"></div>
+      <div class="segn-map-list" id="segnList">
+        <p class="segn-empty">Nessuna segnalazione ancora. Sii il primo a segnalare.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ── CHI SIAMO ── -->
 <section id="chisiamo">
   <div class="section-eyebrow">La nostra storia</div>
@@ -1728,76 +1800,6 @@ footer{
 
 <div class="divider"></div>
 
-<!-- ── SEGNALAZIONI ── -->
-<section id="segnalazioni">
-  <div class="section-eyebrow">Aiutaci a monitorare il territorio</div>
-  <h2 class="section-title">Segnala un Evento</h2>
-  <p class="section-sub">
-    Hai visto un incendio, una frana o una situazione pericolosa?
-    Segnalacelo subito — la tua posizione GPS viene acquisita automaticamente.
-  </p>
-
-  <div class="segn-layout">
-
-    <!-- FORM -->
-    <div class="segn-form">
-      <h3>Nuova segnalazione</h3>
-      <p class="segn-sub">Seleziona il tipo, descrivi brevemente e invia. Riceveremo tutto.</p>
-
-      <div class="segn-types">
-        <div class="segn-type-btn selected" onclick="selezionaTipo(this,'🔥','Incendio')">
-          <span class="st-icon">🔥</span>
-          <span class="st-label">Incendio</span>
-        </div>
-        <div class="segn-type-btn" onclick="selezionaTipo(this,'⛰️','Frana')">
-          <span class="st-icon">⛰️</span>
-          <span class="st-label">Frana</span>
-        </div>
-        <div class="segn-type-btn" onclick="selezionaTipo(this,'🌊','Alluvione')">
-          <span class="st-icon">🌊</span>
-          <span class="st-label">Alluvione</span>
-        </div>
-        <div class="segn-type-btn" onclick="selezionaTipo(this,'⚠️','Altro pericolo')">
-          <span class="st-icon">⚠️</span>
-          <span class="st-label">Altro</span>
-        </div>
-      </div>
-
-      <div class="gps-row" id="gpsRow">
-        <span class="gps-dot"></span>
-        <span id="gpsLabel">Acquisizione posizione GPS in corso...</span>
-      </div>
-
-      <div class="form-group">
-        <label>Descrizione</label>
-        <textarea id="segnDesc" placeholder="Descrivi brevemente cosa vedi: dimensioni, direzione del fumo, pericoli immediati..." style="min-height:100px;"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Il tuo nome (opzionale)</label>
-        <input type="text" id="segnNome" placeholder="Anonimo">
-      </div>
-
-      <button class="btn btn-red" style="width:100%;justify-content:center;font-size:15px;" onclick="inviaSegnalazione()">
-        🚨 Invia segnalazione
-      </button>
-    </div>
-
-    <!-- MAPPA -->
-    <div class="segn-map-wrap">
-      <div class="segn-map-header">
-        <h3>📍 Segnalazioni attive</h3>
-        <span class="segn-count" id="segnCount">0</span>
-      </div>
-      <div id="segn-map"></div>
-      <div class="segn-map-list" id="segnList">
-        <p class="segn-empty">Nessuna segnalazione ancora. Sii il primo a segnalare.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
 <div class="divider"></div>
 
 <!-- ── CONTATTI ── -->
@@ -1932,10 +1934,10 @@ const TELEGRAM_TOKEN = '8100056228:AAHLIjPxAbNhDM1kK2CXEgiWNncwH0sLhzU';
 
 // Aggiungi qui il chat_id di ogni membro del direttivo
 const DIRETTIVO_IDS = [
-  715449500,  // Gabriele
-  // Aggiungi altri membri domani:
-  // 123456789,  // Nome membro 2
-  // 987654321,  // Nome membro 3
+  715449500,    // Gabriele
+  1526468108,   // P.C. N.O.V.
+  // Aggiungi altri membri:
+  // 123456789,
 ];
 
 async function inviaNotificaTelegram(segn){
