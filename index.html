@@ -1420,7 +1420,22 @@ footer{
       <button class="btn btn-red" style="width:100%;justify-content:center;font-size:15px;" onclick="inviaSegnalazione()">
         🚨 Invia segnalazione
       </button>
-    </div>
+
+      <div style="
+        margin-top:16px;
+        padding:14px 16px;
+        background:rgba(220,38,38,.08);
+        border:1px solid rgba(220,38,38,.25);
+        border-radius:10px;
+        font-size:13px;
+        line-height:1.7;
+        color:var(--muted);
+      ">
+        ⚠️ <strong style="color:white;">La segnalazione non sostituisce la chiamata ai numeri di emergenza.</strong><br>
+        In caso di pericolo chiama subito:<br>
+        🚒 <a href="tel:115" style="color:var(--red);font-weight:700;text-decoration:none;">115</a> — Vigili del Fuoco &nbsp;|&nbsp;
+        🚨 <a href="tel:112" style="color:var(--red);font-weight:700;text-decoration:none;">112</a> — Carabinieri
+      </div>
 
     <!-- MAPPA -->
     <div class="segn-map-wrap">
@@ -1910,7 +1925,7 @@ footer{
 <!-- Firebase -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 
 /* ── CONFIG FIREBASE ── */
 const firebaseConfig = {
@@ -2068,9 +2083,15 @@ function aggiornaUI(lista){
 onValue(segnRef, snapshot => {
   const data  = snapshot.val() || {};
   const lista = Object.values(data);
-  if(mappaLeaflet) aggiornaUI(lista);
-  else window._segnBuffer = lista;
+  pulisciSegnalazioniScadute(snapshot);
+  if(mappaLeaflet) aggiornaUI(lista.filter(s => !s.timestamp || (Date.now() - s.timestamp) < 3600000));
+  else window._segnBuffer = lista.filter(s => !s.timestamp || (Date.now() - s.timestamp) < 3600000);
 });
+
+/* pulizia ogni 5 minuti */
+setInterval(() => {
+  onValue(segnRef, snapshot => pulisciSegnalazioniScadute(snapshot), { onlyOnce: true });
+}, 5 * 60 * 1000);
 
 /* ── Invia segnalazione su Firebase ── */
 window.inviaSegnalazione = async function(){
@@ -2085,6 +2106,7 @@ window.inviaSegnalazione = async function(){
     nome:  nome || 'Anonimo',
     lat:   coordsUtente?.lat || null,
     lng:   coordsUtente?.lng || null,
+    timestamp: Date.now(),
     time:  new Date().toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})
   };
 
@@ -2098,6 +2120,18 @@ window.inviaSegnalazione = async function(){
     mostraToast('Errore invio — controlla la connessione.', 'error');
   }
 };
+
+/* ── Pulizia automatica segnalazioni scadute (>1 ora) ── */
+function pulisciSegnalazioniScadute(snapshot){
+  const data = snapshot.val() || {};
+  const ora  = Date.now();
+  const UN_ORA = 60 * 60 * 1000;
+  Object.entries(data).forEach(([key, val]) => {
+    if(val.timestamp && (ora - val.timestamp) > UN_ORA){
+      remove(ref(db, `segnalazioni/${key}`));
+    }
+  });
+}
 
 /* ── Init quando sezione visibile ── */
 const mapObserver = new IntersectionObserver(entries => {
