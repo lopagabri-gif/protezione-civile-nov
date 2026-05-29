@@ -181,8 +181,16 @@ nav a:hover{
 .mobile-nav a:hover{ color:white; background:var(--glass); }
 
 /* ══════════════════════════════
-   CHI SIAMO
+   SEGNALAZIONI
 ══════════════════════════════ */
+#segnalazioni{ background: var(--bg2); }
+
+.segn-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+  margin-top:56px;
+}
 #chisiamo{
   position:relative;
   overflow:hidden;
@@ -1302,6 +1310,8 @@ footer{
 
 @media(max-width:960px){
   .segn-layout{ grid-template-columns:1fr; }
+  .volontario-layout{ grid-template-columns:1fr; }
+  .volontario-form{ position:static; }
 }
 </style>
 </head>
