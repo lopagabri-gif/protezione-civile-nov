@@ -1448,6 +1448,24 @@ footer{
         <input type="text" id="segnNome" placeholder="Anonimo">
       </div>
 
+      <div class="form-group">
+        <label>📷 Foto (opzionale)</label>
+        <input type="file" id="segnFoto" accept="image/*" capture="environment" style="
+          width:100%;
+          background:rgba(255,255,255,.05);
+          border:1px solid var(--border);
+          border-radius:10px;
+          padding:12px 16px;
+          color:var(--muted);
+          font-family:var(--font-b);
+          font-size:14px;
+          cursor:pointer;
+        ">
+        <div id="fotoPreview" style="margin-top:10px;display:none;">
+          <img id="fotoImg" style="width:100%;max-height:180px;object-fit:cover;border-radius:10px;border:1px solid var(--border);">
+        </div>
+      </div>
+
       <button class="btn btn-red" style="width:100%;justify-content:center;font-size:15px;" onclick="inviaSegnalazione()">
         🚨 Invia segnalazione
       </button>
@@ -2058,7 +2076,7 @@ function avviaGPS(){
 function initMappa(){
   if(mappaLeaflet) return;
   mappaLeaflet = L.map('segn-map', { zoomControl:true }).setView([40.38, 16.55], 10);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution:'© OpenStreetMap © CARTO', maxZoom:18
   }).addTo(mappaLeaflet);
 }
@@ -2116,6 +2134,7 @@ function aggiornaUI(lista){
 window.inviaSegnalazione = async function(){
   const desc = document.getElementById('segnDesc').value.trim();
   const nome = document.getElementById('segnNome').value.trim();
+  const fotoInput = document.getElementById('segnFoto');
   if(!desc){ mostraToast('Scrivi una descrizione prima di inviare.','error'); return; }
 
   const nuova = {
@@ -2133,8 +2152,36 @@ window.inviaSegnalazione = async function(){
     await push(segnRef, nuova);
     document.getElementById('segnDesc').value = '';
     document.getElementById('segnNome').value = '';
+    document.getElementById('segnFoto').value = '';
+    document.getElementById('fotoPreview').style.display = 'none';
     mostraToast(`${nuova.icon} Segnalazione inviata al direttivo!`, 'success');
-    await inviaNotificaTelegram(nuova);
+
+    /* Invia foto su Telegram se presente */
+    if(fotoInput.files[0]){
+      const file = fotoInput.files[0];
+      const caption =
+        `🚨 *NUOVA SEGNALAZIONE N.O.V.*\n` +
+        `${nuova.icon} *Tipo:* ${nuova.label}\n` +
+        `📝 ${nuova.desc}\n` +
+        `👤 ${nuova.nome}\n` +
+        `📍 ${nuova.lat ? `https://maps.google.com/?q=${nuova.lat},${nuova.lng}` : 'Posizione non disponibile'}\n` +
+        `🕐 ${nuova.time}`;
+
+      for(const chatId of DIRETTIVO_IDS){
+        const formData = new FormData();
+        formData.append('chat_id', chatId);
+        formData.append('photo', file);
+        formData.append('caption', caption);
+        formData.append('parse_mode', 'Markdown');
+        try{
+          await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendPhoto`, {
+            method:'POST', body: formData
+          });
+        }catch(e){ console.warn('Foto Telegram non inviata', e); }
+      }
+    } else {
+      await inviaNotificaTelegram(nuova);
+    }
   }catch(e){
     mostraToast('Errore invio — controlla la connessione.', 'error');
   }
@@ -2180,6 +2227,18 @@ avviaGPS();
 
 <!-- ── SCRIPT ── -->
 <script>
+/* ── Preview foto ── */
+document.getElementById('segnFoto').addEventListener('change', function(){
+  const file = this.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('fotoImg').src = e.target.result;
+    document.getElementById('fotoPreview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+});
+
 /* ── Toast ── */
 function mostraToast(msg, tipo){
   const t = document.getElementById('toast');
