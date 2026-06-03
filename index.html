@@ -912,6 +912,114 @@ section{ padding:100px 6%; position:relative; z-index:1; }
 }
 
 /* ══════════════════════════════
+   STORICO SEGNALAZIONI
+══════════════════════════════ */
+#storico{ background: var(--bg2); }
+
+.storico-filters{
+  display:flex; gap:10px; flex-wrap:wrap;
+  margin:32px 0 24px;
+  justify-content:center;
+}
+.filter-btn{
+  padding:8px 18px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:var(--glass);
+  color:var(--muted);
+  font-size:13px; font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+  font-family:var(--font-b);
+}
+.filter-btn:hover{ border-color:rgba(220,38,38,.4); color:white; }
+.filter-btn.active{ background:var(--red); border-color:var(--red); color:white; }
+
+.storico-stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:14px;
+  margin-bottom:32px;
+}
+.storico-stat{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:20px 16px;
+  text-align:center;
+}
+.storico-stat .ss-num{
+  font-family:var(--font-h);
+  font-size:42px; font-weight:900;
+  color:var(--red);
+  line-height:1;
+}
+.storico-stat .ss-label{
+  font-size:11px; font-weight:600;
+  letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+.storico-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+}
+.storico-table th{
+  text-align:left;
+  padding:12px 16px;
+  font-size:10px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  color:var(--muted);
+  border-bottom:1px solid var(--border);
+}
+.storico-table td{
+  padding:14px 16px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  vertical-align:top;
+  line-height:1.5;
+}
+.storico-table tr:hover td{ background:rgba(255,255,255,.03); }
+.storico-table .tipo-badge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px; font-weight:700;
+  white-space:nowrap;
+}
+.tipo-incendio{ background:rgba(220,38,38,.15); color:#fca5a5; border:1px solid rgba(220,38,38,.3); }
+.tipo-frana{ background:rgba(146,64,14,.2); color:#fcd34d; border:1px solid rgba(146,64,14,.3); }
+.tipo-alluvione{ background:rgba(29,78,216,.2); color:#93c5fd; border:1px solid rgba(29,78,216,.3); }
+.tipo-altro{ background:rgba(217,119,6,.15); color:#fde68a; border:1px solid rgba(217,119,6,.3); }
+
+.storico-empty{
+  text-align:center;
+  padding:48px 20px;
+  color:var(--muted);
+  font-size:15px;
+}
+
+.storico-wrap{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+}
+.storico-wrap-inner{
+  max-height:500px;
+  overflow-y:auto;
+}
+.storico-wrap-inner::-webkit-scrollbar{ width:4px; }
+.storico-wrap-inner::-webkit-scrollbar-track{ background:transparent; }
+.storico-wrap-inner::-webkit-scrollbar-thumb{ background:var(--border); border-radius:2px; }
+
+@media(max-width:960px){
+  .storico-table th:nth-child(3),
+  .storico-table td:nth-child(3){ display:none; }
+}
+
+/* ══════════════════════════════
    FOOTER
 ══════════════════════════════ */
 footer{
@@ -1344,6 +1452,7 @@ footer{
     <a href="#segnalazioni">Segnala</a>
     <a href="#foto">Foto</a>
     <a href="#volontario">Volontario</a>
+    <a href="#storico">Storico</a>
     <a href="#contatti">Contatti</a>
   </nav>
   <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -1360,6 +1469,7 @@ footer{
   <a href="#segnalazioni" onclick="chiudiMenu()">🚨 Segnala evento</a>
   <a href="#foto"       onclick="chiudiMenu()">Foto</a>
   <a href="#volontario" onclick="chiudiMenu()">Diventa volontario</a>
+  <a href="#storico"    onclick="chiudiMenu()">📋 Storico segnalazioni</a>
   <a href="#numeri"     onclick="chiudiMenu()">Numeri utili</a>
   <a href="#contatti"   onclick="chiudiMenu()">Contatti</a>
   <a href="#donazioni"  onclick="chiudiMenu()">5×1000</a>
@@ -1445,7 +1555,12 @@ footer{
 
       <div class="form-group">
         <label>Il tuo nome (opzionale)</label>
-        <input type="text" id="segnNome" placeholder="Anonimo">
+        <input type="text" id="segnNome" placeholder="Mario Rossi">
+      </div>
+
+      <div class="form-group">
+        <label>Numero di telefono *</label>
+        <input type="tel" id="segnTel" placeholder="+39 333 000 0000" required>
       </div>
 
       <div class="form-group">
@@ -1943,6 +2058,67 @@ footer{
   </div>
 </section>
 
+<!-- ── STORICO SEGNALAZIONI ── -->
+<section id="storico">
+  <div class="section-eyebrow">Archivio completo</div>
+  <h2 class="section-title">📋 Storico Segnalazioni</h2>
+  <p class="section-sub">
+    Tutte le segnalazioni ricevute dal territorio. Archivio permanente aggiornato in tempo reale.
+  </p>
+
+  <div class="storico-stats">
+    <div class="storico-stat">
+      <div class="ss-num" id="statTotale">0</div>
+      <div class="ss-label">Totale</div>
+    </div>
+    <div class="storico-stat">
+      <div class="ss-num" id="statIncendi">0</div>
+      <div class="ss-label">🔥 Incendi</div>
+    </div>
+    <div class="storico-stat">
+      <div class="ss-num" id="statFrane">0</div>
+      <div class="ss-label">⛰️ Frane</div>
+    </div>
+    <div class="storico-stat">
+      <div class="ss-num" id="statAlluvioni">0</div>
+      <div class="ss-label">🌊 Alluvioni</div>
+    </div>
+    <div class="storico-stat">
+      <div class="ss-num" id="statAltro">0</div>
+      <div class="ss-label">⚠️ Altro</div>
+    </div>
+  </div>
+
+  <div class="storico-filters">
+    <button class="filter-btn active" onclick="filtraStorico('tutti', this)">Tutti</button>
+    <button class="filter-btn" onclick="filtraStorico('Incendio', this)">🔥 Incendi</button>
+    <button class="filter-btn" onclick="filtraStorico('Frana', this)">⛰️ Frane</button>
+    <button class="filter-btn" onclick="filtraStorico('Alluvione', this)">🌊 Alluvioni</button>
+    <button class="filter-btn" onclick="filtraStorico('Altro pericolo', this)">⚠️ Altro</button>
+  </div>
+
+  <div class="storico-wrap">
+    <div class="storico-wrap-inner">
+      <table class="storico-table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Descrizione</th>
+            <th>Posizione</th>
+            <th>Segnalato da</th>
+            <th>Data e ora</th>
+          </tr>
+        </thead>
+        <tbody id="storicoBody">
+          <tr><td colspan="5" class="storico-empty">Caricamento...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-brand">
@@ -1988,8 +2164,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db  = getDatabase(app);
-const segnRef = ref(db, 'segnalazioni');
+const db       = getDatabase(app);
+const segnRef  = ref(db, 'segnalazioni');
+const storicoRef = ref(db, 'storico');
 
 /* ══════════════════════════════
    TELEGRAM — NOTIFICHE DIRETTIVO
@@ -2109,7 +2286,7 @@ function aggiornaUI(lista){
       <div class="si-body">
         <div class="si-tipo">${s.label}</div>
         <div class="si-desc">${s.desc || '—'}</div>
-        <div class="si-time">${s.nome ? s.nome+' · ' : ''}${s.time}${s.lat ? ` · <a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" style="color:var(--red);text-decoration:none;">📍 Mappa</a>` : ''}</div>
+        <div class="si-time">${s.nome ? s.nome+' · ' : ''}${s.tel ? '📞 '+s.tel+' · ' : ''}${s.time}${s.lat ? ` · <a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" style="color:var(--red);text-decoration:none;">📍 Mappa</a>` : ''}</div>
         ${s.foto ? `<img src="${s.foto}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-top:6px;border:1px solid var(--border);">` : ''}
       </div>
     </div>
@@ -2137,8 +2314,10 @@ function aggiornaUI(lista){
 window.inviaSegnalazione = async function(){
   const desc = document.getElementById('segnDesc').value.trim();
   const nome = document.getElementById('segnNome').value.trim();
+  const tel  = document.getElementById('segnTel').value.trim();
   const fotoInput = document.getElementById('segnFoto');
   if(!desc){ mostraToast('Scrivi una descrizione prima di inviare.','error'); return; }
+  if(!tel){ mostraToast('Il numero di telefono è obbligatorio.','error'); document.getElementById('segnTel').focus(); return; }
 
   /* Converti foto in base64 se presente */
   let fotoBase64 = null;
@@ -2158,6 +2337,7 @@ window.inviaSegnalazione = async function(){
     label: tipoSelezionato.label,
     desc,
     nome:  nome || 'Anonimo',
+    tel,
     lat:   coordsUtente?.lat || null,
     lng:   coordsUtente?.lng || null,
     foto:  fotoBase64,
@@ -2167,10 +2347,13 @@ window.inviaSegnalazione = async function(){
 
   try{
     const nuovaRef = await push(segnRef, nuova);
-    const segnId = nuovaRef.key;
+    // Salva nello storico permanente (senza foto per risparmiare spazio)
+    const nuovaSenzaFoto = {...nuova, foto: nuova.foto ? '1' : null};
+    await push(storicoRef, nuovaSenzaFoto);
 
     document.getElementById('segnDesc').value = '';
     document.getElementById('segnNome').value = '';
+    document.getElementById('segnTel').value = '';
     document.getElementById('segnFoto').value = '';
     document.getElementById('fotoPreview').style.display = 'none';
     mostraToast(`${nuova.icon} Segnalazione inviata al direttivo!`, 'success');
@@ -2184,7 +2367,8 @@ window.inviaSegnalazione = async function(){
       `🚨 *NUOVA SEGNALAZIONE N.O.V.*\n` +
       `${nuova.icon} *Tipo:* ${nuova.label}\n` +
       `📝 *Descrizione:* ${nuova.desc}\n` +
-      `👤 *Segnalato da:* ${nuova.nome}\n` +
+      `👤 *Nome:* ${nuova.nome}\n` +
+      `📞 *Telefono:* ${nuova.tel}\n` +
       `📍 *Posizione:* ${mapsLink}\n` +
       `🕐 *Orario:* ${nuova.time}` +
       (fotoBase64 ? `\n📷 *Foto allegata* — visibile sulla mappa segnalazioni` : '');
@@ -2226,7 +2410,7 @@ function ridimensionaFoto(base64, maxPx){
 function pulisciSegnalazioniScadute(snapshot){
   const data = snapshot.val() || {};
   const ora  = Date.now();
-  const UN_ORA = 60 * 60 * 1000;
+  const UN_ORA = 2 * 60 * 60 * 1000; // 2 ore
   Object.entries(data).forEach(([key, val]) => {
     if(!val.timestamp || (ora - val.timestamp) > UN_ORA){
       remove(ref(db, `segnalazioni/${key}`));
@@ -2239,7 +2423,7 @@ onValue(segnRef, snapshot => {
   pulisciSegnalazioniScadute(snapshot);
   const data  = snapshot.val() || {};
   const ora   = Date.now();
-  const lista = Object.values(data).filter(s => s.timestamp && (ora - s.timestamp) < 3600000);
+  const lista = Object.values(data).filter(s => s.timestamp && (ora - s.timestamp) < 7200000);
   if(mappaLeaflet) aggiornaUI(lista);
   else window._segnBuffer = lista;
 });
@@ -2256,6 +2440,65 @@ const mapObserver = new IntersectionObserver(entries => {
   }
 }, { threshold:0.1 });
 mapObserver.observe(document.getElementById('segnalazioni'));
+
+/* ── Storico permanente ── */
+let storicoTutti = [];
+let filtroAttivo = 'tutti';
+
+window.filtraStorico = function(tipo, btn){
+  filtroAttivo = tipo;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderStorico();
+};
+
+function renderStorico(){
+  const body = document.getElementById('storicoBody');
+  const lista = filtroAttivo === 'tutti'
+    ? storicoTutti
+    : storicoTutti.filter(s => s.label === filtroAttivo);
+
+  if(lista.length === 0){
+    body.innerHTML = `<tr><td colspan="5" class="storico-empty">Nessuna segnalazione trovata.</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = lista.slice().reverse().map(s => {
+    const tipoClass = {
+      'Incendio':'tipo-incendio',
+      'Frana':'tipo-frana',
+      'Alluvione':'tipo-alluvione',
+      'Altro pericolo':'tipo-altro'
+    }[s.label] || 'tipo-altro';
+
+    const mapsLink = s.lat
+      ? `<a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" style="color:var(--red);text-decoration:none;">📍 Vedi</a>`
+      : '<span style="color:var(--muted)">—</span>';
+
+    return `<tr>
+      <td><span class="tipo-badge ${tipoClass}">${s.icon} ${s.label}</span></td>
+      <td>${s.desc || '—'}</td>
+      <td>${mapsLink}</td>
+      <td>${s.nome || 'Anonimo'}</td>
+      <td style="color:var(--muted);white-space:nowrap;">${s.time || '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function aggiornaStatsStorico(lista){
+  document.getElementById('statTotale').textContent   = lista.length;
+  document.getElementById('statIncendi').textContent  = lista.filter(s=>s.label==='Incendio').length;
+  document.getElementById('statFrane').textContent    = lista.filter(s=>s.label==='Frana').length;
+  document.getElementById('statAlluvioni').textContent= lista.filter(s=>s.label==='Alluvione').length;
+  document.getElementById('statAltro').textContent    = lista.filter(s=>s.label==='Altro pericolo').length;
+}
+
+onValue(storicoRef, snapshot => {
+  const data = snapshot.val() || {};
+  storicoTutti = Object.values(data);
+  aggiornaStatsStorico(storicoTutti);
+  renderStorico();
+});
 
 avviaGPS();
 </script>
