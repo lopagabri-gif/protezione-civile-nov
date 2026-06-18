@@ -15,26 +15,50 @@
 <meta property="og:url" content="https://protezione-civile-nov.vercel.app/">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ─── ROOT ─── */
+/* ─────────────────────────────────────────────────────────
+   TOKEN SYSTEM — identità istituzionale del Metapontino
+   Blu dello Ionio (sea) + carta (paper) + terra di Basilicata (clay)
+   in luogo del rosso/arancio "da Protezione Civile". Il rosso resta
+   riservato esclusivamente alle azioni di reale emergenza (112,
+   invio segnalazione, livello di allerta ROSSA).
+───────────────────────────────────────────────────────────── */
 :root {
-  --red:      #dc2626;
-  --red-dark: #991b1b;
-  --red-glow: rgba(220,38,38,.35);
-  --green:    #16a34a;
-  --green-lt: #22c55e;
-  --yellow:   #ca8a04;
-  --orange:   #ea580c;
-  --bg:       #06080f;
-  --bg2:      #0c0f1a;
-  --glass:    rgba(255,255,255,.04);
-  --border:   rgba(255,255,255,.07);
-  --text:     #e8eaf0;
-  --muted:    rgba(232,234,240,.60);
-  --font-h:   'Barlow Condensed', sans-serif;
-  --font-b:   'Barlow', sans-serif;
+  --navy:        #0d2b3e;
+  --navy-2:      #153a52;
+  --sea:         #0f6e8c;
+  --sea-dark:    #0a5570;
+  --sea-tint:    #eaf3f6;
+  --paper:       #faf8f4;
+  --paper-2:     #f1ece2;
+  --clay:        #ad6a35;
+  --clay-dark:   #8a531f;
+  --clay-tint:   #f6ead9;
+  --gold:        #c8922f;
+  --ink:         #1c2a32;
+  --slate:       #5c6b72;
+  --muted-inv:   #c3d3da;
+
+  --green:       #1c7a42;
+  --yellow:      #a3720a;
+  --orange:      #b6531c;
+  --red:         #b83227;
+  --red-glow:    rgba(184,50,39,.25);
+  --green-lt:    #2f9c5c;
+
+  /* alias storici: gran parte delle regole sotto usa questi nomi */
+  --bg:       var(--paper);
+  --bg2:      var(--paper-2);
+  --glass:    rgba(13,43,62,.035);
+  --border:   rgba(13,43,62,.13);
+  --text:     var(--ink);
+  --muted:    var(--slate);
+
+  --font-h:   'Titillium Web', sans-serif;
+  --font-b:   'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono:'JetBrains Mono', 'SFMono-Regular', monospace;
 }
 
 /* ─── RESET ─── */
@@ -47,20 +71,11 @@ body{
   overflow-x: hidden;
 }
 
-/* ─── NOISE TEXTURE OVERLAY ─── */
-body::before{
-  content:'';
-  position:fixed; inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
-  pointer-events:none;
-  z-index:0;
-}
-
-/* ─── RED ALERT ─── */
-body.red-alert{ animation: redFlash 1.2s infinite; }
+/* ─── RED ALERT (sottile, niente strobo: il vero indicatore è il bollo di stato) ─── */
+body.red-alert{ animation: redFlash 2.4s ease-in-out infinite; }
 @keyframes redFlash{
-  0%,100%{ background:#1a0000; }
-  50%{ background:#2d0000; }
+  0%,100%{ background: var(--paper); }
+  50%{ background:#f6e7e3; }
 }
 
 /* ══════════════════════════════
@@ -70,20 +85,19 @@ header{
   position:fixed; top:0; left:0; width:100%;
   padding:0 40px;
   height:76px;
-  background: rgba(6,8,15,.90);
+  background: rgba(13,43,62,.93);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   display:flex; align-items:center; justify-content:space-between;
   z-index:999;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-/* left accent line */
 header::before{
   content:'';
   position:absolute; left:0; top:0; bottom:0;
   width:4px;
-  background: linear-gradient(180deg, var(--red), transparent);
+  background: linear-gradient(180deg, var(--sea), transparent);
 }
 
 .logo-box{
@@ -94,7 +108,7 @@ header::before{
   width:48px; height:48px;
   border-radius:50%;
   object-fit:cover;
-  border:2px solid var(--red);
+  border:2px solid var(--sea);
   background:white;
   padding:3px;
 }
@@ -104,21 +118,22 @@ header::before{
   font-size:20px; font-weight:900;
   letter-spacing:.5px;
   line-height:1;
+  color: var(--paper);
 }
 
 .logo-text span{
   font-size:10px; font-weight:400;
   letter-spacing:.5px;
   text-transform:uppercase;
-  color: var(--muted);
+  color: var(--muted-inv);
   white-space:nowrap;
 }
 
-/* pill nav */
 nav{ display:flex; gap:4px; }
 nav a{
-  color: var(--muted);
+  color: var(--muted-inv);
   text-decoration:none;
+  font-family: var(--font-h);
   font-size:13px; font-weight:600;
   letter-spacing:.5px;
   text-transform:uppercase;
@@ -128,10 +143,9 @@ nav a{
 }
 nav a:hover{
   color: white;
-  background: rgba(255,255,255,.07);
+  background: rgba(255,255,255,.08);
 }
 
-/* hamburger */
 .hamburger{
   display:none;
   flex-direction:column;
@@ -152,14 +166,13 @@ nav a:hover{
 .hamburger.open span:nth-child(2){ opacity:0; }
 .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
-/* mobile nav drawer */
 .mobile-nav{
   display:none;
   position:fixed;
   top:76px; left:0; right:0;
-  background:rgba(6,8,15,.97);
+  background:rgba(13,43,62,.98);
   backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid rgba(255,255,255,.08);
   flex-direction:column;
   padding:16px 20px 24px;
   z-index:998;
@@ -167,18 +180,18 @@ nav a:hover{
 }
 .mobile-nav.open{ display:flex; }
 .mobile-nav a{
-  color: var(--muted);
+  color: var(--muted-inv);
   text-decoration:none;
   font-family: var(--font-h);
   font-size:22px; font-weight:700;
   letter-spacing:.5px;
   padding:14px 12px;
   border-radius:8px;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid rgba(255,255,255,.08);
   transition:.2s;
 }
 .mobile-nav a:last-child{ border-bottom:none; }
-.mobile-nav a:hover{ color:white; background:var(--glass); }
+.mobile-nav a:hover{ color:white; background:rgba(255,255,255,.08); }
 
 /* ══════════════════════════════
    SEGNALAZIONI
@@ -207,11 +220,11 @@ nav a:hover{
   font-size:320px; font-weight:900;
   left:-30px; top:50%;
   transform:translateY(-50%);
-  opacity:.025;
+  opacity:.045;
   pointer-events:none;
   line-height:1;
   white-space:nowrap;
-  color:white;
+  color: var(--navy);
 }
 
 .chisiamo-layout{
@@ -229,12 +242,12 @@ nav a:hover{
   margin-bottom:20px;
 }
 .chisiamo-text p strong{
-  color:white;
+  color: var(--navy);
 }
 
 .chisiamo-text .highlight{
   display:inline-block;
-  color: var(--red);
+  color: var(--sea-dark);
   font-weight:600;
 }
 
@@ -253,21 +266,22 @@ nav a:hover{
   transition:.3s;
   position:relative;
   overflow:hidden;
+  box-shadow:0 1px 3px rgba(13,43,62,.05);
 }
 .stat-box::before{
   content:'';
   position:absolute; top:0; left:0; right:0;
   height:2px;
-  background: var(--red);
+  background: var(--sea);
 }
 .stat-box:hover{
-  border-color:rgba(220,38,38,.3);
+  border-color:rgba(15,110,140,.3);
   transform:translateY(-4px);
 }
 .stat-box .stat-num{
   font-family: var(--font-h);
   font-size:52px; font-weight:900;
-  color: var(--red);
+  color: var(--navy);
   line-height:1;
   margin-bottom:8px;
 }
@@ -296,7 +310,7 @@ nav a:hover{
   background-position:center;
   background-repeat:no-repeat;
   transform:scale(1.05);
-  animation: heroZoom 18s ease-in-out infinite alternate;
+  animation: heroZoom 20s ease-in-out infinite alternate;
   transition: background-image 1.5s ease-in-out;
 }
 @keyframes heroZoom{
@@ -308,50 +322,37 @@ nav a:hover{
   position:absolute; inset:0;
   background: linear-gradient(
     to bottom,
-    rgba(6,8,15,.55) 0%,
-    rgba(6,8,15,.40) 40%,
-    rgba(6,8,15,.85) 80%,
+    rgba(13,43,62,.62) 0%,
+    rgba(13,43,62,.46) 40%,
+    rgba(13,43,62,.88) 80%,
     var(--bg) 100%
   );
-}
-
-/* diagonal stripe accent */
-.hero-bg::before{
-  content:'';
-  position:absolute; inset:0;
-  background: repeating-linear-gradient(
-    -55deg,
-    transparent,
-    transparent 80px,
-    rgba(220,38,38,.03) 80px,
-    rgba(220,38,38,.03) 81px
-  );
-  z-index:1;
 }
 
 .hero-content{
   position:relative; z-index:2;
   max-width:900px;
+  color: var(--paper);
 }
 
-/* badge */
 .hero-badge{
   display:inline-flex; align-items:center; gap:8px;
   padding:7px 18px;
-  border:1px solid rgba(220,38,38,.4);
+  border:1px solid rgba(255,255,255,.35);
   border-radius:4px;
-  background:rgba(220,38,38,.08);
+  background:rgba(255,255,255,.08);
+  font-family: var(--font-h);
   font-size:11px; font-weight:700;
   letter-spacing:2px; text-transform:uppercase;
-  color: var(--red);
+  color: var(--paper);
   margin-bottom:32px;
   animation: fadeUp .7s ease both;
 }
 .hero-badge .dot{
   width:6px; height:6px;
-  background:var(--red);
+  background: var(--gold);
   border-radius:50%;
-  animation: pulseRed 1s infinite;
+  animation: pulseRed 1.4s infinite;
 }
 @keyframes pulseRed{
   0%,100%{ opacity:1; transform:scale(1); }
@@ -360,29 +361,31 @@ nav a:hover{
 
 .hero h2{
   font-family: var(--font-h);
-  font-size: clamp(54px, 10vw, 110px);
+  font-size: clamp(48px, 9vw, 96px);
   font-weight:900;
-  line-height:.9;
-  letter-spacing:-1px;
+  line-height:.95;
+  letter-spacing:-.5px;
   margin-bottom:20px;
+  color: var(--paper);
   animation: fadeUp .8s .1s ease both;
 }
 
-.hero h2 .accent{ color: var(--red); }
+.hero h2 .accent{ color: var(--gold); }
 
 .hero h3{
   font-family: var(--font-h);
-  font-size: clamp(20px, 3.5vw, 32px);
+  font-size: clamp(18px, 3vw, 28px);
   font-weight:600;
-  color: var(--muted);
+  color: var(--muted-inv);
   margin-bottom:24px;
   animation: fadeUp .8s .2s ease both;
   letter-spacing:.5px;
 }
 
 .hero p{
+  font-family: var(--font-b);
   font-size:17px; line-height:1.75;
-  color: var(--muted);
+  color: var(--muted-inv);
   max-width:580px; margin:0 auto 44px;
   animation: fadeUp .8s .3s ease both;
 }
@@ -398,18 +401,18 @@ nav a:hover{
   to{   opacity:1; transform:translateY(0); }
 }
 
-/* scroll hint */
 .hero-scroll{
   position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
   z-index:2;
   display:flex; flex-direction:column; align-items:center; gap:8px;
+  font-family: var(--font-h);
   font-size:10px; letter-spacing:2px; text-transform:uppercase;
-  color: var(--muted);
+  color: var(--muted-inv);
   animation: fadeUp 1s .8s ease both;
 }
 .hero-scroll span{
   width:1px; height:40px;
-  background:linear-gradient(var(--muted), transparent);
+  background:linear-gradient(var(--muted-inv), transparent);
   animation: scrollLine 1.5s ease-in-out infinite;
 }
 @keyframes scrollLine{
@@ -422,6 +425,7 @@ nav a:hover{
   display:inline-flex; align-items:center; gap:8px;
   padding:14px 30px;
   border:none; border-radius:6px;
+  font-family: var(--font-h);
   font-size:13px; font-weight:700;
   letter-spacing:.8px; text-transform:uppercase;
   cursor:pointer; text-decoration:none;
@@ -433,14 +437,23 @@ nav a:hover{
   box-shadow:0 8px 24px var(--red-glow);
 }
 .btn-red:hover{
-  background:#ef4444;
+  background:#c84a3d;
   transform:translateY(-2px);
   box-shadow:0 12px 30px var(--red-glow);
+}
+.btn-primary{
+  background: var(--sea);
+  color:white;
+  box-shadow:0 8px 24px rgba(15,110,140,.3);
+}
+.btn-primary:hover{
+  background: var(--sea-dark);
+  transform:translateY(-2px);
 }
 .btn-green{
   background: var(--green);
   color:white;
-  box-shadow:0 8px 24px rgba(22,163,74,.3);
+  box-shadow:0 8px 24px rgba(28,122,66,.3);
 }
 .btn-green:hover{
   background: var(--green-lt);
@@ -449,11 +462,11 @@ nav a:hover{
 .btn-outline{
   background:transparent;
   color:white;
-  border:1px solid var(--border);
+  border:1px solid rgba(255,255,255,.35);
 }
 .btn-outline:hover{
-  background: var(--glass);
-  border-color:rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.5);
 }
 
 /* ══════════════════════════════
@@ -464,27 +477,29 @@ section{ padding:100px 6%; position:relative; z-index:1; }
 .section-eyebrow{
   display:flex; align-items:center; justify-content:center;
   gap:10px;
+  font-family: var(--font-h);
   font-size:11px; font-weight:700;
   letter-spacing:3px; text-transform:uppercase;
-  color: var(--red);
+  color: var(--sea-dark);
   margin-bottom:14px;
 }
 .section-eyebrow::before,
 .section-eyebrow::after{
   content:'';
   height:1px; width:40px;
-  background: linear-gradient(90deg, transparent, var(--red));
+  background: linear-gradient(90deg, transparent, var(--sea-dark));
 }
 .section-eyebrow::after{ transform:rotate(180deg); }
 
 .section-title{
   font-family: var(--font-h);
-  font-size: clamp(36px, 6vw, 62px);
+  font-size: clamp(34px, 5.5vw, 56px);
   font-weight:900;
   text-align:center;
   line-height:1;
   letter-spacing:-.5px;
   margin-bottom:16px;
+  color: var(--navy);
 }
 
 .section-sub{
@@ -495,7 +510,6 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   color: var(--muted);
 }
 
-/* divider */
 .divider{
   width:100%;
   height:1px;
@@ -519,12 +533,13 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   border:1px solid var(--border);
   border-radius:20px;
   padding:32px;
-  backdrop-filter:blur(16px);
+  box-shadow:0 1px 3px rgba(13,43,62,.05);
   transition:.3s;
 }
-.glass-card:hover{ border-color:rgba(255,255,255,.13); }
+.glass-card:hover{ border-color:rgba(13,43,62,.22); }
 
 .card-label{
+  font-family: var(--font-h);
   font-size:10px; font-weight:700;
   letter-spacing:2.5px; text-transform:uppercase;
   color: var(--muted);
@@ -542,10 +557,11 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   animation: pulseGreen 1.2s ease-in-out infinite;
 }
 @keyframes pulseGreen{
-  0%,100%{ opacity:1; box-shadow:0 0 0 0 rgba(34,197,94,.5); }
-  50%{ opacity:.6; box-shadow:0 0 0 6px rgba(34,197,94,0); }
+  0%,100%{ opacity:1; box-shadow:0 0 0 0 rgba(47,156,92,.5); }
+  50%{ opacity:.6; box-shadow:0 0 0 6px rgba(47,156,92,0); }
 }
 .live-text{
+  font-family: var(--font-h);
   font-size:11px; font-weight:700;
   letter-spacing:1.5px; text-transform:uppercase;
   color: var(--green-lt);
@@ -565,24 +581,33 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   letter-spacing:1px;
 }
 .alert-status.green{
-  background: linear-gradient(135deg,rgba(21,128,61,.3),rgba(34,197,94,.12));
-  border:1px solid rgba(34,197,94,.25);
-  color: var(--green-lt);
+  background: linear-gradient(135deg,rgba(28,122,66,.14),rgba(28,122,66,.05));
+  border:1px solid rgba(28,122,66,.22);
+  color: var(--green);
+}
+.alert-status.yellow{
+  background: linear-gradient(135deg,rgba(163,114,10,.16),rgba(163,114,10,.06));
+  border:1px solid rgba(163,114,10,.3);
+  color: var(--yellow);
+}
+.alert-status.orange{
+  background: linear-gradient(135deg,rgba(182,83,28,.16),rgba(182,83,28,.06));
+  border:1px solid rgba(182,83,28,.3);
+  color: var(--orange);
 }
 .alert-status.red{
-  background: linear-gradient(135deg,rgba(127,29,29,.4),rgba(220,38,38,.15));
-  border:1px solid rgba(220,38,38,.35);
-  color:#fca5a5;
-  animation:redBlink 1.2s infinite;
+  background: linear-gradient(135deg,rgba(184,50,39,.16),rgba(184,50,39,.06));
+  border:1px solid rgba(184,50,39,.3);
+  color: var(--red);
+  animation:redBlink 1.6s infinite;
 }
 @keyframes redBlink{
   0%,100%{ opacity:1; }
-  50%{ opacity:.6; }
+  50%{ opacity:.85; }
 }
 
 .alert-desc{ font-size:15px; line-height:1.7; color: var(--muted); }
 
-/* scale */
 .scale-list{ display:flex; flex-direction:column; gap:10px; }
 .scale-item{
   display:flex; align-items:flex-start; gap:14px;
@@ -597,16 +622,18 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   letter-spacing:.5px;
   line-height:1;
   margin-bottom:4px;
+  color: var(--ink);
 }
-.scale-body p{ font-size:13px; line-height:1.5; opacity:.85; }
+.scale-body p{ font-size:13px; line-height:1.5; color: var(--muted); }
 
-.scale-item.green{ background:rgba(21,128,61,.18); border-color:rgba(34,197,94,.15); }
-.scale-item.yellow{ background:rgba(202,138,4,.18); border-color:rgba(202,138,4,.2); color:#fde68a; }
-.scale-item.orange{ background:rgba(234,88,12,.18); border-color:rgba(234,88,12,.2); }
-.scale-item.red{ background:rgba(185,28,28,.22); border-color:rgba(220,38,38,.2); }
+.scale-item.green{ background:rgba(28,122,66,.10); border-color:rgba(28,122,66,.15); }
+.scale-item.yellow{ background:rgba(163,114,10,.10); border-color:rgba(163,114,10,.18); }
+.scale-item.yellow .scale-name{ color: var(--yellow); }
+.scale-item.orange{ background:rgba(182,83,28,.10); border-color:rgba(182,83,28,.18); }
+.scale-item.red{ background:rgba(184,50,39,.12); border-color:rgba(184,50,39,.2); }
 
 /* ══════════════════════════════
-   EMERGENZE
+   COSA FACCIAMO
 ══════════════════════════════ */
 .emerg-grid{
   display:grid;
@@ -623,31 +650,33 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   transition:.3s;
   position:relative;
   overflow:hidden;
+  box-shadow:0 1px 3px rgba(13,43,62,.05);
 }
 .emerg-card::before{
   content:'';
   position:absolute; top:0; left:0; right:0;
   height:2px;
-  background: var(--red);
+  background: var(--sea);
   transform:scaleX(0); transform-origin:left;
   transition:.35s;
 }
 .emerg-card:hover::before{ transform:scaleX(1); }
 .emerg-card:hover{
   transform:translateY(-6px);
-  border-color:rgba(255,255,255,.12);
+  border-color:rgba(13,43,62,.18);
 }
 
 .emerg-icon{
-  font-size:40px; margin-bottom:20px;
+  font-size:38px; margin-bottom:20px;
   display:block;
 }
 
 .emerg-card h3{
   font-family: var(--font-h);
-  font-size:28px; font-weight:800;
+  font-size:24px; font-weight:800;
   letter-spacing:.3px;
   margin-bottom:12px;
+  color: var(--navy);
 }
 
 .emerg-card p{
@@ -683,10 +712,11 @@ section{ padding:100px 6%; position:relative; z-index:1; }
 
 .map-cta-body h3{
   font-family: var(--font-h);
-  font-size: clamp(28px, 4vw, 48px);
+  font-size: clamp(26px, 3.6vw, 44px);
   font-weight:900;
   margin-bottom:14px;
   line-height:1;
+  color: var(--navy);
 }
 
 .map-cta-body p{
@@ -702,10 +732,10 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   display:flex; flex-direction:column;
   align-items:center; justify-content:center;
   gap:8px;
-  background:rgba(220,38,38,.04);
+  background:rgba(15,110,140,.05);
 }
 .map-cta-visual .big-icon{
-  font-size:72px;
+  font-size:68px;
   line-height:1;
   animation: flicker 3s ease-in-out infinite;
 }
@@ -719,6 +749,7 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   94%{ opacity:1; }
 }
 .map-cta-visual span{
+  font-family: var(--font-h);
   font-size:11px; letter-spacing:2px;
   text-transform:uppercase;
   color: var(--muted);
@@ -763,7 +794,6 @@ section{ padding:100px 6%; position:relative; z-index:1; }
 }
 .gallery-item:hover::after{ opacity:1; }
 
-/* lightbox */
 .lightbox{
   position:fixed; inset:0;
   background:rgba(0,0,0,.94);
@@ -804,15 +834,17 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   border-radius:16px;
   padding:28px 24px;
   transition:.3s;
+  box-shadow:0 1px 3px rgba(13,43,62,.05);
 }
 .contact-card:hover{
-  border-color:rgba(220,38,38,.3);
+  border-color:rgba(15,110,140,.3);
   transform:translateY(-4px);
 }
 .contact-card .cc-icon{
   font-size:28px; margin-bottom:14px; display:block;
 }
 .contact-card .cc-label{
+  font-family: var(--font-h);
   font-size:10px; font-weight:700;
   letter-spacing:2px; text-transform:uppercase;
   color: var(--muted);
@@ -821,13 +853,14 @@ section{ padding:100px 6%; position:relative; z-index:1; }
 .contact-card .cc-value{
   font-size:16px; font-weight:500;
   line-height:1.5;
+  color: var(--ink);
 }
 .contact-card a{
-  color: white;
+  color: var(--navy);
   text-decoration:none;
   transition:.2s;
 }
-.contact-card a:hover{ color: var(--red); }
+.contact-card a:hover{ color: var(--sea-dark); }
 
 /* ══════════════════════════════
    5x1000
@@ -843,22 +876,23 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   font-size:280px; font-weight:900;
   right:-20px; top:50%;
   transform:translateY(-50%);
-  opacity:.03;
+  opacity:.035;
   pointer-events:none;
   line-height:1;
   white-space:nowrap;
+  color: var(--navy);
 }
 
 .donation-inner{
   max-width:900px;
   margin:56px auto 0;
-  background:linear-gradient(135deg, var(--red-dark) 0%, var(--red) 100%);
+  background:linear-gradient(135deg, var(--clay-dark) 0%, var(--clay) 100%);
   border-radius:24px;
   padding:56px 60px;
   text-align:center;
   position:relative;
   overflow:hidden;
-  box-shadow:0 30px 60px rgba(185,28,28,.35);
+  box-shadow:0 30px 60px rgba(138,83,31,.3);
 }
 .donation-inner::before{
   content:'';
@@ -866,32 +900,33 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   background: repeating-linear-gradient(
     45deg,
     transparent, transparent 40px,
-    rgba(255,255,255,.02) 40px, rgba(255,255,255,.02) 41px
+    rgba(255,255,255,.03) 40px, rgba(255,255,255,.03) 41px
   );
 }
 
 .donation-inner h3{
   font-family: var(--font-h);
-  font-size: clamp(22px, 3.5vw, 34px);
+  font-size: clamp(20px, 3.2vw, 32px);
   font-weight:700;
   letter-spacing:.5px;
   margin-bottom:28px;
   position:relative;
+  color: white;
 }
 
 .tax-code{
   display:inline-block;
-  font-family: var(--font-h);
-  font-size: clamp(32px, 7vw, 64px);
-  font-weight:900;
+  font-family: var(--font-mono);
+  font-size: clamp(28px, 6vw, 56px);
+  font-weight:600;
   background:white;
-  color: var(--red-dark);
+  color: var(--clay-dark);
   padding:16px 40px;
   border-radius:14px;
-  letter-spacing:4px;
+  letter-spacing:3px;
   margin-bottom:32px;
   position:relative;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
 
 .donation-list{
@@ -899,6 +934,7 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   display:flex; flex-direction:column;
   gap:10px;
   font-size:17px;
+  color:white;
   position:relative;
 }
 .donation-list li{
@@ -930,10 +966,10 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   font-size:13px; font-weight:600;
   cursor:pointer;
   transition:.25s;
-  font-family:var(--font-b);
+  font-family:var(--font-h);
 }
-.filter-btn:hover{ border-color:rgba(220,38,38,.4); color:white; }
-.filter-btn.active{ background:var(--red); border-color:var(--red); color:white; }
+.filter-btn:hover{ border-color:rgba(15,110,140,.4); color: var(--sea-dark); }
+.filter-btn.active{ background:var(--sea); border-color:var(--sea); color:white; }
 
 .storico-stats{
   display:grid;
@@ -947,14 +983,16 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   border-radius:14px;
   padding:20px 16px;
   text-align:center;
+  box-shadow:0 1px 3px rgba(13,43,62,.05);
 }
 .storico-stat .ss-num{
-  font-family:var(--font-h);
-  font-size:42px; font-weight:900;
-  color:var(--red);
+  font-family:var(--font-mono);
+  font-size:38px; font-weight:600;
+  color:var(--navy);
   line-height:1;
 }
 .storico-stat .ss-label{
+  font-family: var(--font-h);
   font-size:11px; font-weight:600;
   letter-spacing:1.5px; text-transform:uppercase;
   color:var(--muted);
@@ -969,6 +1007,7 @@ section{ padding:100px 6%; position:relative; z-index:1; }
 .storico-table th{
   text-align:left;
   padding:12px 16px;
+  font-family: var(--font-h);
   font-size:10px; font-weight:700;
   letter-spacing:2px; text-transform:uppercase;
   color:var(--muted);
@@ -976,22 +1015,23 @@ section{ padding:100px 6%; position:relative; z-index:1; }
 }
 .storico-table td{
   padding:14px 16px;
-  border-bottom:1px solid rgba(255,255,255,.04);
+  border-bottom:1px solid rgba(13,43,62,.06);
   vertical-align:top;
   line-height:1.5;
 }
-.storico-table tr:hover td{ background:rgba(255,255,255,.03); }
+.storico-table tr:hover td{ background:rgba(13,43,62,.03); }
 .storico-table .tipo-badge{
   display:inline-flex; align-items:center; gap:6px;
   padding:4px 10px;
   border-radius:20px;
+  font-family: var(--font-h);
   font-size:12px; font-weight:700;
   white-space:nowrap;
 }
-.tipo-incendio{ background:rgba(220,38,38,.15); color:#fca5a5; border:1px solid rgba(220,38,38,.3); }
-.tipo-frana{ background:rgba(146,64,14,.2); color:#fcd34d; border:1px solid rgba(146,64,14,.3); }
-.tipo-alluvione{ background:rgba(29,78,216,.2); color:#93c5fd; border:1px solid rgba(29,78,216,.3); }
-.tipo-altro{ background:rgba(217,119,6,.15); color:#fde68a; border:1px solid rgba(217,119,6,.3); }
+.tipo-incendio{ background:rgba(184,50,39,.12); color:var(--red); border:1px solid rgba(184,50,39,.3); }
+.tipo-frana{ background:rgba(138,83,31,.13); color:var(--clay-dark); border:1px solid rgba(138,83,31,.3); }
+.tipo-alluvione{ background:rgba(15,110,140,.12); color:var(--sea-dark); border:1px solid rgba(15,110,140,.3); }
+.tipo-altro{ background:rgba(163,114,10,.13); color:var(--yellow); border:1px solid rgba(163,114,10,.3); }
 
 .storico-empty{
   text-align:center;
@@ -1024,8 +1064,8 @@ section{ padding:100px 6%; position:relative; z-index:1; }
 ══════════════════════════════ */
 footer{
   padding:48px 8%;
-  background: #020309;
-  border-top:1px solid var(--border);
+  background: var(--navy);
+  border-top:1px solid rgba(255,255,255,.08);
   display:flex;
   align-items:center; justify-content:space-between;
   flex-wrap:wrap; gap:20px;
@@ -1036,7 +1076,7 @@ footer{
 }
 .footer-brand img{
   width:44px; height:44px;
-  border-radius:50%; border:2px solid var(--red);
+  border-radius:50%; border:2px solid var(--sea);
   padding:2px; background:white; object-fit:cover;
 }
 .footer-brand h3{
@@ -1044,14 +1084,16 @@ footer{
   font-size:20px; font-weight:800;
   line-height:1;
   margin-bottom:4px;
+  color: var(--paper);
 }
 .footer-brand p{
-  font-size:12px; color: var(--muted); letter-spacing:.5px;
+  font-size:12px; color: var(--muted-inv); letter-spacing:.5px;
 }
 
 .footer-copy{
-  font-size:12px; color: var(--muted);
+  font-size:12px; color: var(--muted-inv);
   text-align:right;
+  line-height:1.6;
 }
 
 /* ══════════════════════════════
@@ -1085,7 +1127,7 @@ footer{
   .gallery-item:nth-child(5){ grid-column:span 1; }
 
   .donation-inner{ padding:40px 28px; }
-  .tax-code{ font-size:28px; letter-spacing:2px; padding:14px 24px; }
+  .tax-code{ font-size:26px; letter-spacing:1px; padding:14px 24px; }
 
   footer{ flex-direction:column; text-align:center; }
   .footer-copy{ text-align:center; }
@@ -1129,15 +1171,16 @@ footer{
   border-radius:16px;
   padding:24px 22px;
   transition:.3s;
+  box-shadow:0 1px 3px rgba(13,43,62,.05);
 }
 .step-card:hover{
-  border-color:rgba(220,38,38,.3);
+  border-color:rgba(173,106,53,.3);
   transform:translateX(4px);
 }
 .step-num{
-  font-family: var(--font-h);
-  font-size:38px; font-weight:900;
-  color: var(--red);
+  font-family: var(--font-mono);
+  font-size:32px; font-weight:600;
+  color: var(--clay);
   line-height:1;
   flex-shrink:0;
   width:44px;
@@ -1147,13 +1190,13 @@ footer{
   font-size:20px; font-weight:800;
   margin-bottom:6px;
   letter-spacing:.3px;
+  color: var(--navy);
 }
 .step-body p{
   font-size:14px; line-height:1.65;
   color: var(--muted);
 }
 
-/* form */
 .volontario-form{
   background: var(--glass);
   border:1px solid var(--border);
@@ -1161,11 +1204,13 @@ footer{
   padding:36px 32px;
   position:sticky;
   top:100px;
+  box-shadow:0 1px 3px rgba(13,43,62,.05);
 }
 .volontario-form h3{
   font-family: var(--font-h);
-  font-size:28px; font-weight:800;
+  font-size:26px; font-weight:800;
   margin-bottom:6px;
+  color: var(--navy);
 }
 .volontario-form .form-sub{
   font-size:14px; color: var(--muted);
@@ -1177,6 +1222,7 @@ footer{
 }
 .form-group label{
   display:block;
+  font-family: var(--font-h);
   font-size:11px; font-weight:700;
   letter-spacing:1.5px; text-transform:uppercase;
   color: var(--muted);
@@ -1186,11 +1232,11 @@ footer{
 .form-group textarea,
 .form-group select{
   width:100%;
-  background:rgba(255,255,255,.05);
+  background:rgba(13,43,62,.035);
   border:1px solid var(--border);
   border-radius:10px;
   padding:13px 16px;
-  color:white;
+  color:var(--ink);
   font-family: var(--font-b);
   font-size:15px;
   outline:none;
@@ -1200,11 +1246,11 @@ footer{
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus{
-  border-color:rgba(220,38,38,.5);
-  background:rgba(220,38,38,.05);
+  border-color:rgba(15,110,140,.5);
+  background:rgba(15,110,140,.05);
 }
 .form-group textarea{ resize:vertical; min-height:90px; }
-.form-group select option{ background:#1a1a2e; color:white; }
+.form-group select option{ background:var(--paper); color:var(--ink); }
 .form-note{
   font-size:12px; color:var(--muted);
   margin-top:14px; text-align:center;
@@ -1233,30 +1279,31 @@ footer{
   text-align:center;
   transition:.3s;
   text-decoration:none;
-  color:white;
+  color: var(--ink);
   display:block;
 }
 .numero-card:hover{
   transform:translateY(-6px);
-  border-color:rgba(220,38,38,.35);
-  background:rgba(220,38,38,.07);
+  border-color:rgba(184,50,39,.3);
+  background:rgba(184,50,39,.05);
 }
 .numero-card .n-icon{ font-size:36px; margin-bottom:14px; display:block; }
 .numero-card .n-name{
+  font-family: var(--font-h);
   font-size:11px; font-weight:700;
   letter-spacing:2px; text-transform:uppercase;
   color:var(--muted);
   margin-bottom:8px;
 }
 .numero-card .n-num{
-  font-family: var(--font-h);
-  font-size:34px; font-weight:900;
+  font-family: var(--font-mono);
+  font-size:30px; font-weight:600;
   letter-spacing:1px;
   line-height:1;
 }
 .numero-card.emergency{
-  border-color:rgba(220,38,38,.3);
-  background:rgba(220,38,38,.06);
+  border-color:rgba(184,50,39,.3);
+  background:rgba(184,50,39,.05);
 }
 .numero-card.emergency .n-num{ color:var(--red); }
 
@@ -1265,7 +1312,6 @@ footer{
   .volontario-form{ position:static; }
 }
 
-/* toast notifica */
 .segn-types{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -1280,13 +1326,14 @@ footer{
   text-align:center;
   cursor:pointer;
   transition:.25s;
-  color:white;
+  color: var(--ink);
   font-family: var(--font-b);
 }
-.segn-type-btn:hover{ border-color:rgba(220,38,38,.4); background:rgba(220,38,38,.07); }
-.segn-type-btn.selected{ border-color:var(--red); background:rgba(220,38,38,.12); }
+.segn-type-btn:hover{ border-color:rgba(15,110,140,.4); background:rgba(15,110,140,.06); }
+.segn-type-btn.selected{ border-color:var(--sea); background:rgba(15,110,140,.12); }
 .segn-type-btn .st-icon{ font-size:32px; display:block; margin-bottom:8px; }
 .segn-type-btn .st-label{
+  font-family: var(--font-h);
   font-size:13px; font-weight:700;
   letter-spacing:.5px;
 }
@@ -1296,11 +1343,13 @@ footer{
   border:1px solid var(--border);
   border-radius:20px;
   padding:32px 28px;
+  box-shadow:0 1px 3px rgba(13,43,62,.05);
 }
 .segn-form h3{
   font-family: var(--font-h);
-  font-size:26px; font-weight:800;
+  font-size:24px; font-weight:800;
   margin-bottom:6px;
+  color: var(--navy);
 }
 .segn-form .segn-sub{
   font-size:14px; color:var(--muted);
@@ -1309,7 +1358,7 @@ footer{
 
 .gps-row{
   display:flex; align-items:center; gap:10px;
-  background:rgba(255,255,255,.04);
+  background:rgba(13,43,62,.035);
   border:1px solid var(--border);
   border-radius:10px;
   padding:12px 16px;
@@ -1320,14 +1369,13 @@ footer{
 .gps-row .gps-dot{
   width:8px; height:8px;
   border-radius:50%;
-  background:#6b7280;
+  background:#9aa6ab;
   flex-shrink:0;
   transition:.3s;
 }
 .gps-row.gps-ok .gps-dot{ background:var(--green-lt); box-shadow:0 0 6px var(--green-lt); }
-.gps-row.gps-ok{ color:var(--green-lt); }
+.gps-row.gps-ok{ color:var(--green); }
 
-/* mappa segnalazioni */
 .segn-map-wrap{
   background: var(--glass);
   border:1px solid var(--border);
@@ -1335,6 +1383,7 @@ footer{
   overflow:hidden;
   display:flex;
   flex-direction:column;
+  box-shadow:0 1px 3px rgba(13,43,62,.05);
 }
 .segn-map-header{
   padding:20px 24px 16px;
@@ -1343,11 +1392,13 @@ footer{
 }
 .segn-map-header h3{
   font-family: var(--font-h);
-  font-size:22px; font-weight:800;
+  font-size:20px; font-weight:800;
+  color: var(--navy);
 }
 .segn-count{
-  background:var(--red);
+  background:var(--sea);
   color:white;
+  font-family: var(--font-h);
   font-size:12px; font-weight:700;
   padding:4px 12px;
   border-radius:20px;
@@ -1356,7 +1407,7 @@ footer{
   flex:1;
   min-height:380px;
   position:relative;
-  background:#0d1117;
+  background:#eef2f4;
 }
 .segn-map-list{
   max-height:160px;
@@ -1379,12 +1430,14 @@ footer{
 .segn-item .si-body .si-tipo{
   font-weight:700; font-size:13px;
   margin-bottom:2px;
+  color: var(--ink);
 }
 .segn-item .si-body .si-desc{ color:var(--muted); line-height:1.4; }
 .segn-item .si-body .si-time{
   font-size:11px; color:var(--muted);
   margin-top:3px; letter-spacing:.5px;
 }
+.segn-item .si-body .si-time a{ color: var(--sea-dark); }
 .segn-empty{
   text-align:center;
   color:var(--muted);
@@ -1392,7 +1445,6 @@ footer{
   padding:20px 0;
 }
 
-/* toast notifica */
 .toast{
   position:fixed;
   bottom:28px; left:50%; transform:translateX(-50%) translateY(80px);
@@ -1400,14 +1452,16 @@ footer{
   border:1px solid var(--border);
   border-radius:12px;
   padding:14px 24px;
+  font-family: var(--font-h);
   font-size:14px; font-weight:600;
+  color: var(--paper);
   z-index:9998;
   transition:.4s cubic-bezier(.34,1.56,.64,1);
   white-space:nowrap;
   pointer-events:none;
 }
 .toast.show{ transform:translateX(-50%) translateY(0); }
-.toast.success{ border-color:rgba(34,197,94,.4); color:var(--green-lt); }
+.toast.success{ border-color:rgba(47,156,92,.4); color:var(--green-lt); }
 .toast.error{ border-color:rgba(220,38,38,.4); color:#fca5a5; }
 
 @media(max-width:960px){
@@ -1415,9 +1469,57 @@ footer{
   .volontario-layout{ grid-template-columns:1fr; }
   .volontario-form{ position:static; }
 }
+
+/* miniatura foto nello storico */
+.storico-foto-thumb{
+  width:56px;
+  height:42px;
+  object-fit:cover;
+  border-radius:6px;
+  cursor:pointer;
+  border:1px solid var(--border);
+  display:block;
+  transition:.2s;
+}
+.storico-foto-thumb:hover{ border-color:var(--sea); transform:scale(1.05); }
+.storico-foto-na{
+  color:var(--muted);
+  font-size:12px;
+}
+@media(max-width:960px){
+  .storico-table th:nth-child(6),
+  .storico-table td:nth-child(6){ display:none; }
+}
+
+/* ══════════════════════════════
+   PANNELLO GESTIONE ALLERTA (riservato — link nascosto)
+══════════════════════════════ */
+#pannelloAllerta{ background: var(--clay-tint); }
+.pannello-box{
+  max-width:560px;
+  margin:40px auto 0;
+  background: var(--paper);
+  border:2px dashed rgba(138,83,31,.35);
+  border-radius:20px;
+  padding:32px 28px;
+}
+.pannello-box .form-group{ margin-bottom:18px; }
+.pannello-note{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.6;
+  margin-top:16px;
+}
+#allertaUltimoAgg{
+  font-family:var(--font-mono);
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:20px;
+  display:block;
+}
+
 </style>
 </head>
-
 <body>
 
 <!-- ── HEADER ── -->
@@ -1432,7 +1534,7 @@ footer{
       display:flex;flex-direction:column;align-items:center;
       gap:4px;margin-left:12px;
       padding-left:16px;
-      border-left:1px solid var(--border);
+      border-left:1px solid rgba(255,255,255,.15);
     ">
       <img src="anpas.jpg" alt="ANPAS Basilicata" style="
         width:42px;height:42px;
@@ -1445,13 +1547,13 @@ footer{
     </div>
   </div>
   <nav>
-    <a href="#chisiamo">Chi siamo</a>
-    <a href="#allerta">Allerte</a>
-    <a href="#emergenza">Emergenze</a>
-    <a href="#mappa">Incendi</a>
     <a href="#segnalazioni">Segnala</a>
-    <a href="#foto">Foto</a>
+    <a href="#allerta">Allerte</a>
+    <a href="#chisiamo">Chi siamo</a>
+    <a href="#emergenza">Cosa facciamo</a>
+    <a href="#mappa">Incendi</a>
     <a href="#volontario">Volontario</a>
+    <a href="#foto">Foto</a>
     <a href="#storico">Storico</a>
     <a href="#contatti">Contatti</a>
   </nav>
@@ -1462,17 +1564,17 @@ footer{
 
 <!-- menu mobile -->
 <div class="mobile-nav" id="mobileNav">
-  <a href="#chisiamo"   onclick="chiudiMenu()">Chi siamo</a>
-  <a href="#allerta"    onclick="chiudiMenu()">Allerte</a>
-  <a href="#emergenza"  onclick="chiudiMenu()">Emergenze</a>
-  <a href="#mappa"      onclick="chiudiMenu()">Mappa incendi</a>
   <a href="#segnalazioni" onclick="chiudiMenu()">🚨 Segnala evento</a>
-  <a href="#foto"       onclick="chiudiMenu()">Foto</a>
-  <a href="#volontario" onclick="chiudiMenu()">Diventa volontario</a>
-  <a href="#storico"    onclick="chiudiMenu()">📋 Storico segnalazioni</a>
-  <a href="#numeri"     onclick="chiudiMenu()">Numeri utili</a>
-  <a href="#contatti"   onclick="chiudiMenu()">Contatti</a>
-  <a href="#donazioni"  onclick="chiudiMenu()">5×1000</a>
+  <a href="#allerta"      onclick="chiudiMenu()">Allerte</a>
+  <a href="#chisiamo"     onclick="chiudiMenu()">Chi siamo</a>
+  <a href="#emergenza"    onclick="chiudiMenu()">Cosa facciamo</a>
+  <a href="#mappa"        onclick="chiudiMenu()">Mappa incendi</a>
+  <a href="#volontario"   onclick="chiudiMenu()">Diventa volontario</a>
+  <a href="#foto"         onclick="chiudiMenu()">Foto</a>
+  <a href="#storico"      onclick="chiudiMenu()">📋 Storico segnalazioni</a>
+  <a href="#numeri"       onclick="chiudiMenu()">Numeri utili</a>
+  <a href="#contatti"     onclick="chiudiMenu()">Contatti</a>
+  <a href="#donazioni"    onclick="chiudiMenu()">5×1000</a>
 </div>
 
 <!-- ── HERO ── -->
@@ -1490,15 +1592,15 @@ footer{
     <h3>Sempre al servizio del territorio</h3>
 
     <p>
-      Interventi, emergenze, prevenzione e tutela del territorio
-      al servizio della comunità di Pisticci e della Basilicata.
+      Interventi, prevenzione e formazione al servizio della comunità
+      di Pisticci e del Metapontino, in Basilicata.
     </p>
 
     <div class="hero-buttons">
-      <a href="#allerta" class="btn btn-red">🚨 Allerte</a>
-      <a href="#mappa"   class="btn btn-green">🔥 Mappa incendi</a>
-      <a href="#segnalazioni" class="btn btn-red" style="background:#b91c1c;">🆘 Segnala un incendio</a>
-      <a href="#contatti" class="btn btn-outline">Contattaci</a>
+      <a href="#segnalazioni" class="btn btn-red">🔥 Segnala un incendio</a>
+      <a href="#segnalazioni" class="btn btn-outline">Segnala un evento</a>
+      <a href="#allerta" class="btn btn-primary">Stato allerta</a>
+      <a href="#mappa" class="btn btn-green">🛰️ Mappa incendi</a>
     </div>
   </div>
 
@@ -1567,7 +1669,7 @@ footer{
         <label>📷 Foto (opzionale)</label>
         <input type="file" id="segnFoto" accept="image/*" style="
           width:100%;
-          background:rgba(255,255,255,.05);
+          background:rgba(13,43,62,.035);
           border:1px solid var(--border);
           border-radius:10px;
           padding:12px 16px;
@@ -1588,14 +1690,14 @@ footer{
       <div style="
         margin-top:16px;
         padding:14px 16px;
-        background:rgba(220,38,38,.08);
-        border:1px solid rgba(220,38,38,.25);
+        background:rgba(184,50,39,.08);
+        border:1px solid rgba(184,50,39,.22);
         border-radius:10px;
         font-size:13px;
         line-height:1.7;
         color:var(--muted);
       ">
-        ⚠️ <strong style="color:white;">La segnalazione non sostituisce la chiamata ai numeri di emergenza.</strong><br>
+        ⚠️ <strong style="color:var(--navy);">La segnalazione non sostituisce la chiamata ai numeri di emergenza.</strong><br>
         In caso di pericolo chiama subito il numero unico europeo:<br>
         🚨 <a href="tel:112" style="color:var(--red);font-weight:900;font-size:18px;text-decoration:none;">112</a>
       </div>
@@ -1611,73 +1713,6 @@ footer{
       <div id="segn-map"></div>
       <div class="segn-map-list" id="segnList">
         <p class="segn-empty">Nessuna segnalazione ancora. Sii il primo a segnalare.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ── CHI SIAMO ── -->
-<section id="chisiamo">
-  <div class="section-eyebrow">La nostra storia</div>
-  <h2 class="section-title">Chi Siamo</h2>
-  <p class="section-sub">
-    Un gruppo di volontari uniti dalla stessa passione: proteggere il territorio e chi ci vive.
-  </p>
-
-  <div class="chisiamo-layout">
-
-    <div class="chisiamo-text">
-      <p>
-        L'associazione <strong>N.O.V. — Nucleo Operativo Volontari del Metapontino</strong>
-        nasce dalla spontanea volontà di un gruppo di ragazzi che condividono
-        la passione del volontariato, in particolare del settore
-        <span class="highlight">Protezione Civile</span>.
-        Il nostro intento è quello di realizzare una valida struttura di Protezione Civile
-        sul territorio, in grado di soddisfare tutte le situazioni di emergenza e calamità.
-      </p>
-      <p>
-        La <strong>Protezione Civile</strong> in Italia è un sistema che coinvolge
-        istituzioni, enti locali e — soprattutto — i <strong>volontari</strong>.
-        Sono proprio loro il cuore pulsante del sistema: persone comuni che scelgono
-        liberamente di mettere il proprio tempo, le proprie energie e le proprie competenze
-        al servizio della collettività, senza chiedere nulla in cambio.
-      </p>
-      <p>
-        Il volontariato di Protezione Civile significa <strong>prevenzione</strong>,
-        non solo intervento. Significa presidiare il territorio, conoscerne i rischi,
-        educare la popolazione e essere pronti quando arriva il momento che conta davvero.
-        Ogni ora di formazione, ogni esercitazione, ogni turno di guardia è un atto concreto
-        d'amore verso la propria terra.
-      </p>
-      <p>
-        Operiamo a <strong>Pisticci</strong> e su tutto il territorio del
-        <strong>Metapontino</strong>, pronti a intervenire ogni volta che
-        la comunità ne ha bisogno — di giorno, di notte, sempre.
-      </p>
-      <a href="#volontario" class="btn btn-red" style="margin-top:8px;">
-        Unisciti a noi →
-      </a>
-    </div>
-
-    <div class="chisiamo-stats">
-      <div class="stat-box">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Volontari<br>dedicati</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">Sempre<br>operativi</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">MT</div>
-        <div class="stat-label">Provincia di<br>Matera</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">0</div>
-        <div class="stat-label">Scopo<br>di lucro</div>
       </div>
     </div>
 
@@ -1754,6 +1789,116 @@ footer{
 
 <div class="divider"></div>
 
+<!-- ── CHI SIAMO ── -->
+<section id="chisiamo">
+  <div class="section-eyebrow">La nostra storia</div>
+  <h2 class="section-title">Chi Siamo</h2>
+  <p class="section-sub">
+    Un gruppo di volontari uniti dalla stessa passione: proteggere il territorio e chi ci vive.
+  </p>
+
+  <div class="chisiamo-layout">
+
+    <div class="chisiamo-text">
+      <p>
+        L'associazione <strong>N.O.V. — Nucleo Operativo Volontari del Metapontino</strong>
+        nasce dalla spontanea volontà di un gruppo di ragazzi che condividono
+        la passione del volontariato, in particolare del settore
+        <span class="highlight">Protezione Civile</span>.
+        Il nostro intento è quello di realizzare una valida struttura di Protezione Civile
+        sul territorio, in grado di soddisfare tutte le situazioni di emergenza e calamità.
+      </p>
+      <p>
+        La <strong>Protezione Civile</strong> in Italia è un sistema che coinvolge
+        istituzioni, enti locali e — soprattutto — i <strong>volontari</strong>.
+        Sono proprio loro il cuore pulsante del sistema: persone comuni che scelgono
+        liberamente di mettere il proprio tempo, le proprie energie e le proprie competenze
+        al servizio della collettività, senza chiedere nulla in cambio.
+      </p>
+      <p>
+        Il volontariato di Protezione Civile significa <strong>prevenzione</strong>,
+        non solo intervento. Significa presidiare il territorio, conoscerne i rischi,
+        educare la popolazione e essere pronti quando arriva il momento che conta davvero.
+        Ogni ora di formazione, ogni esercitazione, ogni turno di guardia è un atto concreto
+        d'amore verso la propria terra.
+      </p>
+      <p>
+        Operiamo a <strong>Pisticci</strong> e su tutto il territorio del
+        <strong>Metapontino</strong>, pronti a intervenire ogni volta che
+        la comunità ne ha bisogno — di giorno, di notte, sempre.
+      </p>
+      <a href="#volontario" class="btn btn-primary" style="margin-top:8px;">
+        Unisciti a noi →
+      </a>
+    </div>
+
+    <div class="chisiamo-stats">
+      <div class="stat-box">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Volontari<br>dedicati</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Sempre<br>operativi</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">MT</div>
+        <div class="stat-label">Provincia di<br>Matera</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Scopo<br>di lucro</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── COSA FACCIAMO ── -->
+<section id="emergenza">
+  <div class="section-eyebrow">Le nostre attività</div>
+  <h2 class="section-title">Cosa Facciamo</h2>
+  <p class="section-sub">
+    Le tre aree in cui si articola il lavoro quotidiano del nucleo.
+  </p>
+
+  <div class="emerg-grid">
+    <div class="emerg-card">
+      <span class="emerg-icon">🔥</span>
+      <h3>Interventi e Soccorso</h3>
+      <p>
+        Supportiamo le squadre di emergenza in caso di incendi, frane, alluvioni
+        e altre calamità, intervenendo sul territorio del Metapontino con mezzi
+        e personale formato.
+      </p>
+    </div>
+    <div class="emerg-card">
+      <span class="emerg-icon">🔍</span>
+      <h3>Prevenzione e Monitoraggio</h3>
+      <p>
+        Presidiamo il territorio, segnaliamo situazioni di rischio e collaboriamo
+        con il Comune di Pisticci alla pianificazione delle attività di prevenzione.
+      </p>
+    </div>
+    <div class="emerg-card">
+      <span class="emerg-icon">🎓</span>
+      <h3>Formazione e Sensibilizzazione</h3>
+      <p>
+        Organizziamo corsi di formazione per i volontari ed esercitazioni periodiche,
+        e portiamo la cultura della Protezione Civile nelle scuole e nella comunità.
+      </p>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:36px;">
+    <a href="#volontario" class="btn btn-primary">Scopri come diventare volontario →</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ── MAPPA ── -->
 <section id="mappa">
   <div class="section-eyebrow">Monitoraggio satellitare</div>
@@ -1770,7 +1915,7 @@ footer{
         Visualizza gli hotspot di calore rilevati dai satelliti NASA MODIS e VIIRS
         sulla Basilicata. Aggiornamenti ogni 12 ore circa.
       </p>
-      <a class="btn btn-red"
+      <a class="btn btn-primary"
          href="https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@16.6,40.3,8.0z"
          target="_blank">
         🔥 Apri mappa NASA FIRMS
@@ -1785,29 +1930,6 @@ footer{
 </section>
 
 <div class="divider"></div>
-
-<!-- ── GALLERIA ── -->
-<section id="foto">
-  <div class="section-eyebrow">Operatività sul campo</div>
-  <h2 class="section-title">Galleria Operativa</h2>
-  <p class="section-sub">
-    Immagini delle attività, degli interventi e dei volontari N.O.V.
-  </p>
-
-  <div class="gallery">
-    <div class="gallery-item"><img src="FB_IMG_1780005109119.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
-    <div class="gallery-item"><img src="FB_IMG_1779032351750.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
-    <div class="gallery-item"><img src="FB_IMG_1779032400374.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
-    <div class="gallery-item"><img src="FB_IMG_1779032516968.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
-    <div class="gallery-item"><img src="FB_IMG_1779032526869.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
-    <div class="gallery-item"><img src="FB_IMG_1779032545746.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
-    <div class="gallery-item"><img src="FB_IMG_1779032553450.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
-    <div class="gallery-item"><img src="FB_IMG_1779032589055.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
-    <div class="gallery-item"><img src="FB_IMG_1779032631507.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
-    <div class="gallery-item"><img src="FB_IMG_1779516909018.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
-    <div class="gallery-item"><img src="FB_IMG_1779516946597.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
-  </div>
-</section>
 
 <!-- ── DIVENTA VOLONTARIO ── -->
 <section id="volontario">
@@ -1882,13 +2004,100 @@ footer{
         <textarea placeholder="Raccontaci qualcosa di te o delle tue motivazioni..."></textarea>
       </div>
 
-      <button class="btn btn-red" style="width:100%;justify-content:center;"
+      <button class="btn btn-primary" style="width:100%;justify-content:center;"
         onclick="inviaModulo(this)">
         Invia candidatura →
       </button>
-      <p class="form-note">Scrivendo a <a href="mailto:nov_protciv@live.it" style="color:var(--red);text-decoration:none;">nov_protciv@live.it</a> — nessun dato verrà ceduto a terzi.</p>
+      <p class="form-note">Scrivendo a <a href="mailto:nov_protciv@live.it" style="color:var(--sea-dark);text-decoration:none;">nov_protciv@live.it</a> — nessun dato verrà ceduto a terzi.</p>
     </div>
 
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── GALLERIA ── -->
+<section id="foto">
+  <div class="section-eyebrow">Operatività sul campo</div>
+  <h2 class="section-title">Galleria Operativa</h2>
+  <p class="section-sub">
+    Immagini delle attività, degli interventi e dei volontari N.O.V.
+  </p>
+
+  <div class="gallery">
+    <div class="gallery-item"><img src="FB_IMG_1780005109119.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032351750.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032400374.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032516968.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032526869.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032545746.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032553450.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032589055.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779032631507.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779516909018.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+    <div class="gallery-item"><img src="FB_IMG_1779516946597.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STORICO SEGNALAZIONI ── -->
+<section id="storico">
+  <div class="section-eyebrow">Archivio completo</div>
+  <h2 class="section-title">📋 Storico Segnalazioni</h2>
+  <p class="section-sub">
+    Tutte le segnalazioni ricevute dal territorio. Archivio permanente aggiornato in tempo reale.
+  </p>
+
+  <div class="storico-stats">
+    <div class="storico-stat">
+      <div class="ss-num" id="statTotale">0</div>
+      <div class="ss-label">Totale</div>
+    </div>
+    <div class="storico-stat">
+      <div class="ss-num" id="statIncendi">0</div>
+      <div class="ss-label">🔥 Incendi</div>
+    </div>
+    <div class="storico-stat">
+      <div class="ss-num" id="statFrane">0</div>
+      <div class="ss-label">⛰️ Frane</div>
+    </div>
+    <div class="storico-stat">
+      <div class="ss-num" id="statAlluvioni">0</div>
+      <div class="ss-label">🌊 Alluvioni</div>
+    </div>
+    <div class="storico-stat">
+      <div class="ss-num" id="statAltro">0</div>
+      <div class="ss-label">⚠️ Altro</div>
+    </div>
+  </div>
+
+  <div class="storico-filters">
+    <button class="filter-btn active" onclick="filtraStorico('tutti', this)">Tutti</button>
+    <button class="filter-btn" onclick="filtraStorico('Incendio', this)">🔥 Incendi</button>
+    <button class="filter-btn" onclick="filtraStorico('Frana', this)">⛰️ Frane</button>
+    <button class="filter-btn" onclick="filtraStorico('Alluvione', this)">🌊 Alluvioni</button>
+    <button class="filter-btn" onclick="filtraStorico('Altro pericolo', this)">⚠️ Altro</button>
+  </div>
+
+  <div class="storico-wrap">
+    <div class="storico-wrap-inner">
+      <table class="storico-table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Descrizione</th>
+            <th>Posizione</th>
+            <th>Segnalato da</th>
+            <th>Data e ora</th>
+            <th>Foto</th>
+          </tr>
+        </thead>
+        <tbody id="storicoBody">
+          <tr><td colspan="6" class="storico-empty">Caricamento...</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -1904,13 +2113,13 @@ footer{
 
   <div style="max-width:800px;margin:40px auto 0;">
     <div style="
-      background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(220,38,38,.05));
-      border:1px solid rgba(220,38,38,.3);
+      background:linear-gradient(135deg, var(--sea-tint), var(--paper));
+      border:1px solid rgba(15,110,140,.25);
       border-radius:24px;
       padding:48px 40px;
       text-align:center;
     ">
-      <a href="tel:112" style="text-decoration:none;color:white;">
+      <a href="tel:112" style="text-decoration:none;color:var(--ink);">
         <div style="font-size:80px;margin-bottom:8px;">🚨</div>
         <div style="
           font-family:var(--font-h);
@@ -1926,12 +2135,13 @@ footer{
           font-size:24px;font-weight:700;
           letter-spacing:1px;
           margin-bottom:28px;
+          color:var(--navy);
         ">Numero di Emergenza Unico Europeo</div>
       </a>
 
       <div style="
         text-align:left;
-        background:rgba(255,255,255,.04);
+        background:rgba(13,43,62,.035);
         border:1px solid var(--border);
         border-radius:14px;
         padding:24px 28px;
@@ -1940,26 +2150,26 @@ footer{
         line-height:2;
         color:var(--muted);
       ">
-        Puoi chiamare il <strong style="color:white;">112</strong> per richiedere urgentemente un intervento di:<br>
-        🚔 <strong style="color:white;">Forze di Polizia</strong><br>
-        🚒 <strong style="color:white;">Vigili del Fuoco</strong><br>
-        🚑 <strong style="color:white;">Assistenza Sanitaria</strong><br><br>
+        Puoi chiamare il <strong style="color:var(--navy);">112</strong> per richiedere urgentemente un intervento di:<br>
+        🚔 <strong style="color:var(--navy);">Forze di Polizia</strong><br>
+        🚒 <strong style="color:var(--navy);">Vigili del Fuoco</strong><br>
+        🚑 <strong style="color:var(--navy);">Assistenza Sanitaria</strong><br><br>
         L'operatore del 112 inoltra la chiamata alla Centrale operativa competente per tipologia di emergenza.
       </div>
 
       <div style="
-        background:rgba(34,197,94,.08);
-        border:1px solid rgba(34,197,94,.2);
+        background:rgba(28,122,66,.08);
+        border:1px solid rgba(28,122,66,.2);
         border-radius:12px;
         padding:16px 20px;
         font-size:14px;
-        color:rgba(232,234,240,.85);
+        color:var(--ink);
         line-height:1.7;
       ">
-        ✅ Puoi chiamare il <strong style="color:var(--green-lt);">112</strong> gratuitamente da rete fissa o mobile —
-        anche quando il telefono <strong style="color:white;">non ha SIM</strong>, è
-        <strong style="color:white;">bloccato</strong> o
-        <strong style="color:white;">non hai credito</strong>.
+        ✅ Puoi chiamare il <strong style="color:var(--green);">112</strong> gratuitamente da rete fissa o mobile —
+        anche quando il telefono <strong style="color:var(--navy);">non ha SIM</strong>, è
+        <strong style="color:var(--navy);">bloccato</strong> o
+        <strong style="color:var(--navy);">non hai credito</strong>.
       </div>
 
       <a href="tel:112" class="btn btn-red" style="margin-top:28px;font-size:18px;padding:18px 48px;">
@@ -1968,8 +2178,6 @@ footer{
     </div>
   </div>
 </section>
-
-<div class="divider"></div>
 
 <div class="divider"></div>
 
@@ -2037,6 +2245,8 @@ footer{
   </div>
 </section>
 
+<div class="divider"></div>
+
 <!-- ── 5×1000 ── -->
 <section id="donazioni">
   <div class="section-eyebrow">Sostienici</div>
@@ -2058,62 +2268,43 @@ footer{
   </div>
 </section>
 
-<!-- ── STORICO SEGNALAZIONI ── -->
-<section id="storico">
-  <div class="section-eyebrow">Archivio completo</div>
-  <h2 class="section-title">📋 Storico Segnalazioni</h2>
+<div class="divider"></div>
+
+<!-- ── PANNELLO GESTIONE ALLERTA (riservato, link nascosto) ── -->
+<section id="pannelloAllerta" style="display:none;">
+  <div class="section-eyebrow">Riservato al direttivo</div>
+  <h2 class="section-title">Gestione Allerta</h2>
   <p class="section-sub">
-    Tutte le segnalazioni ricevute dal territorio. Archivio permanente aggiornato in tempo reale.
+    Questa pagina non è collegata al menu del sito. Il link va condiviso solo con i membri del direttivo —
+    chiunque lo possieda può modificare l'allerta visibile a tutti i visitatori.
   </p>
 
-  <div class="storico-stats">
-    <div class="storico-stat">
-      <div class="ss-num" id="statTotale">0</div>
-      <div class="ss-label">Totale</div>
-    </div>
-    <div class="storico-stat">
-      <div class="ss-num" id="statIncendi">0</div>
-      <div class="ss-label">🔥 Incendi</div>
-    </div>
-    <div class="storico-stat">
-      <div class="ss-num" id="statFrane">0</div>
-      <div class="ss-label">⛰️ Frane</div>
-    </div>
-    <div class="storico-stat">
-      <div class="ss-num" id="statAlluvioni">0</div>
-      <div class="ss-label">🌊 Alluvioni</div>
-    </div>
-    <div class="storico-stat">
-      <div class="ss-num" id="statAltro">0</div>
-      <div class="ss-label">⚠️ Altro</div>
-    </div>
-  </div>
+  <div class="pannello-box">
+    <span id="allertaUltimoAgg">Caricamento...</span>
 
-  <div class="storico-filters">
-    <button class="filter-btn active" onclick="filtraStorico('tutti', this)">Tutti</button>
-    <button class="filter-btn" onclick="filtraStorico('Incendio', this)">🔥 Incendi</button>
-    <button class="filter-btn" onclick="filtraStorico('Frana', this)">⛰️ Frane</button>
-    <button class="filter-btn" onclick="filtraStorico('Alluvione', this)">🌊 Alluvioni</button>
-    <button class="filter-btn" onclick="filtraStorico('Altro pericolo', this)">⚠️ Altro</button>
-  </div>
-
-  <div class="storico-wrap">
-    <div class="storico-wrap-inner">
-      <table class="storico-table">
-        <thead>
-          <tr>
-            <th>Tipo</th>
-            <th>Descrizione</th>
-            <th>Posizione</th>
-            <th>Segnalato da</th>
-            <th>Data e ora</th>
-          </tr>
-        </thead>
-        <tbody id="storicoBody">
-          <tr><td colspan="5" class="storico-empty">Caricamento...</td></tr>
-        </tbody>
-      </table>
+    <div class="form-group">
+      <label>Livello allerta</label>
+      <select id="allertaSelect">
+        <option value="verde">🟢 Verde</option>
+        <option value="gialla">🟡 Gialla</option>
+        <option value="arancione">🟠 Arancione</option>
+        <option value="rossa">🔴 Rossa</option>
+      </select>
     </div>
+
+    <div class="form-group">
+      <label>Descrizione (opzionale — se vuota viene usato un testo predefinito per il livello scelto)</label>
+      <textarea id="allertaDescInput" placeholder="Scrivi qui un messaggio personalizzato per i visitatori..." style="min-height:90px;"></textarea>
+    </div>
+
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="salvaAllerta()">
+      Salva e pubblica
+    </button>
+
+    <p class="pannello-note">
+      La modifica è immediata e visibile a chiunque stia guardando il sito in quel momento,
+      nella sezione "Allerta Protezione Civile".
+    </p>
   </div>
 </section>
 
@@ -2150,7 +2341,7 @@ footer{
 <!-- Firebase -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 
 /* ── CONFIG FIREBASE ── */
 const firebaseConfig = {
@@ -2167,6 +2358,7 @@ const app = initializeApp(firebaseConfig);
 const db       = getDatabase(app);
 const segnRef  = ref(db, 'segnalazioni');
 const storicoRef = ref(db, 'storico');
+const allertaRef = ref(db, 'allerta');
 
 /* ══════════════════════════════
    TELEGRAM — NOTIFICHE DIRETTIVO
@@ -2211,6 +2403,60 @@ async function inviaNotificaTelegram(segn){
     }catch(e){ console.warn('Telegram non inviato a', chatId); }
   }
 }
+
+/* ══════════════════════════════
+   ALLERTA — LETTURA/SCRITTURA LIVE
+══════════════════════════════ */
+const ALLERTA_INFO = {
+  verde:     { icon:'🟢', label:'VERDE',     classe:'green',
+               desc:'Attualmente non risultano criticità rilevanti sul territorio. Situazione monitorata e sotto controllo.' },
+  gialla:    { icon:'🟡', label:'GIALLA',    classe:'yellow',
+               desc:'Possibili criticità localizzate. Si raccomanda prudenza e attenzione agli aggiornamenti.' },
+  arancione: { icon:'🟠', label:'ARANCIONE', classe:'orange',
+               desc:'Rischio moderato sul territorio. Monitoraggio attivo in corso.' },
+  rossa:     { icon:'🔴', label:'ROSSA',     classe:'red',
+               desc:'⚠️ Massima emergenza attiva. Seguire le indicazioni delle autorità.' }
+};
+
+function renderAllerta(livello, descrizionePersonalizzata){
+  const info = ALLERTA_INFO[livello] || ALLERTA_INFO.verde;
+  const box = document.querySelector('.alert-status');
+  if(box){
+    box.className = 'alert-status ' + info.classe;
+    box.querySelector('.status-icon').textContent  = info.icon;
+    box.querySelector('.status-label').textContent = info.label;
+  }
+  const desc = document.querySelector('.alert-desc');
+  if(desc) desc.textContent = descrizionePersonalizzata || info.desc;
+  document.body.classList.toggle('red-alert', livello === 'rossa');
+}
+
+onValue(allertaRef, snap => {
+  const dati = snap.val();
+  const livelloAttuale = (dati && dati.livello) ? dati.livello : 'verde';
+  renderAllerta(livelloAttuale, dati ? dati.descrizione : null);
+
+  // se il pannello di gestione è aperto, mantienilo sincronizzato
+  const sel = document.getElementById('allertaSelect');
+  const txt = document.getElementById('allertaDescInput');
+  const info = document.getElementById('allertaUltimoAgg');
+  if(sel) sel.value = livelloAttuale;
+  if(txt && document.activeElement !== txt) txt.value = (dati && dati.descrizione) ? dati.descrizione : '';
+  if(info) info.textContent = (dati && dati.aggiornato)
+    ? 'Ultimo aggiornamento: ' + new Date(dati.aggiornato).toLocaleString('it-IT')
+    : 'Nessun aggiornamento registrato — livello predefinito (verde).';
+});
+
+window.salvaAllerta = function(){
+  const sel = document.getElementById('allertaSelect');
+  const txt = document.getElementById('allertaDescInput');
+  const livello = sel ? sel.value : 'verde';
+  const descrizione = txt ? txt.value.trim() : '';
+  set(allertaRef, { livello, descrizione, aggiornato: Date.now() })
+    .then(() => mostraToast('Allerta aggiornata correttamente.', 'success'))
+    .catch(() => mostraToast('Errore durante il salvataggio.', 'error'));
+};
+
 
 /* ══════════════════════════════
    MAPPA & UI
@@ -2348,9 +2594,8 @@ window.inviaSegnalazione = async function(){
 
   try{
     const nuovaRef = await push(segnRef, nuova);
-    // Salva nello storico permanente (senza foto per risparmiare spazio)
-    const nuovaSenzaFoto = {...nuova, foto: nuova.foto ? '1' : null};
-    await push(storicoRef, nuovaSenzaFoto);
+    // Salva nello storico permanente, foto compresa
+    await push(storicoRef, nuova);
 
     document.getElementById('segnDesc').value = '';
     document.getElementById('segnNome').value = '';
@@ -2460,7 +2705,7 @@ function renderStorico(){
     : storicoTutti.filter(s => s.label === filtroAttivo);
 
   if(lista.length === 0){
-    body.innerHTML = `<tr><td colspan="5" class="storico-empty">Nessuna segnalazione trovata.</td></tr>`;
+    body.innerHTML = `<tr><td colspan="6" class="storico-empty">Nessuna segnalazione trovata.</td></tr>`;
     return;
   }
 
@@ -2476,12 +2721,23 @@ function renderStorico(){
       ? `<a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" style="color:var(--red);text-decoration:none;">📍 Vedi</a>`
       : '<span style="color:var(--muted)">—</span>';
 
+    // Foto reale (base64) cliccabile per aprirla a schermo intero.
+    // Le voci più vecchie salvavano solo '1' come segnaposto (foto non conservata): mostriamo un avviso invece di un'immagine rotta.
+    let fotoCell;
+    if(s.foto && s.foto !== '1'){
+      const fotoSafe = s.foto.replace(/'/g, "\\'");
+      fotoCell = `<img src="${s.foto}" class="storico-foto-thumb" onclick="openImg('${fotoSafe}')" alt="Foto segnalazione">`;
+    } else {
+      fotoCell = `<span class="storico-foto-na">non disponibile</span>`;
+    }
+
     return `<tr>
       <td><span class="tipo-badge ${tipoClass}">${s.icon} ${s.label}</span></td>
       <td>${s.desc || '—'}</td>
       <td>${mapsLink}</td>
       <td>${s.nome || 'Anonimo'}</td>
       <td style="color:var(--muted);white-space:nowrap;">${s.time || '—'}</td>
+      <td>${fotoCell}</td>
     </tr>`;
   }).join('');
 }
@@ -2632,20 +2888,19 @@ async function notificaTest(){
   }
 }
 
-/* ── Allerta (modifica qui: "verde" | "gialla" | "arancione" | "rossa") ── */
-const LIVELLO = 'verde';
-
-if(LIVELLO === 'rossa'){
-  document.body.classList.add('red-alert');
-  const box = document.querySelector('.alert-status');
-  if(box){
-    box.className = 'alert-status red';
-    box.querySelector('.status-icon').textContent  = '🔴';
-    box.querySelector('.status-label').textContent = 'ROSSA';
+/* ── Pannello gestione allerta (link nascosto) ── */
+function controllaPannelloAllerta(){
+  const pannello = document.getElementById('pannelloAllerta');
+  if(!pannello) return;
+  if(window.location.hash === '#gestione-allerta-nov'){
+    pannello.style.display = 'block';
+    pannello.scrollIntoView({ behavior:'smooth' });
+  } else {
+    pannello.style.display = 'none';
   }
-  const desc = document.querySelector('.alert-desc');
-  if(desc) desc.textContent = '⚠️ Massima emergenza attiva. Seguire le indicazioni delle autorità.';
 }
+window.addEventListener('hashchange', controllaPannelloAllerta);
+controllaPannelloAllerta();
 
 /* ── Intersection observer per fade-in ── */
 const observer = new IntersectionObserver(entries => {
