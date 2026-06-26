@@ -18,13 +18,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ─────────────────────────────────────────────────────────
-   TOKEN SYSTEM — identità istituzionale del Metapontino
-   Blu dello Ionio (sea) + carta (paper) + terra di Basilicata (clay)
-   in luogo del rosso/arancio "da Protezione Civile". Il rosso resta
-   riservato esclusivamente alle azioni di reale emergenza (112,
-   invio segnalazione, livello di allerta ROSSA).
-───────────────────────────────────────────────────────────── */
 :root {
   --navy:        #0d2b3e;
   --navy-2:      #153a52;
@@ -48,7 +41,6 @@
   --red-glow:    rgba(184,50,39,.25);
   --green-lt:    #2f9c5c;
 
-  /* alias storici: gran parte delle regole sotto usa questi nomi */
   --bg:       var(--paper);
   --bg2:      var(--paper-2);
   --glass:    rgba(13,43,62,.035);
@@ -61,7 +53,6 @@
   --font-mono:'JetBrains Mono', 'SFMono-Regular', monospace;
 }
 
-/* ─── RESET ─── */
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 body{
@@ -71,16 +62,12 @@ body{
   overflow-x: hidden;
 }
 
-/* ─── RED ALERT (sottile, niente strobo: il vero indicatore è il bollo di stato) ─── */
 body.red-alert{ animation: redFlash 2.4s ease-in-out infinite; }
 @keyframes redFlash{
   0%,100%{ background: var(--paper); }
   50%{ background:#f6e7e3; }
 }
 
-/* ══════════════════════════════
-   HEADER
-══════════════════════════════ */
 header{
   position:fixed; top:0; left:0; width:100%;
   padding:0 40px;
@@ -193,9 +180,6 @@ nav a:hover{
 .mobile-nav a:last-child{ border-bottom:none; }
 .mobile-nav a:hover{ color:white; background:rgba(255,255,255,.08); }
 
-/* ══════════════════════════════
-   SEGNALAZIONI
-══════════════════════════════ */
 #segnalazioni{ background: var(--bg2); }
 
 .segn-layout{
@@ -206,9 +190,6 @@ nav a:hover{
   align-items:start;
 }
 
-/* ══════════════════════════════
-   CHI SIAMO
-══════════════════════════════ */
 #chisiamo{
   position:relative;
   overflow:hidden;
@@ -292,9 +273,6 @@ nav a:hover{
   line-height:1.4;
 }
 
-/* ══════════════════════════════
-   HERO
-══════════════════════════════ */
 .hero{
   position:relative;
   min-height:100vh;
@@ -420,7 +398,6 @@ nav a:hover{
   50%{ opacity:.3; }
 }
 
-/* ─── BUTTONS ─── */
 .btn{
   display:inline-flex; align-items:center; gap:8px;
   padding:14px 30px;
@@ -469,9 +446,6 @@ nav a:hover{
   border-color:rgba(255,255,255,.5);
 }
 
-/* ══════════════════════════════
-   SECTIONS
-══════════════════════════════ */
 section{ padding:100px 6%; position:relative; z-index:1; }
 
 .section-eyebrow{
@@ -516,9 +490,6 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent);
 }
 
-/* ══════════════════════════════
-   ALLERTA
-══════════════════════════════ */
 #allerta{ background: var(--bg2); }
 
 .alert-layout{
@@ -632,9 +603,6 @@ section{ padding:100px 6%; position:relative; z-index:1; }
 .scale-item.orange{ background:rgba(182,83,28,.10); border-color:rgba(182,83,28,.18); }
 .scale-item.red{ background:rgba(184,50,39,.12); border-color:rgba(184,50,39,.2); }
 
-/* ══════════════════════════════
-   COSA FACCIAMO
-══════════════════════════════ */
 .emerg-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -689,9 +657,6 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   display:flex; gap:10px; flex-wrap:wrap;
 }
 
-/* ══════════════════════════════
-   MAPPA
-══════════════════════════════ */
 #mappa{ background: var(--bg2); }
 
 .map-cta{
@@ -755,9 +720,6 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   color: var(--muted);
 }
 
-/* ══════════════════════════════
-   GALLERIA
-══════════════════════════════ */
 .gallery{
   margin-top:56px;
   display:grid;
@@ -816,9 +778,6 @@ section{ padding:100px 6%; position:relative; z-index:1; }
 }
 .lb-close:hover{ opacity:1; }
 
-/* ══════════════════════════════
-   CONTATTI
-══════════════════════════════ */
 #contatti{ background: var(--bg2); }
 
 .contacts-grid{
@@ -862,9 +821,6 @@ section{ padding:100px 6%; position:relative; z-index:1; }
 }
 .contact-card a:hover{ color: var(--sea-dark); }
 
-/* ══════════════════════════════
-   5x1000
-══════════════════════════════ */
 #donazioni{
   position:relative;
   overflow:hidden;
@@ -947,9 +903,6 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   border-radius:50%;
 }
 
-/* ══════════════════════════════
-   STORICO SEGNALAZIONI
-══════════════════════════════ */
 #storico{ background: var(--bg2); }
 
 .storico-filters{
@@ -1059,9 +1012,6 @@ section{ padding:100px 6%; position:relative; z-index:1; }
   .storico-table td:nth-child(3){ display:none; }
 }
 
-/* ══════════════════════════════
-   FOOTER
-══════════════════════════════ */
 footer{
   padding:48px 8%;
   background: var(--navy);
@@ -1096,9 +1046,6 @@ footer{
   line-height:1.6;
 }
 
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
 @media(max-width:960px){
   nav{ display:none; }
   .hamburger{ display:flex; }
@@ -1143,9 +1090,6 @@ footer{
   .numeri-grid{ grid-template-columns:1fr; }
 }
 
-/* ══════════════════════════════
-   DIVENTA VOLONTARIO
-══════════════════════════════ */
 #volontario{ background: var(--bg2); }
 
 .volontario-layout{
@@ -1257,9 +1201,6 @@ footer{
   line-height:1.5;
 }
 
-/* ══════════════════════════════
-   NUMERI UTILI
-══════════════════════════════ */
 #numeri{
   position:relative;
 }
@@ -1470,7 +1411,79 @@ footer{
   .volontario-form{ position:static; }
 }
 
-/* miniatura foto nello storico */
+/* ── MODAL DETTAGLIO SEGNALAZIONE ── */
+.segn-modal-overlay{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(6px);
+  z-index:9990;
+  display:none; justify-content:center; align-items:center;
+  padding:20px;
+}
+.segn-modal-overlay.active{ display:flex; }
+.segn-modal{
+  background:var(--paper);
+  border-radius:20px;
+  padding:32px 28px;
+  max-width:520px; width:100%;
+  max-height:88vh;
+  overflow-y:auto;
+  position:relative;
+  box-shadow:0 30px 80px rgba(0,0,0,.3);
+}
+.segn-modal-close{
+  position:absolute; top:16px; right:20px;
+  font-size:28px; font-weight:300;
+  cursor:pointer; color:var(--muted); line-height:1;
+  transition:.2s;
+}
+.segn-modal-close:hover{ color:var(--ink); }
+.segn-modal-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 14px;
+  border-radius:20px;
+  font-family:var(--font-h);
+  font-size:13px; font-weight:700;
+  margin-bottom:20px;
+}
+.segn-modal h3{
+  font-family:var(--font-h);
+  font-size:22px; font-weight:800;
+  color:var(--navy);
+  margin-bottom:20px;
+  padding-right:32px;
+}
+.segn-modal-row{
+  display:flex; gap:12px; align-items:flex-start;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+.segn-modal-row:last-of-type{ border-bottom:none; }
+.segn-modal-row .mr-icon{ font-size:20px; flex-shrink:0; width:28px; text-align:center; }
+.segn-modal-row .mr-body .mr-label{
+  font-family:var(--font-h);
+  font-size:10px; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:3px;
+}
+.segn-modal-row .mr-body .mr-value{
+  font-size:15px; color:var(--ink); line-height:1.5;
+}
+.segn-modal-foto{
+  width:100%; max-height:220px;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid var(--border);
+  margin-top:16px;
+  display:block;
+}
+.segn-modal-btn-row{
+  display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;
+}
+.storico-table tbody tr{ cursor:pointer; transition:.2s; }
+.storico-table tbody tr:hover td{ background:rgba(15,110,140,.07); }
+
 .storico-foto-thumb{
   width:56px;
   height:42px;
@@ -1491,9 +1504,6 @@ footer{
   .storico-table td:nth-child(6){ display:none; }
 }
 
-/* ══════════════════════════════
-   PANNELLO GESTIONE ALLERTA (riservato — link nascosto)
-══════════════════════════════ */
 #pannelloAllerta{ background: var(--clay-tint); }
 .pannello-box{
   max-width:560px;
@@ -1517,12 +1527,10 @@ footer{
   margin-bottom:20px;
   display:block;
 }
-
 </style>
 </head>
 <body>
 
-<!-- ── HEADER ── -->
 <header>
   <div class="logo-box">
     <img src="FB_IMG_1779516909018.jpg" alt="Logo N.O.V.">
@@ -1530,20 +1538,8 @@ footer{
       <h1>PROTEZIONE CIVILE N.O.V.</h1>
       <span>N·ucleo O·perativo V·olontari</span>
     </div>
-    <div style="
-      display:flex;flex-direction:column;align-items:center;
-      gap:4px;margin-left:12px;
-      padding-left:16px;
-      border-left:1px solid rgba(255,255,255,.15);
-    ">
-      <img src="anpas.jpg" alt="ANPAS Basilicata" style="
-        width:42px;height:42px;
-        border-radius:50%;
-        object-fit:cover;
-        border:2px solid #16a34a;
-        padding:2px;background:white;
-        opacity:.9;
-      ">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;margin-left:12px;padding-left:16px;border-left:1px solid rgba(255,255,255,.15);">
+      <img src="anpas.jpg" alt="ANPAS Basilicata" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #16a34a;padding:2px;background:white;opacity:.9;">
     </div>
   </div>
   <nav>
@@ -1562,7 +1558,6 @@ footer{
   </button>
 </header>
 
-<!-- menu mobile -->
 <div class="mobile-nav" id="mobileNav">
   <a href="#segnalazioni" onclick="chiudiMenu()">🚨 Segnala evento</a>
   <a href="#allerta"      onclick="chiudiMenu()">Allerte</a>
@@ -1577,25 +1572,16 @@ footer{
   <a href="#donazioni"    onclick="chiudiMenu()">5×1000</a>
 </div>
 
-<!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-bg"></div>
-
   <div class="hero-content">
     <div class="hero-badge">
       <span class="dot"></span>
       Attivi sul territorio
     </div>
-
     <h2>PROTEZIONE<br>CIVILE <span class="accent">N.O.V.</span></h2>
-
     <h3>Sempre al servizio del territorio</h3>
-
-    <p>
-      Interventi, prevenzione e formazione al servizio della comunità
-      di Pisticci e del Metapontino, in Basilicata.
-    </p>
-
+    <p>Interventi, prevenzione e formazione al servizio della comunità di Pisticci e del Metapontino, in Basilicata.</p>
     <div class="hero-buttons">
       <a href="#segnalazioni" class="btn btn-red">🔥 Segnala un incendio</a>
       <a href="#segnalazioni" class="btn btn-outline">Segnala un evento</a>
@@ -1603,25 +1589,16 @@ footer{
       <a href="#mappa" class="btn btn-green">🛰️ Mappa incendi</a>
     </div>
   </div>
-
-  <div class="hero-scroll">
-    Scorri
-    <span></span>
-  </div>
+  <div class="hero-scroll">Scorri<span></span></div>
 </section>
 
 <!-- ── SEGNALAZIONI ── -->
 <section id="segnalazioni">
   <div class="section-eyebrow">Aiutaci a monitorare il territorio</div>
   <h2 class="section-title">🚨 Segnala un Evento</h2>
-  <p class="section-sub">
-    Hai visto un incendio, una frana o una situazione pericolosa?
-    Segnalacelo subito — la tua posizione GPS viene acquisita automaticamente.
-  </p>
+  <p class="section-sub">Hai visto un incendio, una frana o una situazione pericolosa? Segnalacelo subito — la tua posizione GPS viene acquisita automaticamente.</p>
 
   <div class="segn-layout">
-
-    <!-- FORM -->
     <div class="segn-form">
       <h3>Nuova segnalazione</h3>
       <p class="segn-sub">Seleziona il tipo, descrivi brevemente e invia. Riceveremo tutto.</p>
@@ -1650,6 +1627,12 @@ footer{
         <span id="gpsLabel">Acquisizione posizione GPS in corso...</span>
       </div>
 
+      <!-- ✅ NUOVO CAMPO LOCALITÀ (obbligatorio) -->
+      <div class="form-group">
+        <label>📌 Località *</label>
+        <input type="text" id="segnLocalita" placeholder="Es: Contrada Incoronata" required>
+      </div>
+
       <div class="form-group">
         <label>Descrizione</label>
         <textarea id="segnDesc" placeholder="Descrivi brevemente cosa vedi: dimensioni, direzione del fumo, pericoli immediati..." style="min-height:100px;"></textarea>
@@ -1667,17 +1650,7 @@ footer{
 
       <div class="form-group">
         <label>📷 Foto (opzionale)</label>
-        <input type="file" id="segnFoto" accept="image/*" style="
-          width:100%;
-          background:rgba(13,43,62,.035);
-          border:1px solid var(--border);
-          border-radius:10px;
-          padding:12px 16px;
-          color:var(--muted);
-          font-family:var(--font-b);
-          font-size:14px;
-          cursor:pointer;
-        ">
+        <input type="file" id="segnFoto" accept="image/*" style="width:100%;background:rgba(13,43,62,.035);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--muted);font-family:var(--font-b);font-size:14px;cursor:pointer;">
         <div id="fotoPreview" style="margin-top:10px;display:none;">
           <img id="fotoImg" style="width:100%;max-height:180px;object-fit:cover;border-radius:10px;border:1px solid var(--border);">
         </div>
@@ -1687,24 +1660,13 @@ footer{
         🚨 Invia segnalazione
       </button>
 
-      <div style="
-        margin-top:16px;
-        padding:14px 16px;
-        background:rgba(184,50,39,.08);
-        border:1px solid rgba(184,50,39,.22);
-        border-radius:10px;
-        font-size:13px;
-        line-height:1.7;
-        color:var(--muted);
-      ">
+      <div style="margin-top:16px;padding:14px 16px;background:rgba(184,50,39,.08);border:1px solid rgba(184,50,39,.22);border-radius:10px;font-size:13px;line-height:1.7;color:var(--muted);">
         ⚠️ <strong style="color:var(--navy);">La segnalazione non sostituisce la chiamata ai numeri di emergenza.</strong><br>
         In caso di pericolo chiama subito il numero unico europeo:<br>
         🚨 <a href="tel:112" style="color:var(--red);font-weight:900;font-size:18px;text-decoration:none;">112</a>
       </div>
+    </div>
 
-    </div><!-- fine segn-form -->
-
-    <!-- MAPPA -->
     <div class="segn-map-wrap">
       <div class="segn-map-header">
         <h3>📍 Segnalazioni attive</h3>
@@ -1715,7 +1677,6 @@ footer{
         <p class="segn-empty">Nessuna segnalazione ancora. Sii il primo a segnalare.</p>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -1725,65 +1686,41 @@ footer{
 <section id="allerta">
   <div class="section-eyebrow">Stato attuale</div>
   <h2 class="section-title">Allerta Protezione Civile</h2>
-  <p class="section-sub">
-    Situazione aggiornata della Basilicata e livelli di criticità.
-  </p>
-
+  <p class="section-sub">Situazione aggiornata della Basilicata e livelli di criticità.</p>
   <div class="alert-layout">
-
     <div class="glass-card">
       <div class="card-label">Allerta in corso</div>
-
       <div class="live-row">
         <span class="live-dot"></span>
         <span class="live-text">Live aggiornato</span>
       </div>
-
       <div class="alert-status green">
         <div class="status-icon">🟢</div>
         <div class="status-label">VERDE</div>
       </div>
-
-      <p class="alert-desc">
-        Attualmente non risultano criticità rilevanti sul territorio.
-        Situazione monitorata e sotto controllo.
-      </p>
+      <p class="alert-desc">Attualmente non risultano criticità rilevanti sul territorio. Situazione monitorata e sotto controllo.</p>
     </div>
-
     <div class="glass-card">
       <div class="card-label">Scala allerte nazionale</div>
       <div class="scale-list">
         <div class="scale-item green">
           <span class="scale-icon">🟢</span>
-          <div class="scale-body">
-            <div class="scale-name">VERDE</div>
-            <p>Nessuna criticità prevista.</p>
-          </div>
+          <div class="scale-body"><div class="scale-name">VERDE</div><p>Nessuna criticità prevista.</p></div>
         </div>
         <div class="scale-item yellow">
           <span class="scale-icon">🟡</span>
-          <div class="scale-body">
-            <div class="scale-name">GIALLA</div>
-            <p>Possibili criticità localizzate.</p>
-          </div>
+          <div class="scale-body"><div class="scale-name">GIALLA</div><p>Possibili criticità localizzate.</p></div>
         </div>
         <div class="scale-item orange">
           <span class="scale-icon">🟠</span>
-          <div class="scale-body">
-            <div class="scale-name">ARANCIONE</div>
-            <p>Rischio moderato e monitoraggio attivo.</p>
-          </div>
+          <div class="scale-body"><div class="scale-name">ARANCIONE</div><p>Rischio moderato e monitoraggio attivo.</p></div>
         </div>
         <div class="scale-item red">
           <span class="scale-icon">🔴</span>
-          <div class="scale-body">
-            <div class="scale-name">ROSSA</div>
-            <p>Massima emergenza e rischio elevato.</p>
-          </div>
+          <div class="scale-body"><div class="scale-name">ROSSA</div><p>Massima emergenza e rischio elevato.</p></div>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -1793,64 +1730,21 @@ footer{
 <section id="chisiamo">
   <div class="section-eyebrow">La nostra storia</div>
   <h2 class="section-title">Chi Siamo</h2>
-  <p class="section-sub">
-    Un gruppo di volontari uniti dalla stessa passione: proteggere il territorio e chi ci vive.
-  </p>
-
+  <p class="section-sub">Un gruppo di volontari uniti dalla stessa passione: proteggere il territorio e chi ci vive.</p>
   <div class="chisiamo-layout">
-
     <div class="chisiamo-text">
-      <p>
-        L'associazione <strong>N.O.V. — Nucleo Operativo Volontari del Metapontino</strong>
-        nasce dalla spontanea volontà di un gruppo di ragazzi che condividono
-        la passione del volontariato, in particolare del settore
-        <span class="highlight">Protezione Civile</span>.
-        Il nostro intento è quello di realizzare una valida struttura di Protezione Civile
-        sul territorio, in grado di soddisfare tutte le situazioni di emergenza e calamità.
-      </p>
-      <p>
-        La <strong>Protezione Civile</strong> in Italia è un sistema che coinvolge
-        istituzioni, enti locali e — soprattutto — i <strong>volontari</strong>.
-        Sono proprio loro il cuore pulsante del sistema: persone comuni che scelgono
-        liberamente di mettere il proprio tempo, le proprie energie e le proprie competenze
-        al servizio della collettività, senza chiedere nulla in cambio.
-      </p>
-      <p>
-        Il volontariato di Protezione Civile significa <strong>prevenzione</strong>,
-        non solo intervento. Significa presidiare il territorio, conoscerne i rischi,
-        educare la popolazione e essere pronti quando arriva il momento che conta davvero.
-        Ogni ora di formazione, ogni esercitazione, ogni turno di guardia è un atto concreto
-        d'amore verso la propria terra.
-      </p>
-      <p>
-        Operiamo a <strong>Pisticci</strong> e su tutto il territorio del
-        <strong>Metapontino</strong>, pronti a intervenire ogni volta che
-        la comunità ne ha bisogno — di giorno, di notte, sempre.
-      </p>
-      <a href="#volontario" class="btn btn-primary" style="margin-top:8px;">
-        Unisciti a noi →
-      </a>
+      <p>L'associazione <strong>N.O.V. — Nucleo Operativo Volontari del Metapontino</strong> nasce dalla spontanea volontà di un gruppo di ragazzi che condividono la passione del volontariato, in particolare del settore <span class="highlight">Protezione Civile</span>. Il nostro intento è quello di realizzare una valida struttura di Protezione Civile sul territorio, in grado di soddisfare tutte le situazioni di emergenza e calamità.</p>
+      <p>La <strong>Protezione Civile</strong> in Italia è un sistema che coinvolge istituzioni, enti locali e — soprattutto — i <strong>volontari</strong>. Sono proprio loro il cuore pulsante del sistema: persone comuni che scelgono liberamente di mettere il proprio tempo, le proprie energie e le proprie competenze al servizio della collettività, senza chiedere nulla in cambio.</p>
+      <p>Il volontariato di Protezione Civile significa <strong>prevenzione</strong>, non solo intervento. Significa presidiare il territorio, conoscerne i rischi, educare la popolazione e essere pronti quando arriva il momento che conta davvero. Ogni ora di formazione, ogni esercitazione, ogni turno di guardia è un atto concreto d'amore verso la propria terra.</p>
+      <p>Operiamo a <strong>Pisticci</strong> e su tutto il territorio del <strong>Metapontino</strong>, pronti a intervenire ogni volta che la comunità ne ha bisogno — di giorno, di notte, sempre.</p>
+      <a href="#volontario" class="btn btn-primary" style="margin-top:8px;">Unisciti a noi →</a>
     </div>
-
     <div class="chisiamo-stats">
-      <div class="stat-box">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Volontari<br>dedicati</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">Sempre<br>operativi</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">MT</div>
-        <div class="stat-label">Provincia di<br>Matera</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">0</div>
-        <div class="stat-label">Scopo<br>di lucro</div>
-      </div>
+      <div class="stat-box"><div class="stat-num">100%</div><div class="stat-label">Volontari<br>dedicati</div></div>
+      <div class="stat-box"><div class="stat-num">24/7</div><div class="stat-label">Sempre<br>operativi</div></div>
+      <div class="stat-box"><div class="stat-num">MT</div><div class="stat-label">Provincia di<br>Matera</div></div>
+      <div class="stat-box"><div class="stat-num">0</div><div class="stat-label">Scopo<br>di lucro</div></div>
     </div>
-
   </div>
 </section>
 
@@ -1860,38 +1754,12 @@ footer{
 <section id="emergenza">
   <div class="section-eyebrow">Le nostre attività</div>
   <h2 class="section-title">Cosa Facciamo</h2>
-  <p class="section-sub">
-    Le tre aree in cui si articola il lavoro quotidiano del nucleo.
-  </p>
-
+  <p class="section-sub">Le tre aree in cui si articola il lavoro quotidiano del nucleo.</p>
   <div class="emerg-grid">
-    <div class="emerg-card">
-      <span class="emerg-icon">🔥</span>
-      <h3>Interventi e Soccorso</h3>
-      <p>
-        Supportiamo le squadre di emergenza in caso di incendi, frane, alluvioni
-        e altre calamità, intervenendo sul territorio del Metapontino con mezzi
-        e personale formato.
-      </p>
-    </div>
-    <div class="emerg-card">
-      <span class="emerg-icon">🔍</span>
-      <h3>Prevenzione e Monitoraggio</h3>
-      <p>
-        Presidiamo il territorio, segnaliamo situazioni di rischio e collaboriamo
-        con il Comune di Pisticci alla pianificazione delle attività di prevenzione.
-      </p>
-    </div>
-    <div class="emerg-card">
-      <span class="emerg-icon">🎓</span>
-      <h3>Formazione e Sensibilizzazione</h3>
-      <p>
-        Organizziamo corsi di formazione per i volontari ed esercitazioni periodiche,
-        e portiamo la cultura della Protezione Civile nelle scuole e nella comunità.
-      </p>
-    </div>
+    <div class="emerg-card"><span class="emerg-icon">🔥</span><h3>Interventi e Soccorso</h3><p>Supportiamo le squadre di emergenza in caso di incendi, frane, alluvioni e altre calamità, intervenendo sul territorio del Metapontino con mezzi e personale formato.</p></div>
+    <div class="emerg-card"><span class="emerg-icon">🔍</span><h3>Prevenzione e Monitoraggio</h3><p>Presidiamo il territorio, segnaliamo situazioni di rischio e collaboriamo con il Comune di Pisticci alla pianificazione delle attività di prevenzione.</p></div>
+    <div class="emerg-card"><span class="emerg-icon">🎓</span><h3>Formazione e Sensibilizzazione</h3><p>Organizziamo corsi di formazione per i volontari ed esercitazioni periodiche, e portiamo la cultura della Protezione Civile nelle scuole e nella comunità.</p></div>
   </div>
-
   <div style="text-align:center;margin-top:36px;">
     <a href="#volontario" class="btn btn-primary">Scopri come diventare volontario →</a>
   </div>
@@ -1903,23 +1771,12 @@ footer{
 <section id="mappa">
   <div class="section-eyebrow">Monitoraggio satellitare</div>
   <h2 class="section-title">Mappa Incendi Basilicata</h2>
-  <p class="section-sub">
-    Hotspot in tempo reale tramite NASA FIRMS.
-    Dati aggiornati ogni passaggio satellitare.
-  </p>
-
+  <p class="section-sub">Hotspot in tempo reale tramite NASA FIRMS. Dati aggiornati ogni passaggio satellitare.</p>
   <div class="map-cta">
     <div class="map-cta-body">
       <h3>Mappa incendi<br>in tempo reale</h3>
-      <p>
-        Visualizza gli hotspot di calore rilevati dai satelliti NASA MODIS e VIIRS
-        sulla Basilicata. Aggiornamenti ogni 12 ore circa.
-      </p>
-      <a class="btn btn-primary"
-         href="https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@16.6,40.3,8.0z"
-         target="_blank">
-        🔥 Apri mappa NASA FIRMS
-      </a>
+      <p>Visualizza gli hotspot di calore rilevati dai satelliti NASA MODIS e VIIRS sulla Basilicata. Aggiornamenti ogni 12 ore circa.</p>
+      <a class="btn btn-primary" href="https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@16.6,40.3,8.0z" target="_blank">🔥 Apri mappa NASA FIRMS</a>
     </div>
     <div class="map-cta-visual">
       <div class="big-icon">🛰️</div>
@@ -1935,82 +1792,25 @@ footer{
 <section id="volontario">
   <div class="section-eyebrow">Fai la differenza</div>
   <h2 class="section-title">Diventa Volontario</h2>
-  <p class="section-sub">
-    Non servono superpoteri — serve passione, spirito di servizio
-    e voglia di essere utile alla comunità.
-  </p>
-
+  <p class="section-sub">Non servono superpoteri — serve passione, spirito di servizio e voglia di essere utile alla comunità.</p>
   <div class="volontario-layout">
-
     <div class="volontario-steps">
-      <div class="step-card">
-        <div class="step-num">01</div>
-        <div class="step-body">
-          <h4>Candidati</h4>
-          <p>Compila il modulo accanto con i tuoi dati. Ti risponderemo al più presto per fissare un incontro conoscitivo.</p>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">02</div>
-        <div class="step-body">
-          <h4>Incontro e presentazione</h4>
-          <p>Vieni a conoscere il gruppo, la sede e le attività. Nessun impegno: solo una chiacchierata.</p>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">03</div>
-        <div class="step-body">
-          <h4>Formazione</h4>
-          <p>Seguirai corsi di formazione base in Protezione Civile — sicurezza, primo intervento, gestione emergenze.</p>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">04</div>
-        <div class="step-body">
-          <h4>Operativo sul territorio</h4>
-          <p>Entri a far parte del nucleo e partecipi alle attività, esercitazioni e interventi reali.</p>
-        </div>
-      </div>
+      <div class="step-card"><div class="step-num">01</div><div class="step-body"><h4>Candidati</h4><p>Compila il modulo accanto con i tuoi dati. Ti risponderemo al più presto per fissare un incontro conoscitivo.</p></div></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-body"><h4>Incontro e presentazione</h4><p>Vieni a conoscere il gruppo, la sede e le attività. Nessun impegno: solo una chiacchierata.</p></div></div>
+      <div class="step-card"><div class="step-num">03</div><div class="step-body"><h4>Formazione</h4><p>Seguirai corsi di formazione base in Protezione Civile — sicurezza, primo intervento, gestione emergenze.</p></div></div>
+      <div class="step-card"><div class="step-num">04</div><div class="step-body"><h4>Operativo sul territorio</h4><p>Entri a far parte del nucleo e partecipi alle attività, esercitazioni e interventi reali.</p></div></div>
     </div>
-
     <div class="volontario-form">
       <h3>Voglio candidarmi</h3>
       <p class="form-sub">Lascia i tuoi dati e ti contatteremo noi. È gratuito e senza impegno.</p>
-
-      <div class="form-group">
-        <label>Nome e Cognome</label>
-        <input type="text" placeholder="Mario Rossi">
-      </div>
-      <div class="form-group">
-        <label>Telefono</label>
-        <input type="tel" placeholder="+39 333 000 0000">
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" placeholder="mario@email.it">
-      </div>
-      <div class="form-group">
-        <label>Età</label>
-        <select>
-          <option value="">Seleziona...</option>
-          <option>18–25 anni</option>
-          <option>26–35 anni</option>
-          <option>36–50 anni</option>
-          <option>Oltre 50 anni</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Messaggio (opzionale)</label>
-        <textarea placeholder="Raccontaci qualcosa di te o delle tue motivazioni..."></textarea>
-      </div>
-
-      <button class="btn btn-primary" style="width:100%;justify-content:center;"
-        onclick="inviaModulo(this)">
-        Invia candidatura →
-      </button>
+      <div class="form-group"><label>Nome e Cognome</label><input type="text" placeholder="Mario Rossi"></div>
+      <div class="form-group"><label>Telefono</label><input type="tel" placeholder="+39 333 000 0000"></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="mario@email.it"></div>
+      <div class="form-group"><label>Età</label><select><option value="">Seleziona...</option><option>18–25 anni</option><option>26–35 anni</option><option>36–50 anni</option><option>Oltre 50 anni</option></select></div>
+      <div class="form-group"><label>Messaggio (opzionale)</label><textarea placeholder="Raccontaci qualcosa di te o delle tue motivazioni..."></textarea></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="inviaModulo(this)">Invia candidatura →</button>
       <p class="form-note">Scrivendo a <a href="mailto:nov_protciv@live.it" style="color:var(--sea-dark);text-decoration:none;">nov_protciv@live.it</a> — nessun dato verrà ceduto a terzi.</p>
     </div>
-
   </div>
 </section>
 
@@ -2020,10 +1820,7 @@ footer{
 <section id="foto">
   <div class="section-eyebrow">Operatività sul campo</div>
   <h2 class="section-title">Galleria Operativa</h2>
-  <p class="section-sub">
-    Immagini delle attività, degli interventi e dei volontari N.O.V.
-  </p>
-
+  <p class="section-sub">Immagini delle attività, degli interventi e dei volontari N.O.V.</p>
   <div class="gallery">
     <div class="gallery-item"><img src="FB_IMG_1780005109119.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
     <div class="gallery-item"><img src="FB_IMG_1779032351750.jpg" onclick="openImg(this.src)" alt="Foto operativa"></div>
@@ -2045,31 +1842,14 @@ footer{
 <section id="storico">
   <div class="section-eyebrow">Archivio completo</div>
   <h2 class="section-title">📋 Storico Segnalazioni</h2>
-  <p class="section-sub">
-    Tutte le segnalazioni ricevute dal territorio. Archivio permanente aggiornato in tempo reale.
-  </p>
+  <p class="section-sub">Tutte le segnalazioni ricevute dal territorio. Archivio permanente aggiornato in tempo reale.</p>
 
   <div class="storico-stats">
-    <div class="storico-stat">
-      <div class="ss-num" id="statTotale">0</div>
-      <div class="ss-label">Totale</div>
-    </div>
-    <div class="storico-stat">
-      <div class="ss-num" id="statIncendi">0</div>
-      <div class="ss-label">🔥 Incendi</div>
-    </div>
-    <div class="storico-stat">
-      <div class="ss-num" id="statFrane">0</div>
-      <div class="ss-label">⛰️ Frane</div>
-    </div>
-    <div class="storico-stat">
-      <div class="ss-num" id="statAlluvioni">0</div>
-      <div class="ss-label">🌊 Alluvioni</div>
-    </div>
-    <div class="storico-stat">
-      <div class="ss-num" id="statAltro">0</div>
-      <div class="ss-label">⚠️ Altro</div>
-    </div>
+    <div class="storico-stat"><div class="ss-num" id="statTotale">0</div><div class="ss-label">Totale</div></div>
+    <div class="storico-stat"><div class="ss-num" id="statIncendi">0</div><div class="ss-label">🔥 Incendi</div></div>
+    <div class="storico-stat"><div class="ss-num" id="statFrane">0</div><div class="ss-label">⛰️ Frane</div></div>
+    <div class="storico-stat"><div class="ss-num" id="statAlluvioni">0</div><div class="ss-label">🌊 Alluvioni</div></div>
+    <div class="storico-stat"><div class="ss-num" id="statAltro">0</div><div class="ss-label">⚠️ Altro</div></div>
   </div>
 
   <div class="storico-filters">
@@ -2087,7 +1867,7 @@ footer{
           <tr>
             <th>Tipo</th>
             <th>Descrizione</th>
-            <th>Posizione</th>
+            <th>Posizione / Località</th>
             <th>Segnalato da</th>
             <th>Data e ora</th>
             <th>Foto</th>
@@ -2107,74 +1887,25 @@ footer{
 <section id="numeri">
   <div class="section-eyebrow">Emergenze</div>
   <h2 class="section-title">Numero Utile</h2>
-  <p class="section-sub">
-    In caso di emergenza chiama immediatamente il numero unico europeo.
-  </p>
-
+  <p class="section-sub">In caso di emergenza chiama immediatamente il numero unico europeo.</p>
   <div style="max-width:800px;margin:40px auto 0;">
-    <div style="
-      background:linear-gradient(135deg, var(--sea-tint), var(--paper));
-      border:1px solid rgba(15,110,140,.25);
-      border-radius:24px;
-      padding:48px 40px;
-      text-align:center;
-    ">
+    <div style="background:linear-gradient(135deg, var(--sea-tint), var(--paper));border:1px solid rgba(15,110,140,.25);border-radius:24px;padding:48px 40px;text-align:center;">
       <a href="tel:112" style="text-decoration:none;color:var(--ink);">
         <div style="font-size:80px;margin-bottom:8px;">🚨</div>
-        <div style="
-          font-family:var(--font-h);
-          font-size:clamp(60px,15vw,120px);
-          font-weight:900;
-          color:var(--red);
-          line-height:1;
-          margin-bottom:12px;
-          letter-spacing:4px;
-        ">112</div>
-        <div style="
-          font-family:var(--font-h);
-          font-size:24px;font-weight:700;
-          letter-spacing:1px;
-          margin-bottom:28px;
-          color:var(--navy);
-        ">Numero di Emergenza Unico Europeo</div>
+        <div style="font-family:var(--font-h);font-size:clamp(60px,15vw,120px);font-weight:900;color:var(--red);line-height:1;margin-bottom:12px;letter-spacing:4px;">112</div>
+        <div style="font-family:var(--font-h);font-size:24px;font-weight:700;letter-spacing:1px;margin-bottom:28px;color:var(--navy);">Numero di Emergenza Unico Europeo</div>
       </a>
-
-      <div style="
-        text-align:left;
-        background:rgba(13,43,62,.035);
-        border:1px solid var(--border);
-        border-radius:14px;
-        padding:24px 28px;
-        margin-bottom:24px;
-        font-size:16px;
-        line-height:2;
-        color:var(--muted);
-      ">
+      <div style="text-align:left;background:rgba(13,43,62,.035);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:24px;font-size:16px;line-height:2;color:var(--muted);">
         Puoi chiamare il <strong style="color:var(--navy);">112</strong> per richiedere urgentemente un intervento di:<br>
         🚔 <strong style="color:var(--navy);">Forze di Polizia</strong><br>
         🚒 <strong style="color:var(--navy);">Vigili del Fuoco</strong><br>
         🚑 <strong style="color:var(--navy);">Assistenza Sanitaria</strong><br><br>
         L'operatore del 112 inoltra la chiamata alla Centrale operativa competente per tipologia di emergenza.
       </div>
-
-      <div style="
-        background:rgba(28,122,66,.08);
-        border:1px solid rgba(28,122,66,.2);
-        border-radius:12px;
-        padding:16px 20px;
-        font-size:14px;
-        color:var(--ink);
-        line-height:1.7;
-      ">
-        ✅ Puoi chiamare il <strong style="color:var(--green);">112</strong> gratuitamente da rete fissa o mobile —
-        anche quando il telefono <strong style="color:var(--navy);">non ha SIM</strong>, è
-        <strong style="color:var(--navy);">bloccato</strong> o
-        <strong style="color:var(--navy);">non hai credito</strong>.
+      <div style="background:rgba(28,122,66,.08);border:1px solid rgba(28,122,66,.2);border-radius:12px;padding:16px 20px;font-size:14px;color:var(--ink);line-height:1.7;">
+        ✅ Puoi chiamare il <strong style="color:var(--green);">112</strong> gratuitamente da rete fissa o mobile — anche quando il telefono <strong style="color:var(--navy);">non ha SIM</strong>, è <strong style="color:var(--navy);">bloccato</strong> o <strong style="color:var(--navy);">non hai credito</strong>.
       </div>
-
-      <a href="tel:112" class="btn btn-red" style="margin-top:28px;font-size:18px;padding:18px 48px;">
-        📞 Chiama il 112
-      </a>
+      <a href="tel:112" class="btn btn-red" style="margin-top:28px;font-size:18px;padding:18px 48px;">📞 Chiama il 112</a>
     </div>
   </div>
 </section>
@@ -2185,63 +1916,14 @@ footer{
 <section id="contatti">
   <div class="section-eyebrow">Come raggiungerci</div>
   <h2 class="section-title">Contatti</h2>
-  <p class="section-sub">
-    Siamo presenti sul territorio del Metapontino, pronti a intervenire
-    in caso di necessità.
-  </p>
-
+  <p class="section-sub">Siamo presenti sul territorio del Metapontino, pronti a intervenire in caso di necessità.</p>
   <div class="contacts-grid">
-
-    <div class="contact-card">
-      <span class="cc-icon">🏢</span>
-      <div class="cc-label">Associazione</div>
-      <div class="cc-value">
-        <strong>N.O.V.</strong><br>
-        Nucleo Operativo Volontari del Metapontino
-      </div>
-    </div>
-
-    <div class="contact-card">
-      <span class="cc-icon">📍</span>
-      <div class="cc-label">Sede</div>
-      <div class="cc-value">
-        Via Nilde Iotti<br>
-        75015 Tinchi — Pisticci (MT)
-      </div>
-    </div>
-
-    <div class="contact-card">
-      <span class="cc-icon">📞</span>
-      <div class="cc-label">Telefono</div>
-      <div class="cc-value">
-        <a href="tel:+393518634206">+39 351 863 4206</a>
-      </div>
-    </div>
-
-    <div class="contact-card">
-      <span class="cc-icon">☎️</span>
-      <div class="cc-label">Numero Fisso</div>
-      <div class="cc-value">
-        <a href="tel:0835580129">0835 580129</a>
-      </div>
-    </div>
-
-    <div class="contact-card">
-      <span class="cc-icon">📧</span>
-      <div class="cc-label">Email</div>
-      <div class="cc-value">
-        <a href="mailto:nov_protciv@live.it">nov_protciv@live.it</a>
-      </div>
-    </div>
-
-    <div class="contact-card">
-      <span class="cc-icon">📨</span>
-      <div class="cc-label">Email PEC</div>
-      <div class="cc-value">
-        <a href="mailto:protezionecivilenov@pec.it">protezionecivilenov@pec.it</a>
-      </div>
-    </div>
-
+    <div class="contact-card"><span class="cc-icon">🏢</span><div class="cc-label">Associazione</div><div class="cc-value"><strong>N.O.V.</strong><br>Nucleo Operativo Volontari del Metapontino</div></div>
+    <div class="contact-card"><span class="cc-icon">📍</span><div class="cc-label">Sede</div><div class="cc-value">Via Nilde Iotti<br>75015 Tinchi — Pisticci (MT)</div></div>
+    <div class="contact-card"><span class="cc-icon">📞</span><div class="cc-label">Telefono</div><div class="cc-value"><a href="tel:+393518634206">+39 351 863 4206</a></div></div>
+    <div class="contact-card"><span class="cc-icon">☎️</span><div class="cc-label">Numero Fisso</div><div class="cc-value"><a href="tel:0835580129">0835 580129</a></div></div>
+    <div class="contact-card"><span class="cc-icon">📧</span><div class="cc-label">Email</div><div class="cc-value"><a href="mailto:nov_protciv@live.it">nov_protciv@live.it</a></div></div>
+    <div class="contact-card"><span class="cc-icon">📨</span><div class="cc-label">Email PEC</div><div class="cc-value"><a href="mailto:protezionecivilenov@pec.it">protezionecivilenov@pec.it</a></div></div>
   </div>
 </section>
 
@@ -2251,11 +1933,7 @@ footer{
 <section id="donazioni">
   <div class="section-eyebrow">Sostienici</div>
   <h2 class="section-title">Dona il tuo 5 × 1000</h2>
-  <p class="section-sub">
-    Sostieni chi interviene ogni giorno per il territorio,
-    la sicurezza e le emergenze reali.
-  </p>
-
+  <p class="section-sub">Sostieni chi interviene ogni giorno per il territorio, la sicurezza e le emergenze reali.</p>
   <div class="donation-inner">
     <h3>Inserisci il codice fiscale nel tuo 730 / CU</h3>
     <div class="tax-code">90017920779</div>
@@ -2270,41 +1948,17 @@ footer{
 
 <div class="divider"></div>
 
-<!-- ── PANNELLO GESTIONE ALLERTA (riservato, link nascosto) ── -->
+<!-- ── PANNELLO GESTIONE ALLERTA ── -->
 <section id="pannelloAllerta" style="display:none;">
   <div class="section-eyebrow">Riservato al direttivo</div>
   <h2 class="section-title">Gestione Allerta</h2>
-  <p class="section-sub">
-    Questa pagina non è collegata al menu del sito. Il link va condiviso solo con i membri del direttivo —
-    chiunque lo possieda può modificare l'allerta visibile a tutti i visitatori.
-  </p>
-
+  <p class="section-sub">Questa pagina non è collegata al menu del sito. Il link va condiviso solo con i membri del direttivo.</p>
   <div class="pannello-box">
     <span id="allertaUltimoAgg">Caricamento...</span>
-
-    <div class="form-group">
-      <label>Livello allerta</label>
-      <select id="allertaSelect">
-        <option value="verde">🟢 Verde</option>
-        <option value="gialla">🟡 Gialla</option>
-        <option value="arancione">🟠 Arancione</option>
-        <option value="rossa">🔴 Rossa</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Descrizione (opzionale — se vuota viene usato un testo predefinito per il livello scelto)</label>
-      <textarea id="allertaDescInput" placeholder="Scrivi qui un messaggio personalizzato per i visitatori..." style="min-height:90px;"></textarea>
-    </div>
-
-    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="salvaAllerta()">
-      Salva e pubblica
-    </button>
-
-    <p class="pannello-note">
-      La modifica è immediata e visibile a chiunque stia guardando il sito in quel momento,
-      nella sezione "Allerta Protezione Civile".
-    </p>
+    <div class="form-group"><label>Livello allerta</label><select id="allertaSelect"><option value="verde">🟢 Verde</option><option value="gialla">🟡 Gialla</option><option value="arancione">🟠 Arancione</option><option value="rossa">🔴 Rossa</option></select></div>
+    <div class="form-group"><label>Descrizione (opzionale)</label><textarea id="allertaDescInput" placeholder="Scrivi qui un messaggio personalizzato per i visitatori..." style="min-height:90px;"></textarea></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="salvaAllerta()">Salva e pubblica</button>
+    <p class="pannello-note">La modifica è immediata e visibile a chiunque stia guardando il sito in quel momento.</p>
   </div>
 </section>
 
@@ -2325,25 +1979,28 @@ footer{
   </div>
 </footer>
 
-<!-- ── LIGHTBOX ── -->
+<!-- ── MODAL DETTAGLIO SEGNALAZIONE ── -->
+<div class="segn-modal-overlay" id="segnModal" onclick="chiudiModal(event)">
+  <div class="segn-modal">
+    <span class="segn-modal-close" onclick="chiudiModalDiretto()">×</span>
+    <div id="segnModalContent"></div>
+  </div>
+</div>
+
 <div class="lightbox" id="lightbox">
   <span class="lb-close" onclick="closeImg()">×</span>
   <img id="lightbox-img" alt="">
 </div>
 
-<!-- toast -->
 <div class="toast" id="toast"></div>
 
-<!-- Leaflet mappa -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<!-- Firebase -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 
-/* ── CONFIG FIREBASE ── */
 const firebaseConfig = {
   apiKey: "AIzaSyALw5AVxxggN1QnGYdVo-wn_He_tmRHUzI",
   authDomain: "protezione-civile-nov.firebaseapp.com",
@@ -2355,67 +2012,20 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db       = getDatabase(app);
-const segnRef  = ref(db, 'segnalazioni');
+const db         = getDatabase(app);
+const segnRef    = ref(db, 'segnalazioni');
 const storicoRef = ref(db, 'storico');
 const allertaRef = ref(db, 'allerta');
 
-/* ══════════════════════════════
-   TELEGRAM — NOTIFICHE DIRETTIVO
-══════════════════════════════ */
 const TELEGRAM_TOKEN = '8100056228:AAHLIjPxAbNhDM1kK2CXEgiWNncwH0sLhzU';
+const DIRETTIVO_IDS = [715449500, 1526468108, 2049263134, 366236539, 68534223];
 
-// Aggiungi qui il chat_id di ogni membro del direttivo
-const DIRETTIVO_IDS = [
-  715449500,    // Gabriele
-  1526468108,   // P.C. N.O.V.
-  2049263134,   // Antonio Esposito
-  366236539,    // Rocco
-  68534223,     // Nicola Cisterna
-  // Aggiungi altri membri:
-  // 123456789,
-];
-
-async function inviaNotificaTelegram(segn){
-  if(DIRETTIVO_IDS.length === 0) return;
-  const mapsLink = segn.lat
-    ? `https://maps.google.com/?q=${segn.lat},${segn.lng}`
-    : 'Posizione non disponibile';
-  const testo =
-    `🚨 *NUOVA SEGNALAZIONE N.O.V.*\n` +
-    `${segn.icon} *Tipo:* ${segn.label}\n` +
-    `📝 *Descrizione:* ${segn.desc}\n` +
-    `👤 *Segnalato da:* ${segn.nome}\n` +
-    `📍 *Posizione:* ${mapsLink}\n` +
-    `🕐 *Orario:* ${segn.time}`;
-
-  for(const chatId of DIRETTIVO_IDS){
-    try{
-      await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: testo,
-          parse_mode: 'Markdown'
-        })
-      });
-    }catch(e){ console.warn('Telegram non inviato a', chatId); }
-  }
-}
-
-/* ══════════════════════════════
-   ALLERTA — LETTURA/SCRITTURA LIVE
-══════════════════════════════ */
+/* ── ALLERTA ── */
 const ALLERTA_INFO = {
-  verde:     { icon:'🟢', label:'VERDE',     classe:'green',
-               desc:'Attualmente non risultano criticità rilevanti sul territorio. Situazione monitorata e sotto controllo.' },
-  gialla:    { icon:'🟡', label:'GIALLA',    classe:'yellow',
-               desc:'Possibili criticità localizzate. Si raccomanda prudenza e attenzione agli aggiornamenti.' },
-  arancione: { icon:'🟠', label:'ARANCIONE', classe:'orange',
-               desc:'Rischio moderato sul territorio. Monitoraggio attivo in corso.' },
-  rossa:     { icon:'🔴', label:'ROSSA',     classe:'red',
-               desc:'⚠️ Massima emergenza attiva. Seguire le indicazioni delle autorità.' }
+  verde:     { icon:'🟢', label:'VERDE',     classe:'green',   desc:'Attualmente non risultano criticità rilevanti sul territorio. Situazione monitorata e sotto controllo.' },
+  gialla:    { icon:'🟡', label:'GIALLA',    classe:'yellow',  desc:'Possibili criticità localizzate. Si raccomanda prudenza e attenzione agli aggiornamenti.' },
+  arancione: { icon:'🟠', label:'ARANCIONE', classe:'orange',  desc:'Rischio moderato sul territorio. Monitoraggio attivo in corso.' },
+  rossa:     { icon:'🔴', label:'ROSSA',     classe:'red',     desc:'⚠️ Massima emergenza attiva. Seguire le indicazioni delle autorità.' }
 };
 
 function renderAllerta(livello, descrizionePersonalizzata){
@@ -2435,8 +2045,6 @@ onValue(allertaRef, snap => {
   const dati = snap.val();
   const livelloAttuale = (dati && dati.livello) ? dati.livello : 'verde';
   renderAllerta(livelloAttuale, dati ? dati.descrizione : null);
-
-  // se il pannello di gestione è aperto, mantienilo sincronizzato
   const sel = document.getElementById('allertaSelect');
   const txt = document.getElementById('allertaDescInput');
   const info = document.getElementById('allertaUltimoAgg');
@@ -2457,10 +2065,7 @@ window.salvaAllerta = function(){
     .catch(() => mostraToast('Errore durante il salvataggio.', 'error'));
 };
 
-
-/* ══════════════════════════════
-   MAPPA & UI
-══════════════════════════════ */
+/* ── MAPPA & UI ── */
 let tipoSelezionato = { icon:'🔥', label:'Incendio' };
 let coordsUtente    = null;
 let mappaLeaflet    = null;
@@ -2492,9 +2097,7 @@ function avviaGPS(){
       document.getElementById('gpsLabel').textContent =
         `📍 Posizione acquisita (${coordsUtente.lat.toFixed(4)}, ${coordsUtente.lng.toFixed(4)})`;
     },
-    () => {
-      document.getElementById('gpsLabel').textContent = '⚠️ GPS non disponibile — segnalazione senza posizione.';
-    },
+    () => { document.getElementById('gpsLabel').textContent = '⚠️ GPS non disponibile — segnalazione senza posizione.'; },
     { enableHighAccuracy:true, timeout:10000 }
   );
 }
@@ -2518,7 +2121,6 @@ function aggiornaUI(lista){
   const count  = document.getElementById('segnCount');
   const listEl = document.getElementById('segnList');
   count.textContent = lista.length;
-
   markers.forEach(m => m.remove());
   markers = [];
 
@@ -2533,7 +2135,9 @@ function aggiornaUI(lista){
       <div class="si-body">
         <div class="si-tipo">${s.label}</div>
         <div class="si-desc">${s.desc || '—'}</div>
-        <div class="si-time">${s.nome ? s.nome+' · ' : ''}${s.tel ? '📞 '+s.tel+' · ' : ''}${s.time}${s.lat ? ` · <a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" style="color:var(--red);text-decoration:none;">📍 Mappa</a>` : ''}</div>
+        <div class="si-time">
+          ${s.localita ? '📌 '+s.localita+' · ' : ''}${s.nome ? s.nome+' · ' : ''}${s.tel ? '📞 '+s.tel+' · ' : ''}${s.time}${s.lat ? ` · <a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" style="color:var(--red);text-decoration:none;">📍 Mappa</a>` : ''}
+        </div>
         ${s.foto ? `<img src="${s.foto}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-top:6px;border:1px solid var(--border);">` : ''}
       </div>
     </div>
@@ -2542,9 +2146,12 @@ function aggiornaUI(lista){
   lista.forEach(s => {
     if(!s.lat || !s.lng) return;
     const colore = tipoColori[s.label] || '#dc2626';
+    const popup = s.localita
+      ? `<b>${s.icon} ${s.label}</b><br>📌 ${s.localita}<br>${s.desc||''}<br><small>${s.time}</small>`
+      : `<b>${s.icon} ${s.label}</b><br>${s.desc||''}<br><small>${s.time}</small>`;
     const m = L.marker([s.lat, s.lng], { icon: creaIcona(colore) })
       .addTo(mappaLeaflet)
-      .bindPopup(`<b>${s.icon} ${s.label}</b><br>${s.desc||''}<br><small>${s.time}</small>`);
+      .bindPopup(popup);
     markers.push(m);
   });
 
@@ -2555,18 +2162,18 @@ function aggiornaUI(lista){
   }
 }
 
-/* ── Init quando sezione visibile ── */
-
-/* ── Invia segnalazione su Firebase ── */
+/* ── Invia segnalazione ── */
 window.inviaSegnalazione = async function(){
-  const desc = document.getElementById('segnDesc').value.trim();
-  const nome = document.getElementById('segnNome').value.trim();
-  const tel  = document.getElementById('segnTel').value.trim();
+  const desc     = document.getElementById('segnDesc').value.trim();
+  const nome     = document.getElementById('segnNome').value.trim();
+  const tel      = document.getElementById('segnTel').value.trim();
+  const localita = document.getElementById('segnLocalita').value.trim(); // ✅ NUOVO
   const fotoInput = document.getElementById('segnFoto');
+
+  if(!localita){ mostraToast('La località è obbligatoria.','error'); document.getElementById('segnLocalita').focus(); return; }
   if(!desc){ mostraToast('Scrivi una descrizione prima di inviare.','error'); return; }
   if(!tel){ mostraToast('Il numero di telefono è obbligatorio.','error'); document.getElementById('segnTel').focus(); return; }
 
-  /* Converti foto in base64 se presente */
   let fotoBase64 = null;
   if(fotoInput.files[0]){
     const file = fotoInput.files[0];
@@ -2575,36 +2182,35 @@ window.inviaSegnalazione = async function(){
       reader.onload = e => res(e.target.result);
       reader.readAsDataURL(file);
     });
-    /* Ridimensiona se troppo grande (max 800px) */
     fotoBase64 = await ridimensionaFoto(fotoBase64, 800);
   }
 
   const nuova = {
-    icon:  tipoSelezionato.icon,
-    label: tipoSelezionato.label,
+    icon:     tipoSelezionato.icon,
+    label:    tipoSelezionato.label,
     desc,
-    nome:  nome || 'Anonimo',
+    nome:     nome || 'Anonimo',
     tel,
-    lat:   coordsUtente?.lat || null,
-    lng:   coordsUtente?.lng || null,
-    foto:  fotoBase64,
+    localita: localita || null, // ✅ NUOVO
+    lat:      coordsUtente?.lat || null,
+    lng:      coordsUtente?.lng || null,
+    foto:     fotoBase64,
     timestamp: Date.now(),
-    time:  new Date().toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})
+    time:     new Date().toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})
   };
 
   try{
-    const nuovaRef = await push(segnRef, nuova);
-    // Salva nello storico permanente, foto compresa
+    await push(segnRef, nuova);
     await push(storicoRef, nuova);
 
-    document.getElementById('segnDesc').value = '';
-    document.getElementById('segnNome').value = '';
-    document.getElementById('segnTel').value = '';
-    document.getElementById('segnFoto').value = '';
+    document.getElementById('segnDesc').value    = '';
+    document.getElementById('segnNome').value    = '';
+    document.getElementById('segnTel').value     = '';
+    document.getElementById('segnLocalita').value = ''; // ✅ RESET
+    document.getElementById('segnFoto').value    = '';
     document.getElementById('fotoPreview').style.display = 'none';
     mostraToast(`${nuova.icon} Segnalazione inviata al direttivo!`, 'success');
 
-    /* Notifica Telegram con link alla foto se presente */
     const mapsLink = nuova.lat
       ? `https://maps.google.com/?q=${nuova.lat},${nuova.lng}`
       : 'Posizione non disponibile';
@@ -2612,10 +2218,11 @@ window.inviaSegnalazione = async function(){
     const testo =
       `🚨 *NUOVA SEGNALAZIONE N.O.V.*\n` +
       `${nuova.icon} *Tipo:* ${nuova.label}\n` +
+      `📌 *Località:* ${nuova.localita || 'Non specificata'}\n` + // ✅ NUOVO
       `📝 *Descrizione:* ${nuova.desc}\n` +
       `👤 *Nome:* ${nuova.nome}\n` +
       `📞 *Telefono:* ${nuova.tel}\n` +
-      `📍 *Posizione:* ${mapsLink}\n` +
+      `📍 *Posizione GPS:* ${mapsLink}\n` +
       `🕐 *Orario:* ${nuova.time}` +
       (fotoBase64 ? `\n📷 *Foto allegata* — visibile sulla mappa segnalazioni` : '');
 
@@ -2633,7 +2240,6 @@ window.inviaSegnalazione = async function(){
   }
 };
 
-/* ── Ridimensiona foto ── */
 function ridimensionaFoto(base64, maxPx){
   return new Promise(res => {
     const img = new Image();
@@ -2652,19 +2258,17 @@ function ridimensionaFoto(base64, maxPx){
   });
 }
 
-/* ── Pulizia automatica segnalazioni scadute (>1 ora) ── */
 function pulisciSegnalazioniScadute(snapshot){
   const data = snapshot.val() || {};
   const ora  = Date.now();
-  const UN_ORA = 2 * 60 * 60 * 1000; // 2 ore
+  const DUE_ORE = 2 * 60 * 60 * 1000;
   Object.entries(data).forEach(([key, val]) => {
-    if(!val.timestamp || (ora - val.timestamp) > UN_ORA){
+    if(!val.timestamp || (ora - val.timestamp) > DUE_ORE){
       remove(ref(db, `segnalazioni/${key}`));
     }
   });
 }
 
-/* ── Ascolta Firebase in tempo reale ── */
 onValue(segnRef, snapshot => {
   pulisciSegnalazioniScadute(snapshot);
   const data  = snapshot.val() || {};
@@ -2674,10 +2278,10 @@ onValue(segnRef, snapshot => {
   else window._segnBuffer = lista;
 });
 
-/* pulizia ogni 5 minuti */
 setInterval(() => {
   onValue(segnRef, snapshot => pulisciSegnalazioniScadute(snapshot), { onlyOnce: true });
 }, 5 * 60 * 1000);
+
 const mapObserver = new IntersectionObserver(entries => {
   if(entries[0].isIntersecting){
     initMappa();
@@ -2687,7 +2291,7 @@ const mapObserver = new IntersectionObserver(entries => {
 }, { threshold:0.1 });
 mapObserver.observe(document.getElementById('segnalazioni'));
 
-/* ── Storico permanente ── */
+/* ── STORICO ── */
 let storicoTutti = [];
 let filtroAttivo = 'tutti';
 
@@ -2717,37 +2321,41 @@ function renderStorico(){
       'Altro pericolo':'tipo-altro'
     }[s.label] || 'tipo-altro';
 
-    const mapsLink = s.lat
-      ? `<a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" style="color:var(--red);text-decoration:none;">📍 Vedi</a>`
+    // ✅ COLONNA POSIZIONE / LOCALITÀ AGGIORNATA
+    const posizioneCell = (s.lat || s.localita)
+      ? `${s.localita ? '<strong>📌 '+s.localita+'</strong><br>' : ''}${s.lat ? `<a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" style="color:var(--red);text-decoration:none;font-size:12px;">📍 GPS</a>` : ''}`
       : '<span style="color:var(--muted)">—</span>';
 
-    // Foto reale (base64) cliccabile per aprirla a schermo intero.
-    // Le voci più vecchie salvavano solo '1' come segnaposto (foto non conservata): mostriamo un avviso invece di un'immagine rotta.
     let fotoCell;
     if(s.foto && s.foto !== '1'){
       const fotoSafe = s.foto.replace(/'/g, "\\'");
-      fotoCell = `<img src="${s.foto}" class="storico-foto-thumb" onclick="openImg('${fotoSafe}')" alt="Foto segnalazione">`;
+      fotoCell = `<div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start;">
+        <img src="${s.foto}" class="storico-foto-thumb" onclick="event.stopPropagation();openImg('${fotoSafe}')" alt="Foto segnalazione">
+        <a href="${s.foto}" download="segnalazione_${s.time||'foto'}.jpg" onclick="event.stopPropagation()" style="font-family:var(--font-h);font-size:10px;font-weight:700;letter-spacing:1px;color:var(--sea-dark);text-decoration:none;text-transform:uppercase;">⬇ Scarica</a>
+      </div>`;
     } else {
-      fotoCell = `<span class="storico-foto-na">non disponibile</span>`;
+      fotoCell = `<span class="storico-foto-na">—</span>`;
     }
 
-    return `<tr>
+    const rowData = encodeURIComponent(JSON.stringify(s));
+
+    return `<tr onclick="apriDettaglioSegnalazione('${rowData}')">
       <td><span class="tipo-badge ${tipoClass}">${s.icon} ${s.label}</span></td>
       <td>${s.desc || '—'}</td>
-      <td>${mapsLink}</td>
+      <td>${posizioneCell}</td>
       <td>${s.nome || 'Anonimo'}</td>
       <td style="color:var(--muted);white-space:nowrap;">${s.time || '—'}</td>
-      <td>${fotoCell}</td>
+      <td onclick="event.stopPropagation()">${fotoCell}</td>
     </tr>`;
   }).join('');
 }
 
 function aggiornaStatsStorico(lista){
-  document.getElementById('statTotale').textContent   = lista.length;
-  document.getElementById('statIncendi').textContent  = lista.filter(s=>s.label==='Incendio').length;
-  document.getElementById('statFrane').textContent    = lista.filter(s=>s.label==='Frana').length;
-  document.getElementById('statAlluvioni').textContent= lista.filter(s=>s.label==='Alluvione').length;
-  document.getElementById('statAltro').textContent    = lista.filter(s=>s.label==='Altro pericolo').length;
+  document.getElementById('statTotale').textContent    = lista.length;
+  document.getElementById('statIncendi').textContent   = lista.filter(s=>s.label==='Incendio').length;
+  document.getElementById('statFrane').textContent     = lista.filter(s=>s.label==='Frana').length;
+  document.getElementById('statAlluvioni').textContent = lista.filter(s=>s.label==='Alluvione').length;
+  document.getElementById('statAltro').textContent     = lista.filter(s=>s.label==='Altro pericolo').length;
 }
 
 onValue(storicoRef, snapshot => {
@@ -2760,9 +2368,7 @@ onValue(storicoRef, snapshot => {
 avviaGPS();
 </script>
 
-<!-- ── SCRIPT ── -->
 <script>
-/* ── Preview foto ── */
 document.getElementById('segnFoto').addEventListener('change', function(){
   const file = this.files[0];
   if(!file) return;
@@ -2774,7 +2380,6 @@ document.getElementById('segnFoto').addEventListener('change', function(){
   reader.readAsDataURL(file);
 });
 
-/* ── Toast ── */
 function mostraToast(msg, tipo){
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -2782,62 +2387,101 @@ function mostraToast(msg, tipo){
   setTimeout(() => { t.className = 'toast'; }, 3200);
 }
 
-/* ── Form volontario ── */
 function inviaModulo(btn){
   const nome  = document.querySelector('input[placeholder="Mario Rossi"]').value.trim();
   const tel   = document.querySelector('input[type="tel"]').value.trim();
   const email = document.querySelector('input[type="email"]').value.trim();
-  if(!nome || !tel){
-    alert('Inserisci almeno nome e telefono per procedere.');
-    return;
-  }
+  if(!nome || !tel){ alert('Inserisci almeno nome e telefono per procedere.'); return; }
   const subject = encodeURIComponent('Candidatura Volontario N.O.V.');
-  const body    = encodeURIComponent(
-    `Salve,\n\nVorrei candidarmi come volontario.\n\nNome: ${nome}\nTelefono: ${tel}\nEmail: ${email}\n\nIn attesa di vostre notizie.`
-  );
+  const body    = encodeURIComponent(`Salve,\n\nVorrei candidarmi come volontario.\n\nNome: ${nome}\nTelefono: ${tel}\nEmail: ${email}\n\nIn attesa di vostre notizie.`);
   window.location.href = `mailto:nov_protciv@live.it?subject=${subject}&body=${body}`;
 }
 
-/* ── Slideshow hero ── */
 const heroImgs = [
-  'FB_IMG_1779032553450.jpg',
-  'FB_IMG_1780005109119.jpg',
-  'FB_IMG_1779032351750.jpg',
-  'FB_IMG_1779032400374.jpg',
-  'FB_IMG_1779032516968.jpg',
-  'FB_IMG_1779032526869.jpg',
-  'FB_IMG_1779032545746.jpg',
-  'FB_IMG_1779032589055.jpg',
-  'FB_IMG_1779032631507.jpg',
-  'FB_IMG_1779516909018.jpg',
-  'FB_IMG_1779516946597.jpg',
+  'FB_IMG_1779032553450.jpg','FB_IMG_1780005109119.jpg','FB_IMG_1779032351750.jpg',
+  'FB_IMG_1779032400374.jpg','FB_IMG_1779032516968.jpg','FB_IMG_1779032526869.jpg',
+  'FB_IMG_1779032545746.jpg','FB_IMG_1779032589055.jpg','FB_IMG_1779032631507.jpg',
+  'FB_IMG_1779516909018.jpg','FB_IMG_1779516946597.jpg',
 ];
 let heroIdx = 0;
 const heroBg = document.querySelector('.hero-bg');
 heroBg.style.backgroundImage = `url('${heroImgs[0]}')`;
-
 setInterval(() => {
   heroIdx = (heroIdx + 1) % heroImgs.length;
   heroBg.style.backgroundImage = `url('${heroImgs[heroIdx]}')`;
 }, 5000);
 
-/* ── Hamburger menu ── */
-const hamburger  = document.getElementById('hamburger');
-const mobileNav  = document.getElementById('mobileNav');
-
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   mobileNav.classList.toggle('open');
   document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
 });
-
 function chiudiMenu(){
   hamburger.classList.remove('open');
   mobileNav.classList.remove('open');
   document.body.style.overflow = '';
 }
 
-/* ── Lightbox ── */
+/* ── Modal dettaglio segnalazione ── */
+function apriDettaglioSegnalazione(dataEncoded){
+  const s = JSON.parse(decodeURIComponent(dataEncoded));
+  const tipoClass = {
+    'Incendio':'tipo-incendio','Frana':'tipo-frana',
+    'Alluvione':'tipo-alluvione','Altro pericolo':'tipo-altro'
+  }[s.label] || 'tipo-altro';
+
+  const mapsLink = s.lat
+    ? `<a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" style="color:var(--red);font-weight:700;text-decoration:none;">📍 Apri su Google Maps</a>`
+    : 'Non disponibile';
+
+  const fotoHtml = (s.foto && s.foto !== '1')
+    ? `<img src="${s.foto}" class="segn-modal-foto" onclick="openImg('${s.foto.replace(/'/g,"\\'")}')">
+       <a href="${s.foto}" download="segnalazione_${s.time||'foto'}.jpg" class="btn btn-primary" style="margin-top:10px;font-size:12px;padding:10px 20px;">⬇ Scarica foto</a>`
+    : `<p style="color:var(--muted);font-size:14px;margin-top:12px;">Nessuna foto allegata.</p>`;
+
+  document.getElementById('segnModalContent').innerHTML = `
+    <span class="tipo-badge ${tipoClass}" style="margin-bottom:16px;">${s.icon} ${s.label}</span>
+    <h3>Dettaglio segnalazione</h3>
+    <div class="segn-modal-row">
+      <span class="mr-icon">📌</span>
+      <div class="mr-body"><div class="mr-label">Località</div><div class="mr-value">${s.localita || 'Non specificata'}</div></div>
+    </div>
+    <div class="segn-modal-row">
+      <span class="mr-icon">📝</span>
+      <div class="mr-body"><div class="mr-label">Descrizione</div><div class="mr-value">${s.desc || '—'}</div></div>
+    </div>
+    <div class="segn-modal-row">
+      <span class="mr-icon">👤</span>
+      <div class="mr-body"><div class="mr-label">Segnalato da</div><div class="mr-value">${s.nome || 'Anonimo'}</div></div>
+    </div>
+    <div class="segn-modal-row">
+      <span class="mr-icon">📞</span>
+      <div class="mr-body"><div class="mr-label">Telefono</div><div class="mr-value">${s.tel ? `<a href="tel:${s.tel}" style="color:var(--sea-dark);text-decoration:none;">${s.tel}</a>` : '—'}</div></div>
+    </div>
+    <div class="segn-modal-row">
+      <span class="mr-icon">🕐</span>
+      <div class="mr-body"><div class="mr-label">Data e ora</div><div class="mr-value">${s.time || '—'}</div></div>
+    </div>
+    <div class="segn-modal-row">
+      <span class="mr-icon">📍</span>
+      <div class="mr-body"><div class="mr-label">Posizione GPS</div><div class="mr-value">${mapsLink}</div></div>
+    </div>
+    ${fotoHtml}
+  `;
+  document.getElementById('segnModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function chiudiModal(e){
+  if(e.target === document.getElementById('segnModal')) chiudiModalDiretto();
+}
+function chiudiModalDiretto(){
+  document.getElementById('segnModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
 function openImg(src){
   document.getElementById('lightbox-img').src = src;
   document.getElementById('lightbox').classList.add('active');
@@ -2847,62 +2491,18 @@ function closeImg(){
   document.getElementById('lightbox').classList.remove('active');
   document.body.style.overflow = '';
 }
-document.getElementById('lightbox').addEventListener('click', function(e){
-  if(e.target === this) closeImg();
-});
-document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape') closeImg();
-});
+document.getElementById('lightbox').addEventListener('click', function(e){ if(e.target === this) closeImg(); });
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeImg(); chiudiModalDiretto(); } });
 
-/* ── Notifiche ── */
-async function registraSW(){
-  if('serviceWorker' in navigator){
-    try{
-      return await navigator.serviceWorker.register('sw.js');
-    }catch(e){
-      console.warn('SW error:', e);
-    }
-  }
-}
-
-async function attivaNotifiche(){
-  await registraSW();
-  if(!('Notification' in window)){ alert('Notifiche non supportate da questo browser.'); return; }
-  const p = await Notification.requestPermission();
-  if(p === 'granted'){
-    alert('✅ Notifiche attivate correttamente!');
-  }else{
-    alert('❌ Permesso negato. Controlla le impostazioni del browser.');
-  }
-}
-
-async function notificaTest(){
-  const reg = await registraSW();
-  if(Notification.permission !== 'granted'){ alert('Prima attiva le notifiche.'); return; }
-  if(reg){
-    reg.showNotification('PROTEZIONE CIVILE N.O.V.', {
-      body:  '🚨 Notifica di prova inviata correttamente',
-      icon:  'FB_IMG_1779516909018.jpg',
-      badge: 'FB_IMG_1779516909018.jpg'
-    });
-  }
-}
-
-/* ── Pannello gestione allerta (link nascosto) ── */
 function controllaPannelloAllerta(){
   const pannello = document.getElementById('pannelloAllerta');
   if(!pannello) return;
-  if(window.location.hash === '#gestione-allerta-nov'){
-    pannello.style.display = 'block';
-    pannello.scrollIntoView({ behavior:'smooth' });
-  } else {
-    pannello.style.display = 'none';
-  }
+  pannello.style.display = window.location.hash === '#gestione-allerta-nov' ? 'block' : 'none';
+  if(window.location.hash === '#gestione-allerta-nov') pannello.scrollIntoView({ behavior:'smooth' });
 }
 window.addEventListener('hashchange', controllaPannelloAllerta);
 controllaPannelloAllerta();
 
-/* ── Intersection observer per fade-in ── */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
