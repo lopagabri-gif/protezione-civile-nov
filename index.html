@@ -2014,6 +2014,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db         = getDatabase(app);
 const segnRef    = ref(db, 'segnalazioni');
+
+/* ── CLOUDINARY CONFIG ── */
+const CLOUDINARY_CLOUD = 'dpyku5guh';
+const CLOUDINARY_PRESET = 'nov_segnalazioni';
 const storicoRef = ref(db, 'storico');
 const allertaRef = ref(db, 'allerta');
 
@@ -2167,47 +2171,61 @@ window.inviaSegnalazione = async function(){
   const desc     = document.getElementById('segnDesc').value.trim();
   const nome     = document.getElementById('segnNome').value.trim();
   const tel      = document.getElementById('segnTel').value.trim();
-  const localita = document.getElementById('segnLocalita').value.trim(); // ✅ NUOVO
+  const localita = document.getElementById('segnLocalita').value.trim();
   const fotoInput = document.getElementById('segnFoto');
 
   if(!localita){ mostraToast('La località è obbligatoria.','error'); document.getElementById('segnLocalita').focus(); return; }
   if(!desc){ mostraToast('Scrivi una descrizione prima di inviare.','error'); return; }
   if(!tel){ mostraToast('Il numero di telefono è obbligatorio.','error'); document.getElementById('segnTel').focus(); return; }
 
-  let fotoBase64 = null;
+  const btnInvia = document.querySelector('[onclick="inviaSegnalazione()"]');
+  if(btnInvia){ btnInvia.disabled = true; btnInvia.textContent = '⏳ Invio in corso...'; }
+
+  /* ── Upload foto su Cloudinary ── */
+  let fotoURL = null;
   if(fotoInput.files[0]){
-    const file = fotoInput.files[0];
-    fotoBase64 = await new Promise(res => {
-      const reader = new FileReader();
-      reader.onload = e => res(e.target.result);
-      reader.readAsDataURL(file);
-    });
-    fotoBase64 = await ridimensionaFoto(fotoBase64, 800);
+    try{
+      mostraToast('📷 Caricamento foto...', 'success');
+      const blob = await ridimensionaFotoBlob(fotoInput.files[0], 1200);
+      const formData = new FormData();
+      formData.append('file', blob, 'segnalazione.jpg');
+      formData.append('upload_preset', CLOUDINARY_PRESET);
+      formData.append('folder', 'segnalazioni');
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+      fotoURL = data.secure_url;
+    }catch(e){
+      console.warn('Errore upload foto:', e);
+      mostraToast('⚠️ Foto non caricata, segnalazione inviata senza foto.', 'error');
+    }
   }
 
   const nuova = {
-    icon:     tipoSelezionato.icon,
-    label:    tipoSelezionato.label,
+    icon:      tipoSelezionato.icon,
+    label:     tipoSelezionato.label,
     desc,
-    nome:     nome || 'Anonimo',
+    nome:      nome || 'Anonimo',
     tel,
-    localita: localita || null, // ✅ NUOVO
-    lat:      coordsUtente?.lat || null,
-    lng:      coordsUtente?.lng || null,
-    foto:     fotoBase64,
+    localita:  localita || null,
+    lat:       coordsUtente?.lat || null,
+    lng:       coordsUtente?.lng || null,
+    foto:      fotoURL,
     timestamp: Date.now(),
-    time:     new Date().toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})
+    time:      new Date().toLocaleString('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})
   };
 
   try{
     await push(segnRef, nuova);
     await push(storicoRef, nuova);
 
-    document.getElementById('segnDesc').value    = '';
-    document.getElementById('segnNome').value    = '';
-    document.getElementById('segnTel').value     = '';
-    document.getElementById('segnLocalita').value = ''; // ✅ RESET
-    document.getElementById('segnFoto').value    = '';
+    document.getElementById('segnDesc').value     = '';
+    document.getElementById('segnNome').value     = '';
+    document.getElementById('segnTel').value      = '';
+    document.getElementById('segnLocalita').value = '';
+    document.getElementById('segnFoto').value     = '';
     document.getElementById('fotoPreview').style.display = 'none';
     mostraToast(`${nuova.icon} Segnalazione inviata al direttivo!`, 'success');
 
@@ -2218,13 +2236,13 @@ window.inviaSegnalazione = async function(){
     const testo =
       `🚨 *NUOVA SEGNALAZIONE N.O.V.*\n` +
       `${nuova.icon} *Tipo:* ${nuova.label}\n` +
-      `📌 *Località:* ${nuova.localita || 'Non specificata'}\n` + // ✅ NUOVO
+      `📌 *Località:* ${nuova.localita || 'Non specificata'}\n` +
       `📝 *Descrizione:* ${nuova.desc}\n` +
       `👤 *Nome:* ${nuova.nome}\n` +
       `📞 *Telefono:* ${nuova.tel}\n` +
       `📍 *Posizione GPS:* ${mapsLink}\n` +
       `🕐 *Orario:* ${nuova.time}` +
-      (fotoBase64 ? `\n📷 *Foto allegata* — visibile sulla mappa segnalazioni` : '');
+      (fotoURL ? `\n📷 *Foto:* ${fotoURL}` : '');
 
     for(const chatId of DIRETTIVO_IDS){
       try{
@@ -2233,28 +2251,42 @@ window.inviaSegnalazione = async function(){
           headers:{'Content-Type':'application/json'},
           body: JSON.stringify({ chat_id:chatId, text:testo, parse_mode:'Markdown' })
         });
+        if(fotoURL){
+          await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendPhoto`, {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ chat_id:chatId, photo:fotoURL, caption:`📷 ${nuova.label} — ${nuova.localita||''}` })
+          });
+        }
       }catch(e){ console.warn('Telegram non inviato a', chatId); }
     }
   }catch(e){
     mostraToast('Errore invio — controlla la connessione.', 'error');
+  } finally {
+    if(btnInvia){ btnInvia.disabled = false; btnInvia.textContent = '🚨 Invia segnalazione'; }
   }
 };
 
-function ridimensionaFoto(base64, maxPx){
+/* ── Ridimensiona foto → Blob per Firebase Storage ── */
+function ridimensionaFotoBlob(file, maxPx){
   return new Promise(res => {
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      let w = img.width, h = img.height;
-      if(w > maxPx || h > maxPx){
-        if(w > h){ h = Math.round(h * maxPx / w); w = maxPx; }
-        else { w = Math.round(w * maxPx / h); h = maxPx; }
-      }
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      res(canvas.toDataURL('image/jpeg', 0.75));
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let w = img.width, h = img.height;
+        if(w > maxPx || h > maxPx){
+          if(w > h){ h = Math.round(h * maxPx / w); w = maxPx; }
+          else { w = Math.round(w * maxPx / h); h = maxPx; }
+        }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        canvas.toBlob(blob => res(blob), 'image/jpeg', 0.82);
+      };
+      img.src = e.target.result;
     };
-    img.src = base64;
+    reader.readAsDataURL(file);
   });
 }
 
